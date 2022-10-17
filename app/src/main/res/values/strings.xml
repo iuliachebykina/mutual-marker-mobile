@@ -9,4 +9,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="login">Вход</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="login_button">Войти</string>
+    <string name="signup_button">Зарегистрироваться</string>
+    <string name="login_form_fragment">Форма входа</string>
+    <string name="todo">TODO</string>
 </resources>
