@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/purple_background"
+    tools:context=".fragments.LoginForm"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/WhiteLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/white_line"
+        android:background="@color/white"
+        app:flow_verticalAlign="bottom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/LoginText"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="@string/login"
+        android:fontFamily="@font/gilroy_black"
+        android:textSize="@dimen/login_size"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginVertical="30dp"
+        android:layout_marginHorizontal="54dp"
+        app:layout_constraintTop_toBottomOf="@id/WhiteLine"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <View
+        android:id="@+id/PurpleLine"
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        android:background="@color/purple_main"
+        app:layout_constraintTop_toBottomOf="@id/LoginText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/EmailField"
+        style="@style/InputField"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="54dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/PurpleLine" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/PasswordField"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/password"
+        style="@style/InputField"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintTop_toBottomOf="@id/EmailField"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:text="@string/login_button"
+        android:fontFamily="@font/gilroy_black"
+        android:textSize="@dimen/login_form_size"
+        android:textAllCaps="false"
+        android:layout_marginVertical="286dp"
+        app:layout_constraintTop_toBottomOf="@id/PasswordField"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/SignupButton"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:text="@string/signup_button"
+        android:fontFamily="@font/gilroy_black"
+        android:textSize="@dimen/login_form_size"
+        android:theme="@style/InactiveButton"
+        android:background="@color/transparent"
+        android:textColor="@color/purple_main"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/LoginButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

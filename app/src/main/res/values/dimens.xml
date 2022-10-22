@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="login_size">24sp</dimen>
+    <dimen name="login_form_size">16sp</dimen>
+    <dimen name="bold_weight">700sp</dimen>
+    <dimen name="thin_weight">300sp</dimen>
+    <dimen name="white_line">30dp</dimen>
 </resources>
