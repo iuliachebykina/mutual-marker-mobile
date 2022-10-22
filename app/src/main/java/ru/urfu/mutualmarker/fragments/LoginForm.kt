@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,16 +17,18 @@ import ru.urfu.mutualmarker.client.ClientCredentials
 import ru.urfu.mutualmarker.client.LoginService
 import ru.urfu.mutualmarker.dto.LoginRequest
 import ru.urfu.mutualmarker.dto.LoginResponse
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginForm : Fragment() {
-
-    lateinit var loginService: LoginService
+    @Inject
+    lateinit var loginService : LoginService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        loginService = ClientCredentials.loginService
+//        loginService = ClientCredentials.loginService
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.login_form, container, false)
     }
