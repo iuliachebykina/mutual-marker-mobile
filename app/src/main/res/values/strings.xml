@@ -16,4 +16,9 @@
     <string name="signup_button">Зарегистрироваться</string>
     <string name="login_form_fragment">Форма входа</string>
     <string name="todo">TODO</string>
+    <string name="registration">Регистрация</string>
+    <string name="phone">Номер телефона</string>
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="patronymic">Отчество</string>
 </resources>

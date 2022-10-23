@@ -1,6 +1,5 @@
 package ru.urfu.mutualmarker.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginForm : Fragment() {
+class RegistrationForm : Fragment() {
     @Inject
     lateinit var authorizationService : AuthorizationService
 
@@ -29,9 +28,7 @@ class LoginForm : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loginService = ClientCredentials.loginService
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.login_form, container, false)
+        return inflater.inflate(R.layout.registration_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +36,7 @@ class LoginForm : Fragment() {
 
         val emailField = view.findViewById<TextInputEditText>(R.id.EmailField)
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
+        val firstNameField = view.findViewById<TextInputEditText>(R.id.FirstNameField)
 
         view.findViewById<Button>(R.id.LoginButton).setOnClickListener {
             val requestBody : RequestBody = MultipartBody.Builder()
@@ -59,10 +57,10 @@ class LoginForm : Fragment() {
             findNavController().navigate(R.id.action_Login_to_FirstFragment)
         }
 
-        view.findViewById<Button>(R.id.SignupButton).setOnClickListener{
-            val intent : Intent = Intent(context, RegistrationActivity::class.java)
-            startActivity(intent)
+        view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
+            System.out.println(String.format("email: %s, password: %s",
+                emailField.getText().toString(),
+                passwordField.getText().toString()))
         }
-
     }
 }
