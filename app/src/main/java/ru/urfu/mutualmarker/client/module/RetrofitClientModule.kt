@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.urfu.mutualmarker.client.ClientCredentials
 import ru.urfu.mutualmarker.client.LoginService
+import ru.urfu.mutualmarker.client.RetrofitClient
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +27,7 @@ class RetrofitClientModule {
         Retrofit
             .Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(ClientCredentials.BASE_URL)
+            .baseUrl(RetrofitClient.BASE_URL)
             .build()
 
     @Singleton

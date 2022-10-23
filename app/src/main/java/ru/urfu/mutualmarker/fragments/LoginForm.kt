@@ -15,9 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.client.ClientCredentials
 import ru.urfu.mutualmarker.client.LoginService
-import ru.urfu.mutualmarker.dto.LoginRequest
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
@@ -45,19 +43,22 @@ class LoginForm : Fragment() {
             val requestBody : RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("password", passwordField.getText().toString())
-                .addFormDataPart("username", emailField.getText().toString())
+                .addFormDataPart("username", "ROLE_STUDENT\\" + emailField.getText().toString())
                 .build()
             val result = loginService.login(requestBody)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        System.out.println("result " + t.message)
+                        System.out.println("result FAIl" + t.message)
                     }
 
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                        System.out.println("result " + response)
+                        if(response.code()==200){
+                            findNavController().navigate(R.id.action_Login_to_FirstFragment)
+                        }
+                        System.out.println("result OK" + response)
                     }
                 })
-            findNavController().navigate(R.id.action_Login_to_FirstFragment)
+
         }
 
         view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
