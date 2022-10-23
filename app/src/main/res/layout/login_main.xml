@@ -14,5 +14,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/login_reg" />
+        app:navGraph="@navigation/login_add_room" />
 </androidx.constraintlayout.widget.ConstraintLayout>
