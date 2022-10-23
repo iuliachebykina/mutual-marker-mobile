@@ -53,8 +53,14 @@ class LoginForm : Fragment() {
 
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if(response.code()==200){
-                            //TODO if room's count = 0
-                            findNavController().navigate(R.id.action_Login_to_AddRoomFragment)
+                            //TODO get student's rooms
+                            if(false){ //if room's count > 0
+                                findNavController().navigate(R.id.action_Login_to_FirstFragment)
+
+                            } else{ //if room's count = 0
+                                findNavController().navigate(R.id.action_Login_to_AddRoomFragment)
+                            }
+
                         }
                         System.out.println("result OK" + response)
                     }
