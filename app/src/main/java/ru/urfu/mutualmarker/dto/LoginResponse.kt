@@ -1,6 +1,6 @@
 package ru.urfu.mutualmarker.dto
 
-data class LoginResponse (
+data class LoginResponse(
     var id: Int?,
     var email: String?,
     var role: String?

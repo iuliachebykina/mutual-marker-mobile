@@ -13,11 +13,19 @@
         <action
             android:id="@+id/action_Login_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_Login_to_AddRoomFragment"
+            app:destination="@id/AddRoom" />
     </fragment>
     <fragment
         android:id="@+id/FirstFragment"
         android:name="ru.urfu.mutualmarker.fragments.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-    </fragment>
+        tools:layout="@layout/fragment_first" />
+
+    <fragment
+        android:id="@+id/AddRoom"
+        android:name="ru.urfu.mutualmarker.fragments.AddRoomFragment"
+        android:label="@string/addRoomLabel"
+        tools:layout="@layout/fragment_add_room" />
 </navigation>

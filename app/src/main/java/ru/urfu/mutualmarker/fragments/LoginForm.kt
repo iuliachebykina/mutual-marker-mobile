@@ -1,6 +1,11 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +21,25 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.LoginService
+import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginForm : Fragment() {
     @Inject
-    lateinit var loginService : LoginService
+    lateinit var loginService: LoginService
 
-    override fun onCreateView(
+    @Inject
+    lateinit var customCookieJar: CustomCookieJar
+
+    private val preferences: SharedPreferences = requireContext().getSharedPreferences("cred", Context.MODE_PRIVATE)
+
+
+
+
+
+    override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -40,38 +55,54 @@ class LoginForm : Fragment() {
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
 
         view.findViewById<Button>(R.id.LoginButton).setOnClickListener {
-            val requestBody : RequestBody = MultipartBody.Builder()
+            val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("password", passwordField.getText().toString())
                 .addFormDataPart("username", "ROLE_STUDENT\\" + emailField.getText().toString())
                 .build()
-            val result = loginService.login(requestBody)
+            loginService.login(requestBody)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        System.out.println("result FAIl" + t.message)
+                        println("result FAIl" + t.message)
                     }
 
-                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                        if(response.code()==200){
+
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        if (response.code() == 200) {
+
                             //TODO get student's rooms
-                            if(false){ //if room's count > 0
+
+                            val cred = StringBuilder()
+                            cred.append(emailField.text).append(":").append(passwordField.text)
+
+
+                            //preferences.edit().putString("cred", cred.toString())
+                            if (false) { //if room's count > 0
                                 findNavController().navigate(R.id.action_Login_to_FirstFragment)
 
-                            } else{ //if room's count = 0
+                            } else { //if room's count = 0
                                 findNavController().navigate(R.id.action_Login_to_AddRoomFragment)
                             }
 
+
                         }
-                        System.out.println("result OK" + response)
+                        println("result OK" + response.errorBody())
                     }
                 })
 
         }
 
         view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
-            System.out.println(String.format("email: %s, password: %s",
-                emailField.getText().toString(),
-                passwordField.getText().toString()))
+            println(
+                String.format(
+                    "email: %s, password: %s",
+                    emailField.getText().toString(),
+                    passwordField.getText().toString()
+                )
+            )
         }
     }
 }

@@ -12,23 +12,23 @@
         android:layout_height="@dimen/white_line"
         android:background="@color/white"
         app:flow_verticalAlign="bottom"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/AddRoom"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:text="@string/addRoom"
-        android:fontFamily="@font/gilroy_black"
-        android:textSize="@dimen/login_size"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginVertical="30dp"
         android:layout_marginHorizontal="54dp"
-        app:layout_constraintTop_toBottomOf="@id/WhiteLine"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginVertical="30dp"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/addRoom"
+        android:textColor="@color/black"
+        android:textSize="@dimen/login_size"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/WhiteLine" />
 
 
     <View
@@ -36,33 +36,33 @@
         android:layout_width="300dp"
         android:layout_height="3dp"
         android:background="@color/purple_main"
-        app:layout_constraintTop_toBottomOf="@id/AddRoom"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AddRoom" />
 
     <TextView
         android:id="@+id/WrongRoomCode"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_margin="30dp"
         android:text="@string/wrongRoomCode"
+        android:textColor="@color/red"
+        android:textSize="10sp"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBottomOf="@id/PurpleLine"
         app:layout_constraintBaseline_toTopOf="@id/RoomCode"
-        android:layout_width="300dp"
-        android:textSize="10sp"
-        android:layout_margin="30dp"
-        android:textColor="@color/red"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="invisible" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/RoomCode"
         style="@style/InputField"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="@string/codeRoom"
-        android:padding="10dp"
-        android:inputType="text"
         android:layout_marginVertical="200dp"
+        android:hint="@string/codeRoom"
+        android:inputType="text"
+        android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/PurpleLine" />
@@ -71,16 +71,15 @@
         android:id="@+id/AddRoomButton"
         android:layout_width="270dp"
         android:layout_height="60dp"
-        android:text="@string/buttonAddRoom"
+        android:layout_marginVertical="50dp"
         android:fontFamily="@font/gilroy_black"
 
-        android:textSize="@dimen/login_form_size"
+        android:text="@string/buttonAddRoom"
         android:textAllCaps="false"
-        android:layout_marginVertical="50dp"
-        app:layout_constraintTop_toBottomOf="@id/RoomCode"
+        android:textSize="@dimen/login_form_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RoomCode" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

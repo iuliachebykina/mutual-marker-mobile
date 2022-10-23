@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <!--<include layout="@layout/content_main" />-->
-    <include layout="@layout/login_main"/>
+    <include layout="@layout/login_main" />
+    <include layout="@layout/fragment_first" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

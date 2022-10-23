@@ -22,10 +22,12 @@
     <style name="Theme.MutualMarker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MutualMarker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="InactiveButton">
         <item name="colorAccent">@android:color/black</item>
         <item name="background">@color/transparent</item>
     </style>
+
     <style name="InputField">
         <item name="android:background">@color/white</item>
         <item name="android:textColorHint">@color/gray_hints</item>

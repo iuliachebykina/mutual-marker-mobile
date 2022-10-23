@@ -1,17 +1,30 @@
 package ru.urfu.mutualmarker
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import dagger.hilt.android.AndroidEntryPoint
+import ru.urfu.mutualmarker.client.CustomCookieJar
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var customCookieJar: CustomCookieJar
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        if(customCookieJar.cookies.size > 0)
+            setContentView(R.layout.fragment_first)
+        else
+            setContentView(R.layout.login_form)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
