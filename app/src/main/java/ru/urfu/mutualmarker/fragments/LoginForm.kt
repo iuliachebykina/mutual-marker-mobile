@@ -1,11 +1,7 @@
 package ru.urfu.mutualmarker.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.client.LoginService
 import ru.urfu.mutualmarker.client.CustomCookieJar
+import ru.urfu.mutualmarker.client.LoginService
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
@@ -33,8 +29,6 @@ class LoginForm : Fragment() {
     @Inject
     lateinit var customCookieJar: CustomCookieJar
 
-    private val preferences: SharedPreferences = requireContext().getSharedPreferences("cred", Context.MODE_PRIVATE)
-
 
 
 
@@ -43,10 +37,12 @@ class LoginForm : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loginService = ClientCredentials.loginService
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.login_form, container, false)
     }
+
+    val sharedPref = activity?.getSharedPreferences("credentials", Context.MODE_PRIVATE)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,9 +53,10 @@ class LoginForm : Fragment() {
         view.findViewById<Button>(R.id.LoginButton).setOnClickListener {
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("password", passwordField.getText().toString())
-                .addFormDataPart("username", "ROLE_STUDENT\\" + emailField.getText().toString())
+                .addFormDataPart("password", passwordField.text.toString())
+                .addFormDataPart("username", "ROLE_STUDENT\\" + emailField.text.toString())
                 .build()
+
             loginService.login(requestBody)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -75,9 +72,10 @@ class LoginForm : Fragment() {
 
                             //TODO get student's rooms
 
-                            val cred = StringBuilder()
-                            cred.append(emailField.text).append(":").append(passwordField.text)
-
+                            val edit = sharedPref?.edit()
+                            edit?.putString("username", emailField.text.toString())
+                            edit?.putString("password", passwordField.text.toString())
+                            edit?.apply()
 
                             //preferences.edit().putString("cred", cred.toString())
                             if (false) { //if room's count > 0
@@ -99,8 +97,8 @@ class LoginForm : Fragment() {
             println(
                 String.format(
                     "email: %s, password: %s",
-                    emailField.getText().toString(),
-                    passwordField.getText().toString()
+                    emailField.text.toString(),
+                    passwordField.text.toString()
                 )
             )
         }
