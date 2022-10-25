@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_background"
-    android:orientation="vertical"
-    tools:context=".fragments.LoginForm">
+    tools:context=".fragments.AddRoomFragment">
 
     <View
         android:id="@+id/WhiteLine"
@@ -19,18 +17,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/LoginText"
-        android:layout_width="60dp"
+        android:id="@+id/AddRoom"
+        android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginHorizontal="54dp"
         android:layout_marginVertical="30dp"
         android:fontFamily="@font/gilroy_black"
-        android:text="@string/login"
+        android:text="@string/addRoom"
         android:textColor="@color/black"
         android:textSize="@dimen/login_size"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/WhiteLine" />
+
 
     <View
         android:id="@+id/PurpleLine"
@@ -39,61 +38,48 @@
         android:background="@color/purple_main"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LoginText" />
+        app:layout_constraintTop_toBottomOf="@id/AddRoom" />
+
+    <TextView
+        android:id="@+id/WrongRoomCode"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/wrongRoomCode"
+        android:textColor="@color/red"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBottomOf="@id/PurpleLine"
+        app:layout_constraintBaseline_toTopOf="@id/RoomCode"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/EmailField"
+        android:id="@+id/RoomCode"
         style="@style/InputField"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="54dp"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
+        android:layout_marginVertical="200dp"
+        android:hint="@string/codeRoom"
+        android:inputType="text"
         android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/PurpleLine" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/PasswordField"
-        style="@style/InputField"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginVertical="20dp"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/EmailField"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/purple_main" />
-
     <Button
-        android:id="@+id/LoginButton"
+        android:id="@+id/AddRoomButton"
         android:layout_width="270dp"
         android:layout_height="60dp"
-        android:layout_marginVertical="286dp"
+        android:layout_marginVertical="50dp"
         android:fontFamily="@font/gilroy_black"
-        android:text="@string/login_button"
+
+        android:text="@string/buttonAddRoom"
         android:textAllCaps="false"
         android:textSize="@dimen/login_form_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/PasswordField" />
+        app:layout_constraintTop_toBottomOf="@id/RoomCode" />
 
-    <Button
-        android:id="@+id/SignupButton"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:background="@color/transparent"
-        android:fontFamily="@font/gilroy_black"
-        android:text="@string/signup_button"
-        android:textAllCaps="false"
-        android:textColor="@color/purple_main"
-        android:textSize="@dimen/login_form_size"
-        android:theme="@style/InactiveButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LoginButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

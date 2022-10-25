@@ -16,4 +16,9 @@
     <string name="signup_button">Зарегистрироваться</string>
     <string name="login_form_fragment">Форма входа</string>
     <string name="todo">TODO</string>
+    <string name="addRoom">Добавить комнату</string>
+    <string name="buttonAddRoom">Присоединиться</string>
+    <string name="codeRoom">Код комнаты</string>
+    <string name="wrongRoomCode">Неверный код комнаты</string>
+    <string name="addRoomLabel">Добавить комнату</string>
 </resources>

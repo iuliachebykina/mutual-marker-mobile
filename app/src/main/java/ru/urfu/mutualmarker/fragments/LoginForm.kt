@@ -1,5 +1,6 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,25 +16,33 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.client.ClientCredentials
+import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.client.LoginService
-import ru.urfu.mutualmarker.dto.LoginRequest
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginForm : Fragment() {
     @Inject
-    lateinit var loginService : LoginService
+    lateinit var loginService: LoginService
 
-    override fun onCreateView(
+    @Inject
+    lateinit var customCookieJar: CustomCookieJar
+
+
+
+
+
+    override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loginService = ClientCredentials.loginService
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.login_form, container, false)
     }
+
+    val sharedPref = activity?.getSharedPreferences("credentials", Context.MODE_PRIVATE)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,28 +51,56 @@ class LoginForm : Fragment() {
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
 
         view.findViewById<Button>(R.id.LoginButton).setOnClickListener {
-            val requestBody : RequestBody = MultipartBody.Builder()
+            val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("password", passwordField.getText().toString())
-                .addFormDataPart("username", emailField.getText().toString())
+                .addFormDataPart("password", passwordField.text.toString())
+                .addFormDataPart("username", "ROLE_STUDENT\\" + emailField.text.toString())
                 .build()
-            val result = loginService.login(requestBody)
+
+            loginService.login(requestBody)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        System.out.println("result " + t.message)
+                        println("result FAIl" + t.message)
                     }
 
-                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                        System.out.println("result " + response)
+
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        if (response.code() == 200) {
+
+                            //TODO get student's rooms
+
+                            val edit = sharedPref?.edit()
+                            edit?.putString("username", emailField.text.toString())
+                            edit?.putString("password", passwordField.text.toString())
+                            edit?.apply()
+
+                            //preferences.edit().putString("cred", cred.toString())
+                            if (false) { //if room's count > 0
+                                findNavController().navigate(R.id.action_Login_to_FirstFragment)
+
+                            } else { //if room's count = 0
+                                findNavController().navigate(R.id.action_Login_to_AddRoomFragment)
+                            }
+
+
+                        }
+                        println("result OK" + response.errorBody())
                     }
                 })
-            findNavController().navigate(R.id.action_Login_to_FirstFragment)
+
         }
 
         view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
-            System.out.println(String.format("email: %s, password: %s",
-                emailField.getText().toString(),
-                passwordField.getText().toString()))
+            println(
+                String.format(
+                    "email: %s, password: %s",
+                    emailField.text.toString(),
+                    passwordField.text.toString()
+                )
+            )
         }
     }
 }
