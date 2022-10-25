@@ -27,6 +27,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPref = applicationContext.getSharedPreferences( "credentials", Context.MODE_PRIVATE)
 
+        //todo delete
+//        val edit = sharedPref?.edit()
+//        edit?.putString("username", "iulia@mail.ru")
+//        edit?.putString("password", "0000")
+//        edit?.apply()
+
+
         val email = sharedPref.getString("username", null)
         val password = sharedPref.getString("password", null)
         super.onCreate(savedInstanceState)
@@ -59,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                             edit?.putString("password", password)
                             edit?.apply()
 
-                            setContentView(R.layout.fragment_first)
+                            setContentView(R.layout.fragment_add_room)
                         }
                         println("result OK" + response.errorBody())
                     }
