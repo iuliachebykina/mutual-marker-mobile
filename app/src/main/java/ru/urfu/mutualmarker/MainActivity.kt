@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity() {
         val password = sharedPref.getString("password", null)
         super.onCreate(savedInstanceState)
 
-        if(customCookieJar.cookies.size > 0)
-            setContentView(R.layout.fragment_first)
-        else if (email != null && password != null){
+        if (email != null && password != null){
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("password", password)
@@ -66,15 +64,15 @@ class MainActivity : AppCompatActivity() {
                             edit?.putString("password", password)
                             edit?.apply()
 
-                            setContentView(R.layout.fragment_add_room)
+
                         }
                         println("result OK" + response.errorBody())
                     }
                 })
 
-        } else{
-            setContentView(R.layout.login_form)
         }
+        setContentView(R.layout.activity_main)
+
 
     }
 
