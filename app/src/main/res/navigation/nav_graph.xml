@@ -3,26 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/StartPage">
+    <fragment
+        android:id="@+id/StartPage"
+        android:name="ru.urfu.mutualmarker.fragments.StartPage"
+        android:label="Стартовая страница"
+        tools:layout="@layout/fragment_start_page">
 
+        <action
+            android:id="@+id/action_StartPage_to_LoginForm"
+            app:destination="@id/LoginForm" />
+        <action
+            android:id="@+id/action_StartPage_to_AddRoomFragment"
+            app:destination="@id/AddRoom" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginForm"
+        android:name="ru.urfu.mutualmarker.fragments.LoginForm"
+        android:label="@string/login_form_fragment"
+        tools:layout="@layout/login_form">
+
+        <action
+            android:id="@+id/action_Login_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_Login_to_AddRoomFragment"
+            app:destination="@id/AddRoom" />
+    </fragment>
     <fragment
         android:id="@+id/FirstFragment"
         android:name="ru.urfu.mutualmarker.fragments.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_first" />
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/AddRoom"
         android:name="ru.urfu.mutualmarker.fragments.AddRoomFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_add_room">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:label="@string/addRoomLabel"
+        tools:layout="@layout/fragment_add_room" />
 </navigation>
