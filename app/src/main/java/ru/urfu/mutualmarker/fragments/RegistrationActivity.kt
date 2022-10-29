@@ -1,34 +1,16 @@
-package ru.urfu.mutualmarker
+package ru.urfu.mutualmarker.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import ru.urfu.mutualmarker.client.CustomCookieJar
-import ru.urfu.mutualmarker.client.LoginService
-import ru.urfu.mutualmarker.dto.LoginResponse
-import javax.inject.Inject
+import ru.urfu.mutualmarker.R
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var customCookieJar: CustomCookieJar
-    @Inject
-    lateinit var loginService: AuthorizationService
-
+class RegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-
+        setContentView(R.layout.registration_main)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

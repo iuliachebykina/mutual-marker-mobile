@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.urfu.mutualmarker.client.LoginService
+import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.client.RoomService
 import javax.inject.Singleton
@@ -40,8 +40,8 @@ class RetrofitClientModule {
 
     @Singleton
     @Provides
-    fun provideLoginService(retrofit: Retrofit): LoginService =
-        retrofit.create(LoginService::class.java)
+    fun provideAuthorizationService(retrofit: Retrofit): AuthorizationService =
+        retrofit.create(AuthorizationService::class.java)
 
     @Singleton
     @Provides
