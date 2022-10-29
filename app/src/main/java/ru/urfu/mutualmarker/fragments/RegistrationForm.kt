@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.AuthorizationService
-import ru.urfu.mutualmarker.dto.LoginResponse
 import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.RegistrationRequest
 import javax.inject.Inject
@@ -51,7 +47,7 @@ class RegistrationForm : Fragment() {
 
         view.findViewById<Button>(R.id.RegistrationButton).setOnClickListener {
             println("Onclick")
-            val requestBody : RegistrationRequest = RegistrationRequest(
+            val requestBody = RegistrationRequest(
                 passwordField.text.toString(), numberField.text.toString(),
                 firstNameField.text.toString(), lastNameField.text.toString(),
                 patronymicField.text.toString(), emailField.text.toString()

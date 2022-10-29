@@ -41,6 +41,17 @@ class StartPage : Fragment() {
 
         val sharedPref = activity?.getSharedPreferences( "credentials", Context.MODE_PRIVATE)
 
+
+        //todo delete
+        val edit = sharedPref?.edit()
+        edit?.putString("username", null)
+        edit?.putString("password", null)
+        edit?.apply()
+
+
+
+
+
         val email = sharedPref?.getString("username", null)
         val password = sharedPref?.getString("password", null)
         super.onCreate(savedInstanceState)

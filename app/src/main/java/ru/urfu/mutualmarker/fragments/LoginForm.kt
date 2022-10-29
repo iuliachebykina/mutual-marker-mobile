@@ -17,8 +17,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.client.CustomCookieJar
+import ru.urfu.mutualmarker.RegistrationActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
+import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
@@ -51,8 +52,8 @@ class LoginForm : Fragment() {
         getLoginOnClickListener()
 
         view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
-            val intent = Intent(activity, RegistrationActivity::class.java)
-            startActivity(intent);
+            activity?.startActivity(Intent(activity, RegistrationActivity::class.java))
+
         }
     }
 
@@ -102,5 +103,6 @@ class LoginForm : Fragment() {
                 })
 
         }
+
     }
 }
