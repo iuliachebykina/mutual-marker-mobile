@@ -8,38 +8,32 @@
     android:orientation="vertical"
     tools:context=".fragments.LoginForm">
 
-    <View
-        android:id="@+id/WhiteLine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/white_line"
-        android:background="@color/white"
-        app:flow_verticalAlign="bottom"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/LoginText"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
         android:layout_height="30dp"
-        android:layout_marginHorizontal="54dp"
-        android:layout_marginVertical="30dp"
+        android:layout_marginVertical="50dp"
         android:fontFamily="@font/gilroy_black"
         android:text="@string/login"
         android:textColor="@color/black"
         android:textSize="@dimen/login_size"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/WhiteLine" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/PurpleLine"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
         android:layout_height="3dp"
         android:background="@color/purple_main"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LoginText" />
+        app:layout_constraintTop_toBottomOf="@id/LoginText"
+        />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EmailField"
