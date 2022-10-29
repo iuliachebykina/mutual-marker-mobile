@@ -97,7 +97,7 @@
             app:layout_constraintHorizontal_bias="0.504" />
 
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/patronymicField"
+            android:id="@+id/PatronymicField"
             style="@style/InputField"
             android:layout_width="303dp"
             android:layout_height="48dp"
@@ -122,16 +122,16 @@
             app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-            android:id="@+id/RegistrationButton"
-            android:layout_width="270dp"
-            android:layout_height="60dp"
-            android:text="@string/signup_button"
-            android:fontFamily="@font/gilroy_black"
-            android:textSize="@dimen/login_form_size"
-            app:layout_constraintTop_toBottomOf="@+id/patronymicField"
-            tools:layout_editor_absoluteX="70dp"
-            android:layout_marginTop="60dp" />
-            android:background="@color/transparent"
+        android:id="@+id/RegistrationButton"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/signup_button"
+        android:textSize="@dimen/login_form_size"
+        app:layout_constraintTop_toBottomOf="@+id/PatronymicField"
+        tools:layout_editor_absoluteX="70dp" />
+    android:background="@color/transparent"
             android:textColor="@color/purple_main"
             android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"

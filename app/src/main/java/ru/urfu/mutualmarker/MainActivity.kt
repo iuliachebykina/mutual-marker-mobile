@@ -11,8 +11,8 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
-import ru.urfu.mutualmarker.client.LoginService
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var customCookieJar: CustomCookieJar
     @Inject
-    lateinit var loginService: LoginService
+    lateinit var loginService: AuthorizationService
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

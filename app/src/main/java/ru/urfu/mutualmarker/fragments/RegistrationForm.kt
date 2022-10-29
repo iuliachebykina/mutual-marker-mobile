@@ -17,6 +17,8 @@ import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.dto.LoginResponse
+import ru.urfu.mutualmarker.dto.Profile
+import ru.urfu.mutualmarker.dto.RegistrationRequest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,39 +30,42 @@ class RegistrationForm : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        println("Creat")
         return inflater.inflate(R.layout.registration_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("Created")
+        getRegisterOnClickListener()
+    }
 
+    private fun getRegisterOnClickListener(){
+        val view = requireView();
         val emailField = view.findViewById<TextInputEditText>(R.id.EmailField)
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
         val firstNameField = view.findViewById<TextInputEditText>(R.id.FirstNameField)
+        val lastNameField = view.findViewById<TextInputEditText>(R.id.LastNameField)
+        val patronymicField = view.findViewById<TextInputEditText>(R.id.PatronymicField)
+        val numberField = view.findViewById<TextInputEditText>(R.id.PhoneField)
 
-        view.findViewById<Button>(R.id.LoginButton).setOnClickListener {
-            val requestBody : RequestBody = MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("password", passwordField.getText().toString())
-                .addFormDataPart("username", emailField.getText().toString())
-                .build()
-            val result = authorizationService.login(requestBody)
-                .enqueue(object : Callback<LoginResponse> {
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+        view.findViewById<Button>(R.id.RegistrationButton).setOnClickListener {
+            println("Onclick")
+            val requestBody : RegistrationRequest = RegistrationRequest(
+                passwordField.text.toString(), numberField.text.toString(),
+                firstNameField.text.toString(), lastNameField.text.toString(),
+                patronymicField.text.toString(), emailField.text.toString()
+            )
+            val result = authorizationService.registerStudent(requestBody)
+                .enqueue(object : Callback<Profile> {
+                    override fun onFailure(call: Call<Profile>, t: Throwable) {
                         System.out.println("result " + t.message)
                     }
 
-                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                         System.out.println("result " + response)
                     }
                 })
-            findNavController().navigate(R.id.action_Login_to_FirstFragment)
-        }
-
-        view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
-            System.out.println(String.format("email: %s, password: %s",
-                emailField.getText().toString(),
-                passwordField.getText().toString()))
         }
     }
 }

@@ -10,7 +10,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.registration_form)
+        setContentView(R.layout.registration_main)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

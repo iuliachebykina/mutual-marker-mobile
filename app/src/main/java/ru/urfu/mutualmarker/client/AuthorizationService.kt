@@ -4,7 +4,6 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
-import ru.urfu.mutualmarker.dto.LoginRequest
 import ru.urfu.mutualmarker.dto.LoginResponse
 import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.RegistrationRequest
