@@ -14,7 +14,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.client.LoginService
+import ru.urfu.mutualmarker.client.AuthorizationService
+
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class StartPage : Fragment() {
 
     @Inject
-    lateinit var loginService: LoginService
+    lateinit var authorizationService: AuthorizationService
 
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +51,7 @@ class StartPage : Fragment() {
                 .addFormDataPart("password", password)
                 .addFormDataPart("username", "ROLE_STUDENT\\$email")
                 .build()
-            loginService.login(requestBody)
+            authorizationService.login(requestBody)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                         println("result FAIl" + t.message)
