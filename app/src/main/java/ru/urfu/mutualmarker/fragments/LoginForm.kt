@@ -87,7 +87,6 @@ class LoginForm : Fragment() {
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
 
-                            //preferences.edit().putString("cred", cred.toString())
                             if (false) { //if room's count > 0
                                 findNavController().navigate(R.id.action_Login_to_FirstFragment)
 
