@@ -1,13 +1,12 @@
 package ru.urfu.mutualmarker.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -15,7 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.RoomService
-import ru.urfu.mutualmarker.dto.LoginResponse
 import ru.urfu.mutualmarker.dto.Room
 import javax.inject.Inject
 
@@ -50,8 +48,12 @@ class AddRoomFragment : Fragment() {
 
                     override fun onResponse(call: Call<Room>, response: Response<Room>) {
                         if (response.code() == 200) {
+                            wrongRoomCodeText.visibility = View.INVISIBLE;
                             println(response.body())
 
+                        }
+                        else {
+                            wrongRoomCodeText.visibility = View.VISIBLE;
                         }
                         println("result OK" + response.errorBody())
                     }

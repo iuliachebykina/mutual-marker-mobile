@@ -63,8 +63,6 @@ class MainActivity : AppCompatActivity() {
                             edit?.putString("username", email)
                             edit?.putString("password", password)
                             edit?.apply()
-
-
                         }
                         println("result OK" + response.errorBody())
                     }
