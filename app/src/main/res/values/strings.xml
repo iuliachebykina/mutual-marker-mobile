@@ -21,6 +21,7 @@
     <string name="codeRoom">Код комнаты</string>
     <string name="wrongRoomCode">Неверный код комнаты</string>
     <string name="addRoomLabel">Добавить комнату</string>
+    <string name="AppLabel">Rate et Rate</string>
     <string name="registration">Регистрация</string>
     <string name="phone">Номер телефона</string>
     <string name="first_name">Имя</string>

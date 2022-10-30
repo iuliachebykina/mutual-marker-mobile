@@ -44,7 +44,7 @@ class LoginForm : Fragment() {
         return inflater.inflate(R.layout.login_form, container, false)
     }
 
-    val sharedPref = activity?.getSharedPreferences("credentials", Context.MODE_PRIVATE)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,6 +81,7 @@ class LoginForm : Fragment() {
                         if (response.code() == 200) {
 
                             //TODO get student's rooms
+                            val sharedPref = activity?.getSharedPreferences("credentials", Context.MODE_PRIVATE)
 
                             val edit = sharedPref?.edit()
                             edit?.putString("username", emailField.text.toString())
