@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/registration_form" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_registration_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="ru.urfu.mutualmarker.fragments.RegistrationForm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

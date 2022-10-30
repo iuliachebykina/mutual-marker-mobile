@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragments.RegistrationActivity">
+
+        <activity android:name="ru.urfu.mutualmarker.RegistrationActivity"
+            android:exported="true">
 
         </activity>
     </application>
