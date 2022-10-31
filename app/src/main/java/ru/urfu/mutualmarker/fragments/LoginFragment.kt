@@ -17,14 +17,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RegistrationActivity
+import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.dto.LoginResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginForm : Fragment() {
+class LoginFragment : Fragment() {
     @Inject
     lateinit var authorizationService: AuthorizationService
 
@@ -41,7 +41,7 @@ class LoginForm : Fragment() {
     ): View? {
         println("Create")
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.login_form, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
 
@@ -52,8 +52,7 @@ class LoginForm : Fragment() {
         getLoginOnClickListener()
 
         view.findViewById<Button>(R.id.SignupButton).setOnClickListener {
-            activity?.startActivity(Intent(activity, RegistrationActivity::class.java))
-
+            findNavController().navigate(R.id.action_Login_to_Registration)
         }
     }
 
@@ -89,12 +88,7 @@ class LoginForm : Fragment() {
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
 
-                            if (false) { //if room's count > 0
-                                findNavController().navigate(R.id.action_Login_to_FirstFragment)
-
-                            } else { //if room's count = 0
-                                findNavController().navigate(R.id.action_Login_to_AddRoomFragment)
-                            }
+                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
 
 
                         }

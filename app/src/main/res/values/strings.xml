@@ -27,4 +27,5 @@
     <string name="first_name">Имя</string>
     <string name="last_name">Фамилия</string>
     <string name="patronymic">Отчество</string>
+    <string name="registration_fragment_label">Регистрация</string>
 </resources>

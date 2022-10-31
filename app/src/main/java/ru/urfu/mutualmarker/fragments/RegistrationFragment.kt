@@ -1,5 +1,6 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.RegistrationRequest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RegistrationForm : Fragment() {
+class RegistrationFragment : Fragment() {
     @Inject
     lateinit var authorizationService : AuthorizationService
 
@@ -27,7 +29,7 @@ class RegistrationForm : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         println("Creat")
-        return inflater.inflate(R.layout.registration_form, container, false)
+        return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +61,9 @@ class RegistrationForm : Fragment() {
                     }
 
                     override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                        if(response.code() == 200){
+                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+                        }
                         System.out.println("result " + response)
                     }
                 })

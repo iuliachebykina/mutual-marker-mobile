@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/purple_background"
-        tools:context=".fragments.RegistrationForm"
+        tools:context=".fragments.RegistrationFragment"
         android:orientation="vertical">
 
     <View
