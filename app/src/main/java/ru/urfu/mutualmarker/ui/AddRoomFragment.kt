@@ -1,4 +1,4 @@
-package ru.urfu.mutualmarker.fragments
+package ru.urfu.mutualmarker.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.MutualMarker.ActionBar">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.MutualMarker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MutualMarker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
