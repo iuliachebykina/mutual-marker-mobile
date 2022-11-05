@@ -20,7 +20,7 @@ import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
-import ru.urfu.mutualmarker.dto.LoginResponse
+import ru.urfu.mutualmarker.dto.Login
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -68,15 +68,15 @@ class LoginFragment : Fragment() {
                 .build()
 
             authorizationService.login(requestBody)
-                .enqueue(object : Callback<LoginResponse> {
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                .enqueue(object : Callback<Login> {
+                    override fun onFailure(call: Call<Login>, t: Throwable) {
                         println("result FAIl" + t.message)
                     }
 
 
                     override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
+                        call: Call<Login>,
+                        response: Response<Login>
                     ) {
                         if (response.code() == 200) {
 

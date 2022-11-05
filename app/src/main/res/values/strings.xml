@@ -37,4 +37,13 @@
     <string name="profile">Профиль</string>
     <string name="hello_another_blank_fragment">another blank fragment</string>
     <string name="no_rooms">У вас еще нет ни одной комнаты :(</string>
+    <string name="Profile">Профиль</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="nameLabel">ФИО</string>
+    <string name="notFound">нет(((</string>
+    <string name="emailLabel">Электронная почта</string>
+    <string name="proneNumberLabel">Номер телефона</string>
+    <string name="studyLabel">Учебное заведение</string>
+    <string name="socialNetworkLabel">Социальная сеть</string>
+    <string name="studyGroupLabel">Учебная группа</string>
 </resources>

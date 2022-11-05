@@ -18,7 +18,7 @@ import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 
-import ru.urfu.mutualmarker.dto.LoginResponse
+import ru.urfu.mutualmarker.dto.Login
 import javax.inject.Inject
 
 
@@ -45,10 +45,10 @@ class StartFragment : Fragment() {
 
 
         //todo delete
-        val edit = sharedPref?.edit()
-        edit?.putString("username", null)
-        edit?.putString("password", null)
-        edit?.apply()
+//        val edit = sharedPref?.edit()
+//        edit?.putString("username", null)
+//        edit?.putString("password", null)
+//        edit?.apply()
 
 
 
@@ -65,15 +65,15 @@ class StartFragment : Fragment() {
                 .addFormDataPart("username", "ROLE_STUDENT\\$email")
                 .build()
             authorizationService.login(requestBody)
-                .enqueue(object : Callback<LoginResponse> {
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                .enqueue(object : Callback<Login> {
+                    override fun onFailure(call: Call<Login>, t: Throwable) {
                         println("result FAIl" + t.message)
                     }
 
 
                     override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
+                        call: Call<Login>,
+                        response: Response<Login>
                     ) {
                         if (response.code() == 200) {
 

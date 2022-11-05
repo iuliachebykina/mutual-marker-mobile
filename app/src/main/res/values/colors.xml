@@ -13,5 +13,6 @@
     <color name="purple_inactive">#807256FD</color>
     <color name="purple_background">#0D866EFF</color>
     <color name="gray_hints">#767676</color>
+    <color name="gray_label">#817F7F</color>
     <color name="transparent">#00000000</color>
 </resources>

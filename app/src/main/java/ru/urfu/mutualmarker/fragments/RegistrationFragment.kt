@@ -19,7 +19,7 @@ import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.dto.Profile
-import ru.urfu.mutualmarker.dto.RegistrationRequest
+import ru.urfu.mutualmarker.dto.Registration
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -104,7 +104,7 @@ class RegistrationFragment : Fragment() {
 //
 //            } else{
                 fillFieldsFlag.visibility = View.INVISIBLE
-                val requestBody = RegistrationRequest(
+                val requestBody = Registration(
                     passwordField.text.toString(), numberField.text.toString(),
                     firstNameField.text.toString(), lastNameField.text.toString(),
                     patronymicField.text.toString(), emailField.text.toString()

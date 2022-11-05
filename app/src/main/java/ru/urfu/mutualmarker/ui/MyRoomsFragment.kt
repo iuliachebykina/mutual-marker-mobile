@@ -14,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.RoomService
-import ru.urfu.mutualmarker.dto.RoomResponse
+import ru.urfu.mutualmarker.dto.Room
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,21 +34,21 @@ class MyRoomsFragment : Fragment() {
 
         val noRoomsText = view.findViewById<TextView>(R.id.no_rooms)
 
-        var rooms : List<RoomResponse> = mutableListOf()
+        var rooms : List<Room> = mutableListOf()
         val catNames = arrayOf(
             "Рыжик", "Барсик", "Мурзик"
         )
 
         val roomsCall = roomService.getRooms(0,10)
 
-        roomsCall.enqueue(object : Callback<List<RoomResponse>> {
+        roomsCall.enqueue(object : Callback<List<Room>> {
 
-            override fun onFailure(call: Call<List<RoomResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Room>>, t: Throwable) {
                 println("result FAIl" + t.message)
-                rooms = listOf<RoomResponse>()
+                rooms = listOf<Room>()
             }
 
-            override fun onResponse(call: Call<List<RoomResponse>>, response: Response<List<RoomResponse>>) {
+            override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
                     noRoomsText.visibility = View.INVISIBLE;
                     println(response.body())
@@ -56,7 +56,7 @@ class MyRoomsFragment : Fragment() {
                 }
                 else {
                     noRoomsText.visibility = View.VISIBLE;
-                    rooms = listOf<RoomResponse>()
+                    rooms = listOf<Room>()
                 }
                 println("result OK" + response.errorBody())
             }
