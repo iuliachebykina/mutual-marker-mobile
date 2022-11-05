@@ -11,6 +11,5 @@
         android:paddingHorizontal="20dp"
         android:layout_marginVertical="15dp"
         android:layout_height="60dp"
-        android:background="@drawable/member_item"
  />
 

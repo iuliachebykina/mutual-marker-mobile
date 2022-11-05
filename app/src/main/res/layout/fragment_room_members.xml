@@ -61,7 +61,7 @@
         tools:listitem="@layout/room_member_item"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
-        android:nestedScrollingEnabled="false"
+        android:nestedScrollingEnabled="true"
 
         app:layout_constraintTop_toBottomOf="@id/PurpleLine1"/>
 
@@ -91,6 +91,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Students"
         />
+
     <ListView
         android:id="@+id/studentsListView"
         android:layout_width="0dp"
@@ -101,7 +102,7 @@
         tools:listitem="@layout/room_member_item"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:nestedScrollingEnabled="false"
+        android:nestedScrollingEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/PurpleLine2"/>
 
 

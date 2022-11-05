@@ -77,18 +77,18 @@ class StartFragment : Fragment() {
                     ) {
                         if (response.code() == 200) {
 
-                            //TODO get student's rooms
-
                             val editor = sharedPref.edit()
                             editor?.putString("username", email)
                             editor?.putString("password", password)
                             editor?.apply()
+
+                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
                         }
-                        println("result OK" + response.errorBody())
+                        println("result OK" + response)
                     }
                 })
 
-            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+
 
         } else{
             findNavController().navigate(R.id.action_StartPage_to_LoginForm)

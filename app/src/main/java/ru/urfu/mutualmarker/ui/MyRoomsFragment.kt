@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,6 +15,7 @@ import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.RoomService
 import ru.urfu.mutualmarker.dto.Room
+import ru.urfu.mutualmarker.fragments.RoomsArrayAdapter
 import javax.inject.Inject
 
 
@@ -47,13 +47,12 @@ class MyRoomsFragment : Fragment() {
             "Рыжик", "Барсик", "Мурзик"
         )
 
-        val roomsCall = roomService.getRooms(0,10)
+        val roomsCall = roomService.getRooms(0,100)
 
         roomsCall.enqueue(object : Callback<List<Room>> {
 
             override fun onFailure(call: Call<List<Room>>, t: Throwable) {
                 println("result FAIl" + t.message)
-                rooms = listOf<Room>()
             }
 
             override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
@@ -61,24 +60,25 @@ class MyRoomsFragment : Fragment() {
                     noRoomsText.visibility = View.INVISIBLE
                     println(response.body())
                     rooms = response.body()!!
+
+                    val roomsName = rooms.map { room -> room.code }.toList()
+                    println(roomsName)
+
+                    catNames.plus(roomsName)
+                    val adapter = RoomsArrayAdapter(requireContext(), R.layout.room_item, rooms)
+                    lv.adapter = adapter
+
                 }
                 else {
                     noRoomsText.visibility = View.VISIBLE
-                    rooms = listOf<Room>()
                 }
-                println("result OK" + response.errorBody())
+                println("result OK" + response)
             }
         })
 
 
 
 
-        val roomsName = rooms.map { room -> room.code }.toList()
-        println(roomsName)
-
-        catNames.plus(roomsName)
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(requireContext(), R.layout.room_item, catNames)
-        lv.adapter = adapter
 
         return view
     }
