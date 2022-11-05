@@ -1,5 +1,6 @@
 package ru.urfu.mutualmarker.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,16 +18,23 @@ import ru.urfu.mutualmarker.client.RoomService
 import ru.urfu.mutualmarker.dto.Room
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class MyRoomsFragment : Fragment() {
 
     @Inject
     lateinit var roomService: RoomService
 
+
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_my_rooms, container, false)
 

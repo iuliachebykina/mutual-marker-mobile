@@ -21,6 +21,7 @@
         android:id="@+id/navigation_profile"
         android:name="ru.urfu.mutualmarker.ui.MyProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_my_profile" />
+        tools:layout="@layout/fragment_my_profile" >
+    </fragment>
 
 </navigation>
