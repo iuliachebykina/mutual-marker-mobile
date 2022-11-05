@@ -4,4 +4,9 @@
     android:fontStyle="normal"
     android:fontWeight="400"
     android:font="@font/gilroy_black" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/gilroy_medium" />
 </font-family>

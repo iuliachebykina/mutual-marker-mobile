@@ -14,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.RoomService
-import ru.urfu.mutualmarker.dto.Room
+import ru.urfu.mutualmarker.dto.RoomResponse
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,12 +41,12 @@ class AddRoomFragment : Fragment() {
 
             } else {
                 wrongRoomCodeText.visibility = View.INVISIBLE;
-                roomService.addRoom(roomCode.toString()).enqueue(object : Callback<Room> {
-                    override fun onFailure(call: Call<Room>, t: Throwable) {
+                roomService.addRoom(roomCode.toString()).enqueue(object : Callback<RoomResponse> {
+                    override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
                         println("result FAIl" + t.message)
                     }
 
-                    override fun onResponse(call: Call<Room>, response: Response<Room>) {
+                    override fun onResponse(call: Call<RoomResponse>, response: Response<RoomResponse>) {
                         if (response.code() == 200) {
                             wrongRoomCodeText.visibility = View.INVISIBLE;
                             println(response.body())
