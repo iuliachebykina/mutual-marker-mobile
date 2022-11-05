@@ -28,4 +28,8 @@
     <string name="last_name">Фамилия</string>
     <string name="patronymic">Отчество</string>
     <string name="registration_fragment_label">Регистрация</string>
+    <string name="repeatPassword">Повторите пароль</string>
+    <string name="shortPassword">Короткий пароль. Минимум 8 символов</string>
+    <string name="diffPassword">Пароли не совпадают</string>
+    <string name="fillFields">Заполните все обязательные поля</string>
 </resources>
