@@ -46,4 +46,5 @@
     <string name="studyLabel">Учебное заведение</string>
     <string name="socialNetworkLabel">Социальная сеть</string>
     <string name="studyGroupLabel">Учебная группа</string>
+    <string name="updateProfile">Изменить профиль</string>
 </resources>

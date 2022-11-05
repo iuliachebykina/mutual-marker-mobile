@@ -50,12 +50,12 @@ class MyRoomsFragment : Fragment() {
 
             override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
-                    noRoomsText.visibility = View.INVISIBLE;
+                    noRoomsText.visibility = View.INVISIBLE
                     println(response.body())
                     rooms = response.body()!!
                 }
                 else {
-                    noRoomsText.visibility = View.VISIBLE;
+                    noRoomsText.visibility = View.VISIBLE
                     rooms = listOf<Room>()
                 }
                 println("result OK" + response.errorBody())

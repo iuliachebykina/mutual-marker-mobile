@@ -42,7 +42,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun getRegisterOnClickListener(){
-        val view = requireView();
+        val view = requireView()
         val emailField = view.findViewById<TextInputEditText>(R.id.EmailField)
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
         val repeatPasswordField = view.findViewById<TextInputEditText>(R.id.RepeatPasswordField)

@@ -23,9 +23,9 @@ class CustomCookieJar : CookieJar {
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
         if (!url.encodedPath().endsWith("login")) {
-            return cookies;
+            return cookies
         }
-        return Collections.emptyList();
+        return Collections.emptyList()
     }
 
 }

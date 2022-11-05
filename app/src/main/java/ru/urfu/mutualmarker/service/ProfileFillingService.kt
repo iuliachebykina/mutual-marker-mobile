@@ -55,7 +55,7 @@ class ProfileFillingService {
         fullName += " " + name.firstName
         if (!name.patronymic.isNullOrBlank())
             fullName += " " + name.patronymic
-        return fullName;
+        return fullName
 
     }
 

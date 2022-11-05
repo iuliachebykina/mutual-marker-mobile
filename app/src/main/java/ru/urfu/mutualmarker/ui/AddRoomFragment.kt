@@ -36,29 +36,24 @@ class AddRoomFragment : Fragment() {
         val roomCode = view.findViewById<TextInputEditText>(R.id.RoomCode).text
         val wrongRoomCodeText = view.findViewById<TextView>(R.id.WrongRoomCode)
         view.findViewById<Button>(R.id.AddRoomButton).setOnClickListener {
-            if (roomCode == null || roomCode.isBlank() || roomCode.length < 10) {
-                wrongRoomCodeText.visibility = View.VISIBLE;
-
-            } else {
-                wrongRoomCodeText.visibility = View.INVISIBLE;
-                roomService.addRoom(roomCode.toString()).enqueue(object : Callback<Room> {
-                    override fun onFailure(call: Call<Room>, t: Throwable) {
+            roomService.addRoom(roomCode.toString()).enqueue(object : Callback<Room> {
+                override fun onFailure(call: Call<Room>, t: Throwable) {
                         println("result FAIl" + t.message)
                     }
 
                     override fun onResponse(call: Call<Room>, response: Response<Room>) {
                         if (response.code() == 200) {
-                            wrongRoomCodeText.visibility = View.INVISIBLE;
+                            wrongRoomCodeText.visibility = View.INVISIBLE
                             println(response.body())
 
                         }
                         else {
-                            wrongRoomCodeText.visibility = View.VISIBLE;
+                            wrongRoomCodeText.visibility = View.VISIBLE
                         }
                         println("result OK" + response.errorBody())
                     }
                 })
-            }
+
 
 
         }
