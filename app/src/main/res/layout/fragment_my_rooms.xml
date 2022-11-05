@@ -57,4 +57,17 @@
         android:layout_marginTop="@dimen/fab_margin"
         />
 
+    <TextView
+        android:id="@+id/no_rooms"
+        android:textColor="@color/black"
+        android:textSize="@dimen/login_size"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/no_rooms"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rooms_list"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

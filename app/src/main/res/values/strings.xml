@@ -32,4 +32,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Профиль</string>
     <string name="hello_another_blank_fragment">another blank fragment</string>
+    <string name="no_rooms">У вас еще нет ни одной комнаты :(</string>
 </resources>
