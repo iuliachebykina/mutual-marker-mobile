@@ -18,7 +18,7 @@ import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
-import ru.urfu.mutualmarker.dto.Profile
+import ru.urfu.mutualmarker.dto.MyProfile
 import ru.urfu.mutualmarker.dto.Registration
 import javax.inject.Inject
 
@@ -110,12 +110,12 @@ class RegistrationFragment : Fragment() {
                     patronymicField.text.toString(), emailField.text.toString()
                 )
             authorizationService.registerStudent(requestBody)
-                .enqueue(object : Callback<Profile> {
-                    override fun onFailure(call: Call<Profile>, t: Throwable) {
+                .enqueue(object : Callback<MyProfile> {
+                    override fun onFailure(call: Call<MyProfile>, t: Throwable) {
                         System.out.println("result " + t.message)
                     }
 
-                    override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                    override fun onResponse(call: Call<MyProfile>, response: Response<MyProfile>) {
                         if(response.code() == 200){
                             activity?.startActivity(Intent(activity, RoomsActivity::class.java))
                         }

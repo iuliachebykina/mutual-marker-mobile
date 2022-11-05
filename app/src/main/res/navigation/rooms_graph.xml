@@ -22,6 +22,16 @@
         android:name="ru.urfu.mutualmarker.ui.MyProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_csdvfv"
+            app:destination="@id/csdvfv" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/csdvfv"
+        android:name="ru.urfu.mutualmarker.fragments.RoomMembersFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_room_members" >
     </fragment>
 
 </navigation>

@@ -50,4 +50,7 @@
     <string name="student">СТУДЕНТ</string>
     <string name="teacher">ПРЕПОДАВАТЕЛЬ</string>
     <string name="subject">Предмет</string>
+    <string name="teachers">Преподаватели</string>
+    <string name="students">Студенты</string>
+    <string name="defaultName">Иванов Иван Иванович</string>
 </resources>

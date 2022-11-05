@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.ProfileService
@@ -29,14 +30,14 @@ class MyProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileFillingService.fillProfile(profileService, null, null, view)
+        profileFillingService.fillSelfProfile(profileService, view)
 
         view.findViewById<Button>(R.id.UpdateProfileButton).setOnClickListener {
 
             //TODO пример вызова с аргументами
-//            val bundle = Bundle()
-//            bundle.putString("email", "iulia@mail.ru")
-//            findNavController().navigate(R.id.action_navigation_profile_to_student_profile, bundle)
+            val bundle = Bundle()
+            bundle.putLong("roomId", 152)
+          findNavController().navigate(R.id.action_navigation_profile_to_csdvfv, bundle)
 
         }
 

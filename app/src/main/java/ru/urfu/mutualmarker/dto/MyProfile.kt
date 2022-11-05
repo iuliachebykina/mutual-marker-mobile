@@ -1,12 +1,10 @@
 package ru.urfu.mutualmarker.dto
 
-data class Profile(
+data class MyProfile(
     val id: Long,
     val email: String,
     val role: String,
-    val firstName: String,
-    val lastName: String,
-    val patronymic: String,
+    val name: Name,
     val subject: String,
     val university: String,
     val institute: String,
