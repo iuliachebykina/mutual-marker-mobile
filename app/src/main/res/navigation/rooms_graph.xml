@@ -2,23 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:id="@+id/rooms_graph"
+    app:startDestination="@+id/navigation_add_room">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ru.urfu.mutualmarker.fragments.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_FirstFragment_to_AddRoom"
-            app:destination="@id/AddRoom" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/AddRoom"
-        android:name="ru.urfu.mutualmarker.fragments.AddRoomFragment"
+        android:id="@+id/navigation_add_room"
+        android:name="ru.urfu.mutualmarker.ui.AddRoomFragment"
         android:label="@string/addRoomLabel"
         tools:layout="@layout/fragment_add_room" />
+
+    <fragment
+        android:id="@+id/navigation_my_rooms"
+        android:name="ru.urfu.mutualmarker.ui.MyRoomsFragment"
+        android:label="@string/my_rooms"
+        tools:layout="@layout/fragment_my_rooms" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.urfu.mutualmarker.ui.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>
