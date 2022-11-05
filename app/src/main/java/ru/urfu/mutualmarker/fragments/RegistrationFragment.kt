@@ -109,19 +109,19 @@ class RegistrationFragment : Fragment() {
                     firstNameField.text.toString(), lastNameField.text.toString(),
                     patronymicField.text.toString(), emailField.text.toString()
                 )
-                val result = authorizationService.registerStudent(requestBody)
-                    .enqueue(object : Callback<Profile> {
-                        override fun onFailure(call: Call<Profile>, t: Throwable) {
-                            System.out.println("result " + t.message)
-                        }
+            authorizationService.registerStudent(requestBody)
+                .enqueue(object : Callback<Profile> {
+                    override fun onFailure(call: Call<Profile>, t: Throwable) {
+                        System.out.println("result " + t.message)
+                    }
 
-                        override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                            if(response.code() == 200){
-                                activity?.startActivity(Intent(activity, RoomsActivity::class.java))
-                            }
-                            System.out.println("result " + response)
+                    override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+                        if(response.code() == 200){
+                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
                         }
-                    })
+                        System.out.println("result " + response)
+                    }
+                })
 //            }
             println("Onclick")
 
