@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
+import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.client.RoomService
 import javax.inject.Singleton
 
@@ -22,7 +23,8 @@ class RetrofitClientModule {
     fun provideOkHttpClient(customCookieJar: CustomCookieJar): OkHttpClient = OkHttpClient
         .Builder()
         .cookieJar(customCookieJar)
-        .build();
+        .build()
+
 
     @Singleton
     @Provides
@@ -47,4 +49,9 @@ class RetrofitClientModule {
     @Provides
     fun provideRoomService(retrofit: Retrofit): RoomService =
         retrofit.create(RoomService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideProfileService(retrofit: Retrofit): ProfileService =
+        retrofit.create(ProfileService::class.java)
 }

@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.MutualMarker.ActionBar">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.MutualMarker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MutualMarker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -32,6 +38,6 @@
         <item name="android:background">@color/white</item>
         <item name="android:textColorHint">@color/gray_hints</item>
         <item name="android:textSize">@dimen/login_form_size</item>
-        <item name="fontFamily">@font/gilroy_black</item>
+        <item name="fontFamily">@font/gilroy_medium</item>
     </style>
 </resources>

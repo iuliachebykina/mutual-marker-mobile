@@ -7,7 +7,7 @@ import java.util.*
 
 class CustomCookieJar : CookieJar {
 
-    val cookies = mutableListOf<Cookie>()
+    private val cookies = mutableListOf<Cookie>()
 
     override fun saveFromResponse(url: HttpUrl, cookieList: List<Cookie>) {
         if(url.encodedPath().endsWith("login")){
@@ -23,9 +23,9 @@ class CustomCookieJar : CookieJar {
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
         if (!url.encodedPath().endsWith("login")) {
-            return cookies;
+            return cookies
         }
-        return Collections.emptyList();
+        return Collections.emptyList()
     }
 
 }

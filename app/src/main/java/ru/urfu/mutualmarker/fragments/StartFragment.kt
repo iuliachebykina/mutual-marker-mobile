@@ -1,6 +1,7 @@
 package ru.urfu.mutualmarker.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 
-import ru.urfu.mutualmarker.dto.LoginResponse
+import ru.urfu.mutualmarker.dto.Login
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class StartPage : Fragment() {
+class StartFragment : Fragment() {
 
     @Inject
     lateinit var authorizationService: AuthorizationService
@@ -41,6 +43,17 @@ class StartPage : Fragment() {
 
         val sharedPref = activity?.getSharedPreferences( "credentials", Context.MODE_PRIVATE)
 
+
+        //todo delete
+//        val edit = sharedPref?.edit()
+//        edit?.putString("username", null)
+//        edit?.putString("password", null)
+//        edit?.apply()
+
+
+
+
+
         val email = sharedPref?.getString("username", null)
         val password = sharedPref?.getString("password", null)
         super.onCreate(savedInstanceState)
@@ -52,15 +65,15 @@ class StartPage : Fragment() {
                 .addFormDataPart("username", "ROLE_STUDENT\\$email")
                 .build()
             authorizationService.login(requestBody)
-                .enqueue(object : Callback<LoginResponse> {
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                .enqueue(object : Callback<Login> {
+                    override fun onFailure(call: Call<Login>, t: Throwable) {
                         println("result FAIl" + t.message)
                     }
 
 
                     override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
+                        call: Call<Login>,
+                        response: Response<Login>
                     ) {
                         if (response.code() == 200) {
 
@@ -75,7 +88,7 @@ class StartPage : Fragment() {
                     }
                 })
 
-            findNavController().navigate(R.id.action_StartPage_to_AddRoomFragment)
+            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
 
         } else{
             findNavController().navigate(R.id.action_StartPage_to_LoginForm)

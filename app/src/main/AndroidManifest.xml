@@ -14,7 +14,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="n">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.MutualMarker.NoActionBar">
             <intent-filter>
@@ -23,11 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="ru.urfu.mutualmarker.RegistrationActivity"
+        <activity
+            android:name=".RoomsActivity"
+            android:label="@string/my_rooms"
             android:exported="true">
-
         </activity>
+
     </application>
 
 </manifest>

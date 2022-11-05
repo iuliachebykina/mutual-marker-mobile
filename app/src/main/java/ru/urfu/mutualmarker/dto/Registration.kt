@@ -1,6 +1,6 @@
 package ru.urfu.mutualmarker.dto
 
-data class RegistrationRequest(
+data class Registration(
     val password: String,
     val phoneNumber: String,
     val firstName: String,

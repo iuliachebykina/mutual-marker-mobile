@@ -27,4 +27,24 @@
     <string name="first_name">Имя</string>
     <string name="last_name">Фамилия</string>
     <string name="patronymic">Отчество</string>
+    <string name="registration_fragment_label">Регистрация</string>
+    <string name="repeatPassword">Повторите пароль</string>
+    <string name="shortPassword">Короткий пароль. Минимум 8 символов</string>
+    <string name="diffPassword">Пароли не совпадают</string>
+    <string name="fillFields">Заполните все обязательные поля</string>
+    <string name="my_rooms">Мои комнаты</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Профиль</string>
+    <string name="hello_another_blank_fragment">another blank fragment</string>
+    <string name="no_rooms">У вас еще нет ни одной комнаты :(</string>
+    <string name="Profile">Профиль</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="nameLabel">ФИО</string>
+    <string name="notFound">нет(((</string>
+    <string name="emailLabel">Электронная почта</string>
+    <string name="proneNumberLabel">Номер телефона</string>
+    <string name="studyLabel">Учебное заведение</string>
+    <string name="socialNetworkLabel">Социальная сеть</string>
+    <string name="studyGroupLabel">Учебная группа</string>
+    <string name="updateProfile">Изменить профиль</string>
 </resources>

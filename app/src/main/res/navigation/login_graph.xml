@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/StartPage">
+    <fragment
+        android:id="@+id/StartPage"
+        android:name="ru.urfu.mutualmarker.fragments.StartFragment"
+        android:label="Стартовая страница"
+        tools:layout="@layout/fragment_start_page">
+
+        <action
+            android:id="@+id/action_StartPage_to_LoginForm"
+            app:destination="@id/LoginForm" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginForm"
+        android:name="ru.urfu.mutualmarker.fragments.LoginFragment"
+        android:label="@string/login_form_fragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_Login_to_Registration"
+            app:destination="@id/RegistrationForm" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/RegistrationForm"
+        android:name="ru.urfu.mutualmarker.fragments.RegistrationFragment"
+        android:label="@string/registration_fragment_label"
+        tools:layout="@layout/fragment_registration" />
+
+</navigation>

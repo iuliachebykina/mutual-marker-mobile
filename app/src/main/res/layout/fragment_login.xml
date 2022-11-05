@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple_background"
     android:orientation="vertical"
-    tools:context=".fragments.LoginForm">
+    tools:context=".fragments.LoginFragment">
 
 
     <TextView
