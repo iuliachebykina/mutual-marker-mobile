@@ -35,13 +35,22 @@ class ProfileFillingService {
                 if (response.code() == 200) {
                     val profile = response.body() ?: return
 
-                    val name = getName(profile.name)
-                    view.findViewById<TextView>(R.id.Name).text = name
-                    view.findViewById<TextView>(R.id.Email).text = profile.email
-                    view.findViewById<TextView>(R.id.PhoneNumber).text = profile.phoneNumber
-                    view.findViewById<TextView>(R.id.Study).text = profile.institute
-                    view.findViewById<TextView>(R.id.StudyGroup).text = profile.studentGroup
-                    view.findViewById<TextView>(R.id.SocialNetwork).text = profile.socialNetwork
+                    if(profile.name != null){
+                        val name = getName(profile.name)
+                        view.findViewById<TextView>(R.id.Name).text = name
+                    }
+                    if(profile.email != null)
+                        view.findViewById<TextView>(R.id.Email).text = profile.email
+                    if(profile.phoneNumber != null)
+                        view.findViewById<TextView>(R.id.PhoneNumber).text = profile.phoneNumber
+                    if(profile.institute != null)
+                        view.findViewById<TextView>(R.id.Study).text = profile.institute
+                    if(profile.socialNetwork != null)
+                        view.findViewById<TextView>(R.id.SocialNetwork).text = profile.socialNetwork
+                    if(profile.subject != null)
+                        view.findViewById<TextView>(R.id.Subject).text = profile.subject
+                    if(profile.studentGroup != null)
+                        view.findViewById<TextView>(R.id.StudyGroup).text = profile.studentGroup
 
                 }
                 println("result OK" + response.errorBody())

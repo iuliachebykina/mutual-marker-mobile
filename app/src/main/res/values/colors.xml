@@ -10,6 +10,7 @@
     <color name="red">#FF0000</color>
 
     <color name="purple_main">#7256FD</color>
+    <color name="purple_profile_background">#40866EFF</color>
     <color name="purple_inactive">#807256FD</color>
     <color name="purple_background">#0D866EFF</color>
     <color name="gray_hints">#767676</color>
