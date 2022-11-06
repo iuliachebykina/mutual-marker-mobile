@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.adapter.RoomsAdapter
+import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.client.RoomService
 import ru.urfu.mutualmarker.dto.Room
 import javax.inject.Inject
@@ -24,6 +25,8 @@ class MyRoomsFragment : Fragment() {
 
     @Inject
     lateinit var roomService: RoomService
+    @Inject
+    lateinit var profileService: ProfileService
     private var rooms = ArrayList<Room>()
     var recyclerView: RecyclerView? = null
 
@@ -39,10 +42,8 @@ class MyRoomsFragment : Fragment() {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
-        rooms = ArrayList()
-        recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
-        recyclerView?.layoutManager = LinearLayoutManager(activity)
         getRooms()
+
     }
 
     private fun getRooms() {
@@ -58,13 +59,16 @@ class MyRoomsFragment : Fragment() {
             override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
                     println(response.body())
-                    rooms.addAll(response.body()!!)
-                    recyclerView?.adapter = RoomsAdapter(rooms)
+                    rooms = response.body() as ArrayList<Room>
+
                     if (rooms.isEmpty()) {
                         noRoomsText.visibility = View.VISIBLE
                     } else {
                         noRoomsText.visibility = View.INVISIBLE
                     }
+                    recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
+                    recyclerView?.layoutManager = LinearLayoutManager(activity)
+                    recyclerView?.adapter = RoomsAdapter(rooms)
                     return
                 }
                 noRoomsText.visibility = View.VISIBLE

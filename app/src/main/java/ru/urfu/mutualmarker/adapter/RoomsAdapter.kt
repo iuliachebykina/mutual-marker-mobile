@@ -40,9 +40,9 @@ class RoomsAdapter(private var dataSet: List<Room>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val room = dataSet.get(position)
+        val room = dataSet[position]
         viewHolder.roomTitle.text = room.title
-        viewHolder.count.text = room.id.toString()
+        viewHolder.count.text = room.membersCount.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
