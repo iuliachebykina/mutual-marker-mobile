@@ -39,7 +39,7 @@ class MyRoomsFragment : Fragment() {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
-
+        rooms = ArrayList()
         recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(activity)
         getRooms()
