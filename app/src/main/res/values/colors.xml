@@ -16,4 +16,5 @@
     <color name="gray_hints">#767676</color>
     <color name="gray_label">#817F7F</color>
     <color name="transparent">#00000000</color>
+    <color name="count_orange">#FE7451</color>
 </resources>

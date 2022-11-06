@@ -50,4 +50,6 @@
     <string name="student">СТУДЕНТ</string>
     <string name="teacher">ПРЕПОДАВАТЕЛЬ</string>
     <string name="subject">Предмет</string>
+    <string name="room_title_example">Создание сайта по оценке обучающихся</string>
+    <string name="members_count">Количество участников</string>
 </resources>
