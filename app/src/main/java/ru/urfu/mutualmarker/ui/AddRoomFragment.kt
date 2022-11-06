@@ -50,7 +50,7 @@ class AddRoomFragment : Fragment() {
                         else {
                             wrongRoomCodeText.visibility = View.VISIBLE
                         }
-                        println("result OK" + response.errorBody())
+                        println("result OK" + response)
                     }
                 })
 

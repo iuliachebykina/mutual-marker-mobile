@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:textColor="@color/count_orange"
+                android:textColor="@color/orange_main"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintWidth_percent="0.9"

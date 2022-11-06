@@ -37,7 +37,7 @@ class MyProfileFragment : Fragment() {
             //TODO пример вызова с аргументами
             val bundle = Bundle()
             bundle.putLong("roomId", 152)
-          findNavController().navigate(R.id.action_navigation_profile_to_csdvfv, bundle)
+          findNavController().navigate(R.id.action_navigation_profile_to_roomMembers, bundle)
 
         }
 

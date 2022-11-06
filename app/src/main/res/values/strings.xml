@@ -40,7 +40,7 @@
     <string name="Profile">Профиль</string>
     <string name="my_profile">Мой профиль</string>
     <string name="nameLabel">ФИО</string>
-    <string name="notFound">нет(((</string>
+    <string name="notFound">нет данных :(</string>
     <string name="emailLabel">Электронная почта</string>
     <string name="proneNumberLabel">Номер телефона</string>
     <string name="studyLabel">Учебное заведение</string>
@@ -55,4 +55,5 @@
     <string name="teachers">Преподаватели</string>
     <string name="students">Студенты</string>
     <string name="defaultName">Иванов Иван Иванович</string>
+    <string name="roomMemebers">Участники комнаты</string>
 </resources>

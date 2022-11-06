@@ -13,7 +13,7 @@ interface ProfileService {
     @GET("/api/profile/students/{email}")
     fun getStudentProfile(@Path("email") email: String): Call<Profile>
 
-    @GET("/api/profile/teacher/{email}")
+    @GET("/api/profile/teachers/{email}")
     fun getTeacherProfile(@Path("email") email: String): Call<Profile>
 
     @GET("/api/profile/self")

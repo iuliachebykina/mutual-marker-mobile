@@ -11,10 +11,11 @@
 
     <color name="purple_main">#7256FD</color>
     <color name="purple_profile_background">#40866EFF</color>
+    <color name="orange_profile_background">#40FE7451</color>
     <color name="purple_inactive">#807256FD</color>
     <color name="purple_background">#0D866EFF</color>
     <color name="gray_hints">#767676</color>
     <color name="gray_label">#817F7F</color>
     <color name="transparent">#00000000</color>
-    <color name="count_orange">#FE7451</color>
+    <color name="orange_main">#FE7451</color>
 </resources>

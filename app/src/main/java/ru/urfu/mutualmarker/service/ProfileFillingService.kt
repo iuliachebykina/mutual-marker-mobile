@@ -47,7 +47,7 @@ class ProfileFillingService {
                         view.findViewById<TextView>(R.id.StudyGroup).text = profile.studentGroup
 
                 }
-                println("result OK" + response.errorBody())
+                println("result OK" + response)
             }
         })
     }
@@ -87,7 +87,7 @@ class ProfileFillingService {
                         view.findViewById<TextView>(R.id.StudyGroup).text = profile.studentGroup
 
                 }
-                println("result OK" + response.errorBody())
+                println("result OK" + response)
             }
         })
     }

@@ -1,14 +1,17 @@
 package ru.urfu.mutualmarker.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.dto.Profile
 
-class MembersAdapter(private var dataSet: List<Profile>) :
+class MembersAdapter(private var dataSet: List<Profile>,
+                     private var isStudents: Boolean) :
     RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
 
     /**
@@ -40,6 +43,14 @@ class MembersAdapter(private var dataSet: List<Profile>) :
         // contents of the view with that element
         val profile = dataSet[position]
         viewHolder.name.text = getName(profile)
+        viewHolder.itemView.setOnClickListener { view ->
+            val bundle = Bundle()
+            bundle.putString("email", dataSet[position].email)
+            if(isStudents)
+                view.findNavController().navigate(R.id.action_roomMembers_to_studentProfile, bundle)
+            else
+                view.findNavController().navigate(R.id.action_roomMembers_to_teacherProfile, bundle)
+        }
     }
 
     private fun getName(profile: Profile): String {

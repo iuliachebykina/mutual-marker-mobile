@@ -14,7 +14,6 @@ import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.adapter.MembersAdapter
 import ru.urfu.mutualmarker.client.ProfileService
-import ru.urfu.mutualmarker.dto.MyProfile
 import ru.urfu.mutualmarker.dto.Profile
 import javax.inject.Inject
 
@@ -53,8 +52,6 @@ class RoomMembersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val teachers: List<MyProfile>
-
         roomId?.let {
             profileService.getTeachers(roomId = it, 0, 1000).enqueue(object : Callback<List<Profile>> {
                 override fun onFailure(call: Call<List<Profile>>, t: Throwable) {
@@ -69,10 +66,10 @@ class RoomMembersFragment : Fragment() {
                         val profiles = response.body() ?: return
                         val recyclerView = view.findViewById(R.id.teachersRecyclerView) as RecyclerView
                         recyclerView.layoutManager = LinearLayoutManager(activity)
-                        recyclerView.adapter = MembersAdapter(profiles)
+                        recyclerView.adapter = MembersAdapter(profiles, false)
 
                     }
-                    println("result OK" + response.errorBody())
+                    println("result OK" + response)
                 }
             })
 
@@ -89,10 +86,10 @@ class RoomMembersFragment : Fragment() {
                         val profiles = (response.body() ?: return).toMutableList()
                         val recyclerView = view.findViewById(R.id.studentsRecyclerView) as RecyclerView
                         recyclerView.layoutManager = LinearLayoutManager(activity)
-                        recyclerView.adapter = MembersAdapter(profiles)
+                        recyclerView.adapter = MembersAdapter(profiles, true)
 
                     }
-                    println("result OK" + response.errorBody())
+                    println("result OK" + response)
                 }
             })
 
@@ -119,3 +116,4 @@ class RoomMembersFragment : Fragment() {
             }
     }
 }
+
