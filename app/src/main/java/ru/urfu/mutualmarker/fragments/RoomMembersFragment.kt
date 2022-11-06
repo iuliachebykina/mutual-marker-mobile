@@ -87,8 +87,6 @@ class RoomMembersFragment : Fragment() {
                 ) {
                     if (response.code() == 200) {
                         val profiles = (response.body() ?: return).toMutableList()
-                        profiles.addAll(profiles)
-                        profiles.addAll(profiles)
                         val recyclerView = view.findViewById(R.id.studentsRecyclerView) as RecyclerView
                         recyclerView.layoutManager = LinearLayoutManager(activity)
                         recyclerView.adapter = MembersAdapter(profiles)
