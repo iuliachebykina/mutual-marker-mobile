@@ -52,4 +52,7 @@
     <string name="subject">Предмет</string>
     <string name="room_title_example">Создание сайта по оценке обучающихся</string>
     <string name="members_count">Количество участников</string>
+    <string name="teachers">Преподаватели</string>
+    <string name="students">Студенты</string>
+    <string name="defaultName">Иванов Иван Иванович</string>
 </resources>
