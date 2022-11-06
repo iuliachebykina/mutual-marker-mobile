@@ -51,14 +51,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/teachersRecyclerView"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintWidth_percent="0.9"
-        android:layout_height="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:listitem="@layout/room_member_item"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
+        tools:listitem="@layout/room_member_item"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:nestedScrollingEnabled="true"
-
         app:layout_constraintTop_toBottomOf="@id/PurpleLine1"/>
 
 
@@ -91,10 +90,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/studentsRecyclerView"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintWidth_percent="0.9"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:background="@color/purple_background"
+        android:layout_marginTop="10dp"
         tools:listitem="@layout/room_member_item"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
