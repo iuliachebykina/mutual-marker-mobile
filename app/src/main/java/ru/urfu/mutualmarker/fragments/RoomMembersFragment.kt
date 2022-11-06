@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.adapter.MembersAdapter
 import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.dto.MyProfile
 import ru.urfu.mutualmarker.dto.Profile
@@ -66,10 +67,9 @@ class RoomMembersFragment : Fragment() {
                 ) {
                     if (response.code() == 200) {
                         val profiles = response.body() ?: return
-                        val teachersListView: ListView = view.findViewById(R.id.teachersListView)
-                        val adapter: ArrayAdapter<Profile> = MembersArrayAdapter(requireContext(), R.layout.room_member_item, profiles)
-
-                        teachersListView.adapter = adapter
+                        val recyclerView = view.findViewById(R.id.teachersRecyclerView) as RecyclerView
+                        recyclerView.layoutManager = LinearLayoutManager(activity)
+                        recyclerView.adapter = MembersAdapter(profiles)
 
                     }
                     println("result OK" + response.errorBody())
@@ -87,11 +87,11 @@ class RoomMembersFragment : Fragment() {
                 ) {
                     if (response.code() == 200) {
                         val profiles = (response.body() ?: return).toMutableList()
-
-                        val studentsRecyclerView: ListView = view.findViewById(R.id.studentsListView)
-                        val adapter: ArrayAdapter<Profile> = MembersArrayAdapter(requireContext(), R.layout.room_member_item, profiles)
-
-                        studentsRecyclerView.adapter = adapter
+                        profiles.addAll(profiles)
+                        profiles.addAll(profiles)
+                        val recyclerView = view.findViewById(R.id.studentsRecyclerView) as RecyclerView
+                        recyclerView.layoutManager = LinearLayoutManager(activity)
+                        recyclerView.adapter = MembersAdapter(profiles)
 
                     }
                     println("result OK" + response.errorBody())

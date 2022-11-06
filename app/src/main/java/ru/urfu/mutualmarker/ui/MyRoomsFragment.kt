@@ -59,6 +59,12 @@ class MyRoomsFragment : Fragment() {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
                     println(response.body())
                     rooms.addAll(response.body()!!)
+                    rooms.addAll(response.body()!!)
+                    rooms.addAll(response.body()!!)
+                    rooms.addAll(response.body()!!)
+                    rooms.addAll(response.body()!!)
+                    rooms.addAll(response.body()!!)
+
                     recyclerView?.adapter = RoomsAdapter(rooms)
                     if (rooms.isEmpty()) {
                         noRoomsText.visibility = View.VISIBLE
