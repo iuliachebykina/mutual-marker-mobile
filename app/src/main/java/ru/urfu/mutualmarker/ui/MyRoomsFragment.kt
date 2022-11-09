@@ -43,7 +43,6 @@ class MyRoomsFragment : Fragment() {
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         getRooms()
-
     }
 
     private fun getRooms() {
@@ -66,6 +65,7 @@ class MyRoomsFragment : Fragment() {
                     } else {
                         noRoomsText.visibility = View.INVISIBLE
                     }
+
                     recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
                     recyclerView?.layoutManager = LinearLayoutManager(activity)
                     recyclerView?.adapter = RoomsAdapter(rooms)

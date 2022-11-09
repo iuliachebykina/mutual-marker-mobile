@@ -56,4 +56,8 @@
     <string name="students">Студенты</string>
     <string name="defaultName">Иванов Иван Иванович</string>
     <string name="roomMemebers">Участники комнаты</string>
+    <string name="room_description_example">Проект по созданию сайта, на котором студенты смогут оценивать работы друг друга</string>
+    <string name="current_tasks">Текущие задания</string>
+    <string name="members">Участники</string>
+    <string name="completed_tasks">Выполненные задания</string>
 </resources>
