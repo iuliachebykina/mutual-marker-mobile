@@ -92,7 +92,7 @@ class LoginFragment : Fragment() {
 
 
                         }
-                        println("result OK" + response.errorBody())
+                        println("result OK" + response)
                     }
                 })
 

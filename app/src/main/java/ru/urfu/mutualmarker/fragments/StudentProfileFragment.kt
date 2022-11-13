@@ -45,7 +45,7 @@ class StudentProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileFillingService.fillProfile(profileService, email, Role.STUDENT, view)
+        email?.let { profileFillingService.fillProfile(profileService, it, Role.STUDENT, view) }
 
     }
 

@@ -22,6 +22,37 @@
         android:name="ru.urfu.mutualmarker.ui.MyProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_my_profile" >
+
+        <action
+            android:id="@+id/action_navigation_profile_to_roomMembers"
+            app:destination="@id/roomMembers" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roomMembers"
+        android:name="ru.urfu.mutualmarker.fragments.RoomMembersFragment"
+        android:label="@string/roomMemebers"
+        tools:layout="@layout/fragment_room_members" >
+        <action
+            android:id="@+id/action_roomMembers_to_teacherProfile"
+            app:destination="@id/teacherProfile" />
+        <action
+            android:id="@+id/action_roomMembers_to_studentProfile"
+            app:destination="@id/studentProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teacherProfile"
+        android:name="ru.urfu.mutualmarker.fragments.TeacherProfileFragment"
+        android:label="@string/teacher"
+        tools:layout="@layout/fragment_room_members" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/studentProfile"
+        android:name="ru.urfu.mutualmarker.fragments.StudentProfileFragment"
+        android:label="@string/student"
+        tools:layout="@layout/fragment_room_members" >
     </fragment>
 
 </navigation>
