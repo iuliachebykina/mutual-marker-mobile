@@ -88,10 +88,6 @@ class LoginFragment : Fragment() {
                             edit?.putString("username", emailField.text.toString())
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
-                            val fm: FragmentManager = activity!!.supportFragmentManager
-                            for (i in 0 until fm.backStackEntryCount) {
-                                fm.popBackStack()
-                            }
 
                             findNavController().navigate(R.id.action_LoginForm_to_navigation_profile)
 
