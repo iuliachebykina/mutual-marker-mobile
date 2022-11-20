@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_roomMembers"
             app:destination="@id/roomMembers" />
+        <action
+            android:id="@+id/action_navigation_profile_to_LoginForm"
+            app:destination="@id/LoginForm" />
     </fragment>
     <fragment
         android:id="@+id/roomMembers"
@@ -102,4 +105,9 @@
             app:destination="@id/navigation_profile" />
     </fragment>
 
+    <action
+        android:id="@+id/Logout_Redirect"
+        app:destination="@+id/Login_Fragment"
+        app:popUpTo="@+id/Login_Fragment"
+        app:popUpToInclusive="false"/>
 </navigation>

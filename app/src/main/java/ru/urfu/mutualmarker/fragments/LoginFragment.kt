@@ -1,15 +1,14 @@
 package ru.urfu.mutualmarker.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
@@ -89,6 +88,10 @@ class LoginFragment : Fragment() {
                             edit?.putString("username", emailField.text.toString())
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
+                            val fm: FragmentManager = activity!!.supportFragmentManager
+                            for (i in 0 until fm.backStackEntryCount) {
+                                fm.popBackStack()
+                            }
 
                             findNavController().navigate(R.id.action_LoginForm_to_navigation_profile)
 

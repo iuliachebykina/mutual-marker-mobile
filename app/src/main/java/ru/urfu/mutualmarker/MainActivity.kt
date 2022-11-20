@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val hideNavBarLocations = listOf(R.id.LoginForm, R.id.StartPage, R.id.RegistrationForm)
+
 
 //        val navView:BottomNavigationView = findViewById(R.id.nav_view)
 //        val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            bottomNavigationView.visibility = if(destination.id == R.id.LoginForm || destination.id == R.id.StartPage || destination.id == R.id.RegistrationForm) {
+            bottomNavigationView.visibility = if(hideNavBarLocations.contains(destination.id)) { // Dont know how ineffective this approach is
                 View.GONE
             } else {
                 View.VISIBLE
