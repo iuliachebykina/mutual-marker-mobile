@@ -21,13 +21,6 @@ class RoomsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
 
-//        val navView:BottomNavigationView = findViewById(R.id.nav_view)
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        val appBarConfig = AppBarConfiguration(setOf(
-//            R.id.navigation_add_room, R.id.navigation_my_rooms, R.id.navigation_profile))
-//        setupActionBarWithNavController(navController, appBarConfig)
-//        navView.setupWithNavController(navController)
-
         val navHostFragment = supportFragmentManager.findFragmentById(
             R.id.nav_host_fragment
         ) as NavHostFragment
@@ -43,22 +36,6 @@ class RoomsActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.bottom_nav_menu, menu)
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)

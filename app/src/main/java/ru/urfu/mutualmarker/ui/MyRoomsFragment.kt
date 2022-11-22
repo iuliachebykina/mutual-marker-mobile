@@ -1,6 +1,7 @@
 package ru.urfu.mutualmarker.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.RoomActivity
+import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.adapter.RoomsAdapter
 import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.client.RoomService
@@ -43,6 +46,9 @@ class MyRoomsFragment : Fragment() {
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         getRooms()
+        recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        recyclerView?.adapter = RoomsAdapter(rooms)
     }
 
     private fun getRooms() {
@@ -65,10 +71,6 @@ class MyRoomsFragment : Fragment() {
                     } else {
                         noRoomsText.visibility = View.INVISIBLE
                     }
-
-                    recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
-                    recyclerView?.layoutManager = LinearLayoutManager(activity)
-                    recyclerView?.adapter = RoomsAdapter(rooms)
                     return
                 }
                 noRoomsText.visibility = View.VISIBLE

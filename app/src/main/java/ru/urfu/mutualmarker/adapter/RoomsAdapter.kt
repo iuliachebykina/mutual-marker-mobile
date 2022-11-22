@@ -1,11 +1,14 @@
 package ru.urfu.mutualmarker.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.RoomActivity
+import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.dto.Room
 
 class RoomsAdapter(private var dataSet: List<Room>) :
@@ -15,7 +18,7 @@ class RoomsAdapter(private var dataSet: List<Room>) :
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val roomTitle: TextView
         val count: TextView
 
@@ -23,6 +26,12 @@ class RoomsAdapter(private var dataSet: List<Room>) :
             // Define click listener for the ViewHolder's View.
             roomTitle = view.findViewById(R.id.room_title)
             count = view.findViewById(R.id.count)
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val activity = v?.context
+            activity?.startActivity(Intent(activity, RoomActivity::class.java))
         }
     }
 

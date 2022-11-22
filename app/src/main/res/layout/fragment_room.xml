@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/purple_background">
+    android:background="@color/purple_background"
+    android:id="@+id/RoomLayout">
 
     <LinearLayout
         android:id="@+id/RoomCard"
@@ -66,7 +67,7 @@
         app:layout_constraintWidth_percent="0.85"
         android:layout_marginTop="@dimen/room_button_margin_between"
         android:fontFamily="@font/gilroy_black"
-        android:text="@string/current_tasks"
+        android:text="@string/evaluated_works"
         android:textAllCaps="false"
         android:textSize="@dimen/login_form_size"
         app:layout_constraintLeft_toLeftOf="parent"
