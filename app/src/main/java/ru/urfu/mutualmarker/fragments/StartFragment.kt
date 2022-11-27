@@ -15,7 +15,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 
 import ru.urfu.mutualmarker.dto.Login
@@ -82,7 +81,7 @@ class StartFragment : Fragment() {
                             editor?.putString("password", password)
                             editor?.apply()
 
-                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+                            findNavController().navigate(R.id.action_StartPage_to_navigation_profile)
                         }
                         println("result OK" + response)
                     }

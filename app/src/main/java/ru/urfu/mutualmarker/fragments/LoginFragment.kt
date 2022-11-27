@@ -1,13 +1,13 @@
 package ru.urfu.mutualmarker.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +17,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.client.CustomCookieJar
 import ru.urfu.mutualmarker.dto.Login
@@ -41,6 +40,8 @@ class LoginFragment : Fragment() {
     ): View? {
         println("Create")
         // Inflate the layout for this fragment
+
+//        view?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -88,7 +89,7 @@ class LoginFragment : Fragment() {
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
 
-                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+                            findNavController().navigate(R.id.action_LoginForm_to_navigation_profile)
 
 
                         }
