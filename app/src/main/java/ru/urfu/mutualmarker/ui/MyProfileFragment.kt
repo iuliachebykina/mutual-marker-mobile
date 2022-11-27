@@ -67,6 +67,7 @@ class MyProfileFragment : Fragment() {
                     edit?.remove("username")
                     edit?.remove("password")
                     edit?.apply()
+
                     findNavController().navigate(R.id.Logout_Redirect)
                 }
             })

@@ -107,7 +107,7 @@
 
     <action
         android:id="@+id/Logout_Redirect"
-        app:destination="@+id/Login_Fragment"
-        app:popUpTo="@+id/Login_Fragment"
+        app:destination="@+id/LoginForm"
+        app:popUpTo="@+id/LoginForm"
         app:popUpToInclusive="false"/>
 </navigation>
