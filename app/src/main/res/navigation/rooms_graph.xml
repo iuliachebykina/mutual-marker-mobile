@@ -15,7 +15,11 @@
         android:id="@+id/navigation_my_rooms"
         android:name="ru.urfu.mutualmarker.ui.MyRoomsFragment"
         android:label="@string/my_rooms"
-        tools:layout="@layout/fragment_my_rooms" />
+        tools:layout="@layout/fragment_my_rooms">
+        <action
+            android:id="@+id/action_navigation_my_rooms_to_roomMembers"
+            app:destination="@id/roomMembers" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -23,15 +27,40 @@
         android:label="@string/profile"
         tools:layout="@layout/fragment_my_profile" >
 
+
         <action
-            android:id="@+id/action_navigation_profile_to_roomMembers"
-            app:destination="@id/roomMembers" />
+            android:id="@+id/action_navigation_profile_to_navigation_update_profile"
+            app:destination="@id/navigation_update_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_update_password"
+            app:destination="@id/navigation_update_password" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_update_profile"
+        android:name="ru.urfu.mutualmarker.fragments.UpdateMyProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_update_my_profile" >
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_update_password"
+        android:name="ru.urfu.mutualmarker.fragments.UpdateMyPasswordFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_update_my_password" >
+
+
+    </fragment>
+
+
+
 
     <fragment
         android:id="@+id/roomMembers"
         android:name="ru.urfu.mutualmarker.fragments.RoomMembersFragment"
-        android:label="@string/roomMemebers"
+        android:label="@string/roomMembers"
         tools:layout="@layout/fragment_room_members" >
         <action
             android:id="@+id/action_roomMembers_to_teacherProfile"

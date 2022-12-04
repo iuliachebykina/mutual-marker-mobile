@@ -55,5 +55,15 @@
     <string name="teachers">Преподаватели</string>
     <string name="students">Студенты</string>
     <string name="defaultName">Иванов Иван Иванович</string>
-    <string name="roomMemebers">Участники комнаты</string>
+    <string name="roomMembers">Участники комнаты</string>
+    <string name="roomTemplate">Создание сайта по оценке обучающихся</string>
+    <string name="saveProfile">Сохранить</string>
+    <string name="updateEmail">Изменить почту</string>
+    <string name="updatePassword">Обновить пароль</string>
+    <string name="my_email">Моя почта</string>
+    <string name="oldPasswordLabel">Старый пароль</string>
+    <string name="newPasswordLabel">Новый пароль</string>
+    <string name="my_password">Мой пароль</string>
+    <string name="instituteLabel">Институт</string>
+    <string name="universityLabel">Университет</string>
 </resources>

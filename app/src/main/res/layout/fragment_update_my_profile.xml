@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_background"
+        android:orientation="vertical"
+        tools:context=".fragments.UpdateMyProfileFragment">
+
+        <TextView
+            android:id="@+id/MyProfile"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginVertical="50dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/my_profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/login_size"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.9" />
+
+        <View
+            android:id="@+id/PurpleLine"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@color/purple_main"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MyProfile"
+            app:layout_constraintWidth_percent="0.9" />
+
+
+        <TextView
+            android:id="@+id/NameLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="50dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/nameLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PurpleLine"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/FirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="Имя"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NameLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/LastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="Фамилия"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FirstName"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Patronymiс"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="Отчетство"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LastName"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <TextView
+            android:id="@+id/PhoneNumberLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/proneNumberLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Patronymiс"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/PhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PhoneNumberLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <TextView
+            android:id="@+id/SocialNetworkLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/socialNetworkLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PhoneNumber"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/SocialNetwork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SocialNetworkLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <TextView
+            android:id="@+id/UniversityLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/universityLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SocialNetwork"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/University"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UniversityLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <TextView
+            android:id="@+id/InstituteLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/instituteLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/University"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Institute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/InstituteLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+
+        <TextView
+            android:id="@+id/StudyGroupLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/studyGroupLabel"
+            android:textColor="@color/gray_label"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Institute"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/StudyGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/StudyGroupLabel"
+            app:layout_constraintWidth_percent="0.8" />
+
+
+        <Button
+            android:id="@+id/SaveProfileButton"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/saveProfile"
+            android:textAllCaps="false"
+            android:layout_marginBottom="100dp"
+            android:textSize="@dimen/login_form_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/StudyGroupLabel" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toBottomOf="@id/SaveProfileButton"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
