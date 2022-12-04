@@ -20,7 +20,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Создание сайта по оценке обучающихся"/>
+            android:text="@string/room_title_example"/>
 
         <LinearLayout
             android:id="@+id/members_layout"

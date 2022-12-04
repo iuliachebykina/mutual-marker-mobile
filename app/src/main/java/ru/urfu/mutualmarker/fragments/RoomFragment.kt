@@ -1,47 +1,46 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.content.Intent.getIntent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
+import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.client.RoomService
+import ru.urfu.mutualmarker.dto.Room
+import ru.urfu.mutualmarker.dto.TaskInfo
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RoomFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class RoomFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    @Inject
+    lateinit var roomService: RoomService
+
+    var roomId: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_room, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_room, container, false)
+        roomId = activity?.intent?.extras?.getLong("roomId")!!
+        getRoom()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getRoom()
 
         view.findViewById<Button>(R.id.CurrentTasks).setOnClickListener {
             findNavController().navigate(R.id.action_room_to_current_tasks)
@@ -54,23 +53,29 @@ class RoomFragment : Fragment() {
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RoomFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RoomFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun getRoom() {
+
+        if (roomId == 0L){
+            return
+        }
+        val title: TextView? =  view?.findViewById(R.id.MyRoomsText)
+        val description: TextView? = view?.findViewById(R.id.RoomDescription)
+
+        roomService.getRoom(roomId).enqueue(object : Callback<Room> {
+            override fun onResponse(
+                call: Call<Room>,
+                response: Response<Room>
+            ) {
+                if (response.code() == 200 && response.body() != null) {
+                    println(response.body())
+                    title?.text = response.body()!!.title
+                    description?.text = response.body()!!.code
                 }
             }
+
+            override fun onFailure(call: Call<Room>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

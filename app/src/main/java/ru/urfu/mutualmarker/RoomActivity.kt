@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import dagger.hilt.android.AndroidEntryPoint
+import ru.urfu.mutualmarker.fragments.RoomFragment
 
+@AndroidEntryPoint
 class RoomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -30,6 +30,12 @@
         android:name="ru.urfu.mutualmarker.fragments.CurrentTasksFragment"
         android:label="Текущие задания"
         tools:layout="@layout/fragment_current_tasks">
+        <action
+            android:id="@+id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
+        <action
+            android:id="@+id/action_to_task"
+            app:destination="@id/TaskFragment" />
     </fragment>
 
     <fragment
@@ -37,6 +43,9 @@
         android:name="ru.urfu.mutualmarker.fragments.EvaluatedWorks"
         android:label="Работы на оценку"
         tools:layout="@layout/fragment_current_tasks">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
     </fragment>
 
     <fragment
@@ -44,6 +53,9 @@
         android:name="ru.urfu.mutualmarker.fragments.RoomMembersFragment"
         android:label="Участники"
         tools:layout="@layout/fragment_room_members">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
     </fragment>
 
     <fragment
@@ -51,6 +63,17 @@
         android:name="ru.urfu.mutualmarker.fragments.CompletedTasksFragment"
         android:label="Выполненные задания"
         tools:layout="@layout/fragment_completed_tasks">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
     </fragment>
+
+    <fragment
+        android:id="@+id/TaskFragment"
+        android:name="ru.urfu.mutualmarker.fragments.TaskFragment"
+        android:label="Задание"
+        tools:layout="@layout/fragment_task">
+    </fragment>
+
 
 </navigation>

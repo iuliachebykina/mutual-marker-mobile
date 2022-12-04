@@ -15,4 +15,7 @@ interface RoomService {
 
     @GET("/api/rooms/rooms")
     fun getRooms(@Query("page") page: Int, @Query("size") size: Int): Call<List<Room>>
+
+    @GET("/api/rooms/room-by-id/{roomId}")
+    fun getRoom(@Path("roomId") roomId: Long): Call<Room>
 }

@@ -1,10 +1,12 @@
 package ru.urfu.mutualmarker.adapter
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.RoomActivity
@@ -19,19 +21,22 @@ class RoomsAdapter(private var dataSet: List<Room>) :
      * (custom ViewHolder).
      */
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-        val roomTitle: TextView
-        val count: TextView
+
+        val roomTitle: TextView = view.findViewById(R.id.room_title)
+        val count: TextView = view.findViewById(R.id.count)
+        var roomId: Long = 0
 
         init {
             // Define click listener for the ViewHolder's View.
-            roomTitle = view.findViewById(R.id.room_title)
-            count = view.findViewById(R.id.count)
             view.setOnClickListener(this)
         }
 
-        override fun onClick(v: View?) {
-            val activity = v?.context
-            activity?.startActivity(Intent(activity, RoomActivity::class.java))
+        override fun onClick(v: View) {
+
+            val activity = v.context
+            activity.startActivity(Intent(activity, RoomActivity::class.java).apply {
+                putExtra("roomId", roomId)
+            })
         }
     }
 
@@ -52,6 +57,7 @@ class RoomsAdapter(private var dataSet: List<Room>) :
         val room = dataSet[position]
         viewHolder.roomTitle.text = room.title
         viewHolder.count.text = room.membersCount.toString()
+        viewHolder.roomId = room.id
     }
 
     // Return the size of your dataset (invoked by the layout manager)

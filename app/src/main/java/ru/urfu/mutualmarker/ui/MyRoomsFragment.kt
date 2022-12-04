@@ -38,17 +38,17 @@ class MyRoomsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_rooms, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_rooms, container, false)
+        recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        return view
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         getRooms()
-        recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
-        recyclerView?.layoutManager = LinearLayoutManager(activity)
-        recyclerView?.adapter = RoomsAdapter(rooms)
     }
 
     private fun getRooms() {
@@ -70,6 +70,7 @@ class MyRoomsFragment : Fragment() {
                         noRoomsText.visibility = View.VISIBLE
                     } else {
                         noRoomsText.visibility = View.INVISIBLE
+                        recyclerView?.adapter = RoomsAdapter(rooms)
                     }
                     return
                 }
