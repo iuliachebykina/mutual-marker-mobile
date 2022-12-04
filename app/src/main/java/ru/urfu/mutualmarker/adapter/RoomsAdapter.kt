@@ -1,6 +1,7 @@
 package ru.urfu.mutualmarker.adapter
 
 import android.graphics.Canvas
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,11 @@ class RoomsAdapter(private var dataSet: List<Room>) :
         viewHolder.roomTitle.text = room.title
         viewHolder.count.text = room.membersCount.toString()
 
-
+        viewHolder.itemView.setOnClickListener { view ->
+            val bundle = Bundle()
+            bundle.putLong("id", dataSet[position].id)
+            //view.findNavController().navigate(R.id.action_MyRooms_toRoom, bundle) TODO
+        }
 
     }
 

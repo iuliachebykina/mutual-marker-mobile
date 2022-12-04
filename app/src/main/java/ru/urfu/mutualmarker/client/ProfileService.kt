@@ -1,6 +1,10 @@
 package ru.urfu.mutualmarker.client
 
 import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.http.*
 import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.UpdatePassword
@@ -29,5 +33,6 @@ interface ProfileService {
     @POST("/api/profile/password")
     fun updatePassword(@Body body: UpdatePassword): Call<Profile>
 
-
+    @POST("/api/logout")
+    fun logout() : Call<Unit>
 }

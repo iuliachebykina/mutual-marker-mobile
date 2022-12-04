@@ -47,6 +47,7 @@
     <string name="socialNetworkLabel">Социальная сеть</string>
     <string name="studyGroupLabel">Учебная группа</string>
     <string name="updateProfile">Изменить профиль</string>
+    <string name="logout">Выйти</string>
     <string name="student">СТУДЕНТ</string>
     <string name="teacher">ПРЕПОДАВАТЕЛЬ</string>
     <string name="subject">Предмет</string>

@@ -94,25 +94,39 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/StudyGroupLabel" />
 
-<!--        <Button-->
-<!--            android:id="@+id/UpdatePasswordButton"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:fontFamily="@font/gilroy_black"-->
-<!--            android:text="@string/updatePassword"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:textSize="@dimen/login_form_size"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/UpdateProfileButton" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/UpdatePasswordButton"-->
+        <!--            android:layout_width="200dp"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:fontFamily="@font/gilroy_black"-->
+        <!--            android:text="@string/updatePassword"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textSize="@dimen/login_form_size"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/UpdateProfileButton" />-->
+
+        <Button
+            android:id="@+id/LogoutButton"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            app:backgroundTint="@android:color/holo_red_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/UpdateProfileButton" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/UpdateProfileButton"/>
-<!--            app:layout_constraintTop_toBottomOf="@id/UpdatePasswordButton" />-->
+            app:layout_constraintTop_toBottomOf="@id/UpdateProfileButton" />
+        <!--            app:layout_constraintTop_toBottomOf="@id/UpdatePasswordButton" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package ru.urfu.mutualmarker.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
 import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.Registration
@@ -117,7 +116,7 @@ class RegistrationFragment : Fragment() {
 
                     override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                         if(response.code() == 200){
-                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+                            findNavController().navigate(R.id.action_RegistrationForm_to_navigation_my_rooms)
                         }
                         System.out.println("result " + response)
                     }

@@ -1,5 +1,6 @@
 package ru.urfu.mutualmarker.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.service.ProfileFillingService
@@ -32,20 +36,44 @@ class MyProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         profileFillingService.fillProfile(profileService, view)
 
+        setUpdateListener(view)
+        setLogoutListener(view)
+
+    }
+
+    private fun setUpdateListener(view: View) {
         view.findViewById<Button>(R.id.UpdateProfileButton).setOnClickListener {
 
             view.findNavController().navigate(R.id.action_navigation_profile_to_navigation_update_profile)
 
         }
-
-//        view.findViewById<Button>(R.id.UpdatePasswordButton).setOnClickListener {
+        //        view.findViewById<Button>(R.id.UpdatePasswordButton).setOnClickListener {
 //
 //            view.findNavController().navigate(R.id.action_navigation_profile_to_navigation_update_password)
 //
 //        }
-
     }
 
+    private fun setLogoutListener(view: View){
+        view.findViewById<Button>(R.id.LogoutButton).setOnClickListener {
+            //logout + empty cookie jar
+            profileService.logout().enqueue(object : Callback<Unit> {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    println("result FAIl" + t.message)
+                }
 
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    val sharedPref = activity?.getSharedPreferences("credentials", Context.MODE_PRIVATE)
+
+                    val edit = sharedPref?.edit()
+                    edit?.remove("username")
+                    edit?.remove("password")
+                    edit?.apply()
+
+                    view.findNavController().navigate(R.id.Logout_Redirect)
+                }
+            })
+        }
+    }
 
 }
