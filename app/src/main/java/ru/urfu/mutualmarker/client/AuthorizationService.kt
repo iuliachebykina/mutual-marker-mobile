@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 import ru.urfu.mutualmarker.dto.Login
-import ru.urfu.mutualmarker.dto.MyProfile
+import ru.urfu.mutualmarker.dto.Profile
 import ru.urfu.mutualmarker.dto.Registration
 
 interface AuthorizationService {
@@ -13,12 +13,7 @@ interface AuthorizationService {
     @POST("/api/login")
     fun login(@Body request: RequestBody): Call<Login>
 
-    @POST("/api/registration/teacher")
-    fun registerTeacher(@Body body: Registration): Call<MyProfile>
-
     @POST("/api/registration/student")
-    fun registerStudent(@Body body: Registration): Call<MyProfile>
+    fun registerStudent(@Body body: Registration): Call<Profile>
 
-    @POST("/api/registration/admin")
-    fun registerAdmin(@Body body: Registration): Call<MyProfile>
 }

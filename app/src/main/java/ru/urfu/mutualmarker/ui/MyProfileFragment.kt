@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,22 +34,24 @@ class MyProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileFillingService.fillSelfProfile(profileService, view)
+        profileFillingService.fillProfile(profileService, view)
 
         setUpdateListener(view)
         setLogoutListener(view)
 
     }
 
-    private fun setUpdateListener(view: View){
+    private fun setUpdateListener(view: View) {
         view.findViewById<Button>(R.id.UpdateProfileButton).setOnClickListener {
 
-            //TODO пример вызова с аргументами
-            val bundle = Bundle()
-            bundle.putLong("roomId", 152)
-            findNavController().navigate(R.id.action_navigation_profile_to_roomMembers, bundle)
+            view.findNavController().navigate(R.id.action_navigation_profile_to_navigation_update_profile)
 
         }
+        //        view.findViewById<Button>(R.id.UpdatePasswordButton).setOnClickListener {
+//
+//            view.findNavController().navigate(R.id.action_navigation_profile_to_navigation_update_password)
+//
+//        }
     }
 
     private fun setLogoutListener(view: View){
@@ -68,7 +70,7 @@ class MyProfileFragment : Fragment() {
                     edit?.remove("password")
                     edit?.apply()
 
-                    findNavController().navigate(R.id.Logout_Redirect)
+                    view.findNavController().navigate(R.id.Logout_Redirect)
                 }
             })
         }

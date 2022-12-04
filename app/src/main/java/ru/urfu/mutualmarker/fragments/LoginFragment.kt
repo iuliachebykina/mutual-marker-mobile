@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -89,7 +88,7 @@ class LoginFragment : Fragment() {
                             edit?.putString("password", passwordField.text.toString())
                             edit?.apply()
 
-                            findNavController().navigate(R.id.action_LoginForm_to_navigation_profile)
+                            findNavController().navigate(R.id.action_LoginForm_to_navigation_my_rooms)
 
 
                         }
