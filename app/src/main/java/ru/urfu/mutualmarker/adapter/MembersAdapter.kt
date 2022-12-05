@@ -47,9 +47,9 @@ class MembersAdapter(private var dataSet: List<Profile>,
             val bundle = Bundle()
             bundle.putString("email", dataSet[position].email)
             if(isStudents)
-                view.findNavController().navigate(R.id.action_roomMembers_to_studentProfile, bundle)
+                view.findNavController().navigate(R.id.action_MembersFragment_to_studentProfile, bundle)
             else
-                view.findNavController().navigate(R.id.action_roomMembers_to_teacherProfile, bundle)
+                view.findNavController().navigate(R.id.action_MembersFragment_to_teacherProfile, bundle)
         }
     }
 

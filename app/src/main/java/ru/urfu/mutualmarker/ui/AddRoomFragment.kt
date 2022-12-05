@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -45,6 +46,10 @@ class AddRoomFragment : Fragment() {
                         if (response.code() == 200) {
                             wrongRoomCodeText.visibility = View.INVISIBLE
                             println(response.body())
+
+                            val bundle = Bundle()
+                            response.body()?.let { it1 -> bundle.putLong("roomId", it1.id) }
+                            view.findNavController().navigate(R.id.action_navigation_add_room_to_RoomMainLayout, bundle)
 
                         }
                         else {

@@ -1,7 +1,6 @@
 package ru.urfu.mutualmarker.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.client.AuthorizationService
-
 import ru.urfu.mutualmarker.dto.Login
 import javax.inject.Inject
 
@@ -82,7 +79,7 @@ class StartFragment : Fragment() {
                             editor?.putString("password", password)
                             editor?.apply()
 
-                            activity?.startActivity(Intent(activity, RoomsActivity::class.java))
+                            findNavController().navigate(R.id.action_StartPage_to_navigation_my_rooms)
                         }
                         println("result OK" + response)
                     }

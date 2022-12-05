@@ -1,17 +1,15 @@
 package ru.urfu.mutualmarker.adapter
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.urfu.mutualmarker.R
-import ru.urfu.mutualmarker.RoomActivity
-import ru.urfu.mutualmarker.RoomsActivity
 import ru.urfu.mutualmarker.dto.Room
+
 
 class RoomsAdapter(private var dataSet: List<Room>) :
     RecyclerView.Adapter<RoomsAdapter.ViewHolder>() {
@@ -20,24 +18,12 @@ class RoomsAdapter(private var dataSet: List<Room>) :
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val roomTitle: TextView = view.findViewById(R.id.room_title)
         val count: TextView = view.findViewById(R.id.count)
         var roomId: Long = 0
 
-        init {
-            // Define click listener for the ViewHolder's View.
-            view.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View) {
-
-            val activity = v.context
-            activity.startActivity(Intent(activity, RoomActivity::class.java).apply {
-                putExtra("roomId", roomId)
-            })
-        }
     }
 
     // Create new views (invoked by the layout manager)
@@ -45,6 +31,7 @@ class RoomsAdapter(private var dataSet: List<Room>) :
         // Create a new view, which defines the UI of the list item
         val itemView = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.room_item, viewGroup, false)
+
 
         return ViewHolder(itemView)
     }
@@ -57,7 +44,13 @@ class RoomsAdapter(private var dataSet: List<Room>) :
         val room = dataSet[position]
         viewHolder.roomTitle.text = room.title
         viewHolder.count.text = room.membersCount.toString()
-        viewHolder.roomId = room.id
+
+        viewHolder.itemView.setOnClickListener { view ->
+            val bundle = Bundle()
+            bundle.putLong("roomId", dataSet[position].id)
+            view.findNavController().navigate(R.id.action_navigation_my_rooms_to_RoomMainLayout, bundle)
+
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

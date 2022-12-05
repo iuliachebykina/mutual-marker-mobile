@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/StartPage">
+    <fragment
+        android:id="@+id/navigation_add_room"
+        android:name="ru.urfu.mutualmarker.ui.AddRoomFragment"
+        android:label="@string/addRoomLabel"
+        tools:layout="@layout/fragment_add_room" >
+        <action
+            android:id="@+id/action_navigation_add_room_to_RoomMainLayout"
+            app:destination="@id/RoomMainLayout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_my_rooms"
+        android:name="ru.urfu.mutualmarker.ui.MyRoomsFragment"
+        android:label="@string/my_rooms"
+        tools:layout="@layout/fragment_my_rooms">
+
+        <action
+            android:id="@+id/action_navigation_my_rooms_to_RoomMainLayout"
+            app:destination="@id/RoomMainLayout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.urfu.mutualmarker.ui.MyProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_my_profile" >
+
+
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_update_profile"
+            app:destination="@id/navigation_update_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_update_password"
+            app:destination="@id/navigation_update_password" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_update_profile"
+        android:name="ru.urfu.mutualmarker.fragments.UpdateMyProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_update_my_profile" >
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_update_password"
+        android:name="ru.urfu.mutualmarker.fragments.UpdateMyPasswordFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_update_my_password" >
+
+
+    </fragment>
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/teacherProfile"
+        android:name="ru.urfu.mutualmarker.fragments.TeacherProfileFragment"
+        android:label="@string/teacher"
+        tools:layout="@layout/fragment_room_members" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/studentProfile"
+        android:name="ru.urfu.mutualmarker.fragments.StudentProfileFragment"
+        android:label="@string/student"
+        tools:layout="@layout/fragment_room_members" >
+    </fragment>
+    <fragment
+        android:id="@+id/StartPage"
+        android:name="ru.urfu.mutualmarker.fragments.StartFragment"
+        android:label="Стартовая страница"
+        tools:layout="@layout/fragment_start_page">
+
+        <action
+            android:id="@+id/action_StartPage_to_LoginForm"
+            app:destination="@id/LoginForm" />
+        <action
+            android:id="@+id/action_StartPage_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/LoginForm"
+        android:name="ru.urfu.mutualmarker.fragments.LoginFragment"
+        android:label="@string/login_form_fragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_Login_to_Registration"
+            app:destination="@id/RegistrationForm" />
+        <action
+            android:id="@+id/action_LoginForm_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/RegistrationForm"
+        android:name="ru.urfu.mutualmarker.fragments.RegistrationFragment"
+        android:label="@string/registration_fragment_label"
+        tools:layout="@layout/fragment_registration" >
+
+        <action
+            android:id="@+id/action_RegistrationForm_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+    </fragment>
+
+    <action
+        android:id="@+id/Logout_Redirect"
+        app:destination="@+id/LoginForm"
+        app:popUpTo="@+id/LoginForm"
+        app:popUpToInclusive="false"/>
+
+
+    <fragment
+        android:id="@+id/RoomMainLayout"
+        android:name="ru.urfu.mutualmarker.fragments.RoomFragment"
+        android:label="Сборная комнаты"
+        tools:layout="@layout/fragment_room">
+
+        <action
+            android:id="@+id/action_room_to_current_tasks"
+            app:destination="@id/CurrentTasksFragment" />
+        <action
+            android:id="@+id/action_room_to_evaluated_works"
+            app:destination="@id/EvaluatedWorksFragment" />
+        <action
+            android:id="@+id/action_room_to_members"
+            app:destination="@id/MembersFragment" />
+        <action
+            android:id="@+id/action_room_to_completed_tasks"
+            app:destination="@id/CompletedTasksFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CurrentTasksFragment"
+        android:name="ru.urfu.mutualmarker.fragments.CurrentTasksFragment"
+        android:label="Текущие задания"
+        tools:layout="@layout/fragment_current_tasks">
+        <action
+            android:id="@+id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
+        <action
+            android:id="@+id/action_to_task"
+            app:destination="@id/TaskFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EvaluatedWorksFragment"
+        android:name="ru.urfu.mutualmarker.fragments.EvaluatedWorks"
+        android:label="Работы на оценку"
+        tools:layout="@layout/fragment_current_tasks">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/MembersFragment"
+        android:name="ru.urfu.mutualmarker.fragments.RoomMembersFragment"
+        android:label="Участники"
+        tools:layout="@layout/fragment_room_members">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
+        <action
+            android:id="@+id/action_MembersFragment_to_teacherProfile"
+            app:destination="@id/teacherProfile" />
+        <action
+            android:id="@+id/action_MembersFragment_to_studentProfile"
+            app:destination="@id/studentProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CompletedTasksFragment"
+        android:name="ru.urfu.mutualmarker.fragments.CompletedTasksFragment"
+        android:label="Выполненные задания"
+        tools:layout="@layout/fragment_completed_tasks">
+        <action
+            android:id="@id/action_return_to_room"
+            app:destination="@id/RoomMainLayout" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/TaskFragment"
+        android:name="ru.urfu.mutualmarker.fragments.TaskFragment"
+        android:label="Задание"
+        tools:layout="@layout/fragment_task">
+    </fragment>
+</navigation>
