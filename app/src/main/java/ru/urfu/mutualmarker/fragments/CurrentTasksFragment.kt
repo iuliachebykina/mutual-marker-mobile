@@ -36,7 +36,7 @@ class CurrentTasksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_current_tasks, container, false)
-        roomId = activity?.intent?.extras?.getLong("roomId")!!
+        roomId = arguments?.getLong("roomId")!!
         //getTasks(view)
         recyclerView = view.findViewById(R.id.recycle_tasks) as RecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(activity)
