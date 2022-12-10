@@ -47,7 +47,6 @@
     <string name="socialNetworkLabel">Социальная сеть</string>
     <string name="studyGroupLabel">Учебная группа</string>
     <string name="updateProfile">Изменить профиль</string>
-    <string name="logout">Выйти</string>
     <string name="student">СТУДЕНТ</string>
     <string name="teacher">ПРЕПОДАВАТЕЛЬ</string>
     <string name="subject">Предмет</string>
@@ -56,6 +55,21 @@
     <string name="teachers">Преподаватели</string>
     <string name="students">Студенты</string>
     <string name="defaultName">Иванов Иван Иванович</string>
+    <string name="roomMemebers">Участники комнаты</string>
+    <string name="room_description_example">Проект по созданию сайта, на котором студенты смогут оценивать работы друг друга</string>
+    <string name="current_tasks">Текущие задания</string>
+    <string name="members">Участники</string>
+    <string name="completed_tasks">Выполненные задания</string>
+    <string name="evaluated_works">Работы на оценку</string>
+    <string name="no_tasks">У вас еще нет ни одного задания :(</string>
+    <string name="room_return">Вернуться к комнате</string>
+    <string name="task_title_example">Создание вайфреймов приложения</string>
+    <string name="task_expiration_text">Срок истекает</string>
+    <string name="task_expiration_date_example">12.02.2022</string>
+    <string name="task_description_example">Проект по созданию сайта, на котором студенты смогут оценивать работы друг друга</string>
+    <string name="upload_work">Загрузить работу</string>
+    <string name="uploaded_work_example">проект_по_созданию...</string>
+    <string name="change">Изменить</string>
     <string name="roomMembers">Участники комнаты</string>
     <string name="roomTemplate">Создание сайта по оценке обучающихся</string>
     <string name="saveProfile">Сохранить</string>
@@ -67,4 +81,5 @@
     <string name="my_password">Мой пароль</string>
     <string name="instituteLabel">Институт</string>
     <string name="universityLabel">Университет</string>
+    <string name="logout">Выйти</string>
 </resources>

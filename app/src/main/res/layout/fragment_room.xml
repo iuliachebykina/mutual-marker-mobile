@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/purple_background"
+    android:id="@+id/RoomLayout">
+
+    <LinearLayout
+        android:id="@+id/RoomCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.85"
+        android:elevation="@dimen/shadow"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/room_description_margin_top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/MyRoomsText"
+            android:layout_width="match_parent"
+            android:padding="@dimen/fab_margin"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/room_title_example"
+            android:textColor="@color/black"
+            android:textSize="@dimen/login_size"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/RoomDescription"
+            android:layout_width="match_parent"
+            android:padding="@dimen/fab_margin"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/room_description_example"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_margin"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/CurrentTasks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.85"
+        android:layout_marginTop="@dimen/room_button_margin"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/current_tasks"
+        android:textAllCaps="false"
+        android:textSize="@dimen/login_form_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RoomCard" />
+    <Button
+        android:id="@+id/EvaluatedWorks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.85"
+        android:layout_marginTop="@dimen/room_button_margin_between"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/evaluated_works"
+        android:textAllCaps="false"
+        android:textSize="@dimen/login_form_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CurrentTasks" />
+
+    <Button
+        android:id="@+id/Members"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.85"
+        android:layout_marginTop="@dimen/room_button_margin_between"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/members"
+        android:textAllCaps="false"
+        android:textSize="@dimen/login_form_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EvaluatedWorks" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/CompletedTasks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.85"
+        android:layout_marginTop="@dimen/room_description_margin_top"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/completed_tasks"
+        android:textAllCaps="false"
+        android:textSize="@dimen/login_form_size"
+        android:textColor="@color/purple_main"
+        android:backgroundTint="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Members"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +18,6 @@ import ru.urfu.mutualmarker.adapter.RoomsAdapter
 import ru.urfu.mutualmarker.client.ProfileService
 import ru.urfu.mutualmarker.client.RoomService
 import ru.urfu.mutualmarker.dto.Room
-import ru.urfu.mutualmarker.helper.SimpleItemTouchHelperCallback
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -37,16 +35,17 @@ class MyRoomsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_rooms, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_rooms, container, false)
+        recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        return view
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         getRooms()
-
-
 
     }
 
@@ -69,15 +68,8 @@ class MyRoomsFragment : Fragment() {
                         noRoomsText.visibility = View.VISIBLE
                     } else {
                         noRoomsText.visibility = View.INVISIBLE
+                        recyclerView?.adapter = RoomsAdapter(rooms)
                     }
-                    recyclerView = view?.findViewById(R.id.recycle_rooms) as RecyclerView
-                    recyclerView?.layoutManager = LinearLayoutManager(activity)
-                    val adapter = RoomsAdapter(rooms)
-                    recyclerView?.adapter = adapter
-
-                    val itemTouchHelperCallback = SimpleItemTouchHelperCallback(adapter)
-                    val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-                    itemTouchHelper.attachToRecyclerView(recyclerView)
                     return
                 }
                 noRoomsText.visibility = View.VISIBLE
