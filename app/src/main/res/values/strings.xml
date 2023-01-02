@@ -57,10 +57,10 @@
     <string name="defaultName">Иванов Иван Иванович</string>
     <string name="roomMemebers">Участники комнаты</string>
     <string name="room_description_example">Проект по созданию сайта, на котором студенты смогут оценивать работы друг друга</string>
-    <string name="current_tasks">Текущие задания</string>
+    <string name="current_tasks">Задания</string>
     <string name="members">Участники</string>
     <string name="completed_tasks">Выполненные задания</string>
-    <string name="evaluated_works">Работы на оценку</string>
+    <string name="evaluated_works">Оценить работу</string>
     <string name="no_tasks">У вас еще нет ни одного задания :(</string>
     <string name="room_return">Вернуться к комнате</string>
     <string name="task_title_example">Создание вайфреймов приложения</string>
@@ -82,4 +82,6 @@
     <string name="instituteLabel">Институт</string>
     <string name="universityLabel">Университет</string>
     <string name="logout">Выйти</string>
+    <string name="download_project">Скачать работу</string>
+    <string name="not_found_project">Не удалось найти работы для оценивания :(</string>
 </resources>

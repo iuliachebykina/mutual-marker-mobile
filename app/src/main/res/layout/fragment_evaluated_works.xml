@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/EvaluatedWorksLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EvaluatedWorks">
+    android:background="@color/purple_background">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/not_found_project"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gilroy_medium"
+        android:padding="@dimen/fab_margin"
+        android:text="@string/not_found_project"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="15dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ProjectCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/room_description_margin_top"
+        android:background="@color/white"
+        android:elevation="@dimen/shadow"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.85"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/project_title_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/gilroy_black"
+            android:padding="@dimen/fab_margin"
+            android:text="@string/task_title_example"
+            android:textColor="@color/black"
+            android:textSize="@dimen/login_size"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/project_description_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_medium"
+            android:padding="@dimen/fab_margin"
+            android:text="@string/task_description_example"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_margin"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/DownloadProject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/room_button_margin_between"
+        android:fontFamily="@font/gilroy_black"
+        android:text="@string/download_project"
+        android:textAllCaps="false"
+        android:textSize="@dimen/login_form_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ProjectCard"
+        app:layout_constraintWidth_percent="0.85"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

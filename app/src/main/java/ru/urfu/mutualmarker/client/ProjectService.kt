@@ -9,4 +9,10 @@ interface ProjectService {
 
     @GET("/api/task/{task_id}/project/self")
     fun getSelfProject(@Path("task_id") taskId: Long): Call<Project>
+
+    @GET("/api/task/{task_id}/project/random")
+    fun getRandomProjectId(@Path("task_id") taskId: Long): Call<Long>
+
+    @GET("/api/task/{task_id}/project/{project_id}")
+    fun getRandomProject(@Path("project_id") projectId: Long): Call<Project>
 }

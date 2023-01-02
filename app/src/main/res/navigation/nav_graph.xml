@@ -131,9 +131,7 @@
         <action
             android:id="@+id/action_room_to_current_tasks"
             app:destination="@id/CurrentTasksFragment" />
-        <action
-            android:id="@+id/action_room_to_evaluated_works"
-            app:destination="@id/EvaluatedWorksFragment" />
+
         <action
             android:id="@+id/action_room_to_members"
             app:destination="@id/MembersFragment" />
@@ -196,5 +194,9 @@
         android:name="ru.urfu.mutualmarker.fragments.TaskFragment"
         android:label="Задание"
         tools:layout="@layout/fragment_task">
+
+        <action
+            android:id="@+id/action_task_to_evaluated_works"
+            app:destination="@id/EvaluatedWorksFragment" />
     </fragment>
 </navigation>

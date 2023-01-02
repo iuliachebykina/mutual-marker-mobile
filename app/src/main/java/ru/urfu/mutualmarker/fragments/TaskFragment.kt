@@ -1,13 +1,15 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -17,8 +19,8 @@ import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.ProjectService
 import ru.urfu.mutualmarker.client.TaskService
 import ru.urfu.mutualmarker.dto.Project
-import ru.urfu.mutualmarker.dto.Room
 import ru.urfu.mutualmarker.dto.Task
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -48,6 +50,11 @@ class TaskFragment : Fragment() {
 //        view.findViewById<Button>(R.id.change_button).setOnClickListener {
 //            findNavController().navigate(R.id.action_room_to_current_tasks)
 //        }
+        val bundle = Bundle()
+        bundle.putLong("taskId", taskId)
+        view.findViewById<Button>(R.id.EvaluatedWorks).setOnClickListener {
+            findNavController().navigate(R.id.action_task_to_evaluated_works, bundle)
+        }
     }
 
     private fun getSelfProject() {
@@ -92,6 +99,8 @@ class TaskFragment : Fragment() {
             }
 
         })
+
+
     }
 
     private fun getTask() {
@@ -103,6 +112,7 @@ class TaskFragment : Fragment() {
         val expirationDate: TextView? = view?.findViewById(R.id.task_expiration_date)
 
         taskService.getTask(taskId).enqueue(object : Callback<Task> {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(
                 call: Call<Task>,
                 response: Response<Task>
@@ -111,7 +121,7 @@ class TaskFragment : Fragment() {
                     println(response.body())
                     title?.text = response.body()!!.title
                     description?.text = response.body()!!.description
-                    expirationDate?.text =response.body()!!.closeDate
+                    expirationDate?.text = LocalDateTime.parse(response.body()!!.closeDate).toLocalDate().toString()
                 }
             }
 

@@ -65,6 +65,7 @@ class CurrentTasksFragment : Fragment() {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
                     println(response.body())
                     tasks = response.body() as ArrayList<TaskInfo>
+                    tasks.sortedWith(compareBy { it.closeDate })
 
                     if (tasks.isEmpty()) {
                         noTasksText.visibility = View.VISIBLE
