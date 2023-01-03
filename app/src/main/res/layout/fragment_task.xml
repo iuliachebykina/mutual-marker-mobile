@@ -1,163 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Login_Fragment"
+    style="@style/Theme.AppCompat.Light.NoActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/purple_background"
-    android:id="@+id/TaskLayout">
+    android:orientation="vertical"
+    tools:context=".fragments.TaskFragment">
 
-    <LinearLayout
-        android:id="@+id/TaskCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.85"
-        android:elevation="@dimen/shadow"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/room_description_margin_top"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/task_title_card"
-            android:layout_width="match_parent"
-            android:padding="@dimen/fab_margin"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/gilroy_black"
-            android:text="@string/task_title_example"
-            android:textColor="@color/black"
-            android:textSize="@dimen/login_size"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/task_description_card"
-            android:layout_width="match_parent"
-            android:padding="@dimen/fab_margin"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_medium"
-            android:text="@string/task_description_example"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_margin"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/task_expiration_date_box"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/task_description_card"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@id/task_expiration_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:paddingLeft="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:text="@string/task_expiration_text"/>
-
-            <TextView
-                android:id="@id/task_expiration_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/orange_main"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintWidth_percent="0.85"
-                app:layout_constraintHeight_percent="0.05"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:text="@string/task_expiration_date_example"/>
-        </LinearLayout>
-    </LinearLayout>
-    <Button
-        android:id="@+id/EvaluatedWorks"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_marginTop="@dimen/room_button_margin_between"
-        android:fontFamily="@font/gilroy_black"
-        android:text="@string/evaluated_works"
-        android:textAllCaps="false"
-        android:textSize="@dimen/login_form_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TaskCard" />
-
-    <Button
-        android:id="@+id/upload_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.85"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="@dimen/room_button_margin"
-        app:layout_constraintTop_toBottomOf="@id/EvaluatedWorks"
-        android:fontFamily="@font/gilroy_black"
-        android:text="@string/upload_work"
-        android:textAllCaps="false"
-        android:textSize="@dimen/login_form_size"/>
-
-
-    <LinearLayout
-        android:id="@+id/UploadedWorkCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/EvaluatedWorks"
-        app:layout_constraintWidth_percent="0.85"
-        android:elevation="@dimen/shadow"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/room_button_margin"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/uploaded_work_file"
+            android:id="@+id/TaskCard"
             android:layout_width="0dp"
-            android:padding="10dp"
-            app:layout_constraintWidth_percent="0.85"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@string/uploaded_work_example"
-            app:layout_constraintRight_toLeftOf="@id/change_button"
+            android:layout_marginTop="@dimen/room_description_margin_top"
+            android:background="@color/white"
+            android:elevation="@dimen/shadow"
+            android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_weight="1"
-            />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/change_button"
-            android:layout_width="wrap_content"
-            app:layout_constraintWidth_percent="0.15"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/uploaded_work_file"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/gilroy_medium"
-            android:text="@string/change"
+            app:layout_constraintWidth_percent="0.85">
+
+            <TextView
+                android:id="@+id/task_title_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/gilroy_black"
+                android:padding="@dimen/fab_margin"
+                android:text="@string/task_title_example"
+                android:textColor="@color/black"
+                android:textSize="@dimen/login_size"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/task_description_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_medium"
+                android:padding="@dimen/fab_margin"
+                android:text="@string/task_description_example"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_margin"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/task_expiration_date_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/task_description_card">
+
+                <TextView
+                    android:id="@id/task_expiration_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:text="@string/task_expiration_text"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@id/task_expiration_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/task_expiration_date_example"
+                    android:textColor="@color/orange_main"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintHeight_percent="0.05"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintWidth_percent="0.85" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/EvaluatedWorks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/room_button_margin_between"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/evaluated_works"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
-            android:textColor="@color/purple_main"
-            android:backgroundTint="@color/white"
-            style="?android:attr/borderlessButtonStyle" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TaskCard"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <Button
+            android:id="@+id/upload_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/upload_work"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/EvaluatedWorks"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <TextView
+            android:id="@+id/MyProjectLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/myProject"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upload_button"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <TextView
+            android:id="@+id/MyProjectTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="@string/projectTitleHint"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectLabel"
+            app:layout_constraintWidth_percent="0.85"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/MyProjectDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="@string/projectDescriptionHint"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectTitle"
+            app:layout_constraintWidth_percent="0.85"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/EditMyProjectTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="@string/projectTitleHint"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectLabel"
+            app:layout_constraintWidth_percent="0.85"
+            android:autofillHints="Название"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/EditMyProjectDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/gilroy_black"
+            android:hint="@string/projectDescriptionHint"
+            android:textColor="@color/black"
+            android:inputType="text|textMultiLine"
+            android:textSize="15sp"
+            android:maxLength="2000"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/EditMyProjectTitle"
+            app:layout_constraintWidth_percent="0.85"
+            android:autofillHints="Описание" />
+
+        <Button
+            android:id="@+id/DownloadMyProject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/room_button_margin_between"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/download_project"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectDescription"
+            app:layout_constraintWidth_percent="0.50"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/EditMyProject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/editMyProject"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DownloadMyProject"
+            app:layout_constraintWidth_percent="0.50"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/SaveMyProject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/saveMyProject"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            app:layout_constraintWidth_percent="0.50" />
 
 
-
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

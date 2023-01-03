@@ -84,4 +84,11 @@
     <string name="logout">Выйти</string>
     <string name="download_project">Скачать работу</string>
     <string name="not_found_project">Не удалось найти работы для оценивания :(</string>
+    <string name="mark_project">Оценить</string>
+    <string name="comment">Комментарий</string>
+    <string name="myProject">Моя работа</string>
+    <string name="projectTitleHint">Название работы</string>
+    <string name="projectDescriptionHint">Описание работы</string>
+    <string name="editMyProject">Изменить работу</string>
+    <string name="saveMyProject">Сохранить работу</string>
 </resources>

@@ -71,8 +71,8 @@ class CurrentTasksFragment : Fragment() {
                         noTasksText.visibility = View.VISIBLE
                         returnRoomButton.visibility = View.VISIBLE
                     } else {
-                        noTasksText.visibility = View.INVISIBLE
-                        returnRoomButton.visibility = View.INVISIBLE
+                        noTasksText.visibility = View.GONE
+                        returnRoomButton.visibility = View.GONE
                         recyclerView?.adapter = TasksAdapter(tasks)
                     }
                     return

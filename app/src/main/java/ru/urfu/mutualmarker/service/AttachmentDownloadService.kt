@@ -1,6 +1,9 @@
 package ru.urfu.mutualmarker.service
 
+import android.content.Context
+import android.os.Environment
 import android.util.Log
+import android.widget.Toast
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,14 +15,24 @@ import java.io.InputStream
 
 class AttachmentDownloadService {
 
-
-
-
-    fun downloadFile(fileName: String, attachmentService: AttachmentService){
+    fun downloadFile(fileName: String, attachmentService: AttachmentService, context: Context?){
         attachmentService.downloadAttachment(fileName).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                println(response)
                 if (response.code() == 200 && response.body() != null) {
-                    //saveFile(response.body(), Environment.getExternalStorageDirectory().absolutePath+fileName)
+                    val filePath = saveFile(
+                        response.body(),
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + fileName
+                    )
+                    if(filePath == ""){
+                        Toast.makeText(context, "Не удалось скачать работу. Попробуйте позже", Toast.LENGTH_LONG).show()
+
+                    } else {
+                        Toast.makeText(context, "Работа сохранилась в загрузках", Toast.LENGTH_SHORT).show()
+
+                    }
+                } else {
+                    Toast.makeText(context, "Не удалось скачать работу. Попробуйте позже", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -46,6 +59,7 @@ class AttachmentDownloadService {
                 }
                 output.flush()
             }
+
             return pathWhereYouWantToSaveFile
         }catch (e:Exception){
             Log.e("saveFile",e.toString())

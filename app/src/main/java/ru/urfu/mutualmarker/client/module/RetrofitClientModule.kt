@@ -71,4 +71,9 @@ class RetrofitClientModule {
     @Singleton
     @Provides
     fun provideAttachmentDownloadService(): AttachmentDownloadService = AttachmentDownloadService()
+
+    @Singleton
+    @Provides
+    fun provideMarkService(retrofit: Retrofit): MarkService =
+        retrofit.create(MarkService::class.java)
 }

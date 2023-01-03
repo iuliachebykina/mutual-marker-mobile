@@ -67,7 +67,7 @@ class MyRoomsFragment : Fragment() {
                     if (rooms.isEmpty()) {
                         noRoomsText.visibility = View.VISIBLE
                     } else {
-                        noRoomsText.visibility = View.INVISIBLE
+                        noRoomsText.visibility = View.GONE
                         recyclerView?.adapter = RoomsAdapter(rooms)
                     }
                     return

@@ -12,6 +12,12 @@
         <action
             android:id="@+id/action_navigation_add_room_to_RoomMainLayout"
             app:destination="@id/RoomMainLayout" />
+        <action
+            android:id="@+id/action_navigation_add_room_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+        <action
+            android:id="@+id/action_navigation_add_room_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment
@@ -23,6 +29,9 @@
         <action
             android:id="@+id/action_navigation_my_rooms_to_RoomMainLayout"
             app:destination="@id/RoomMainLayout" />
+        <action
+            android:id="@+id/action_navigation_my_rooms_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment
@@ -38,6 +47,12 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_update_password"
             app:destination="@id/navigation_update_password" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_add_room"
+            app:destination="@id/navigation_add_room" />
     </fragment>
 
     <fragment
@@ -157,10 +172,11 @@
         android:id="@+id/EvaluatedWorksFragment"
         android:name="ru.urfu.mutualmarker.fragments.EvaluatedWorks"
         android:label="Работы на оценку"
-        tools:layout="@layout/fragment_current_tasks">
+        tools:layout="@layout/fragment_evaluated_works">
+
         <action
-            android:id="@id/action_return_to_room"
-            app:destination="@id/RoomMainLayout" />
+            android:id="@+id/action_EvaluatedWorksFragment_to_TaskFragment"
+            app:destination="@id/TaskFragment" />
     </fragment>
 
     <fragment
