@@ -91,4 +91,5 @@
     <string name="projectDescriptionHint">Описание работы</string>
     <string name="editMyProject">Изменить работу</string>
     <string name="saveMyProject">Сохранить работу</string>
+    <string name="uploadFile">Загрузить файл</string>
 </resources>

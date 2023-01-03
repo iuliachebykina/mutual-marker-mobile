@@ -11,7 +11,7 @@ package ru.urfu.mutualmarker.dto
  * }
  */
 data class Project(
-    var id: Long,
+    var id: Long?,
     var title: String?,
     var description: String?,
     var attachments: List<String>?

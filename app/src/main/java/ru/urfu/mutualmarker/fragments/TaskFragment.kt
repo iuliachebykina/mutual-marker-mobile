@@ -20,6 +20,7 @@ import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.AttachmentService
 import ru.urfu.mutualmarker.client.ProjectService
 import ru.urfu.mutualmarker.client.TaskService
+import ru.urfu.mutualmarker.dto.CreationProject
 import ru.urfu.mutualmarker.dto.Project
 import ru.urfu.mutualmarker.dto.Task
 import ru.urfu.mutualmarker.service.AttachmentDownloadService
@@ -65,36 +66,118 @@ class TaskFragment : Fragment() {
         markOther()
         downloadFiles()
         editMyProject()
+        createProject()
+    }
+
+    private fun createProject() {
+        view?.findViewById<Button>(R.id.upload_button)?.setOnClickListener {
+            visibleEditProject()
+            val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
+            createProject?.visibility = View.VISIBLE
+            val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
+            saveProject?.visibility = View.GONE
+
+            val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
+            val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
+            view?.findViewById<Button>(R.id.CreateMyProject)?.setOnClickListener {
+                editTitle?.visibility = View.VISIBLE
+                editDescription?.visibility = View.VISIBLE
+
+                val project = Project(
+                    null,
+                    editTitle?.text.toString(),
+                    editDescription?.text.toString(),
+                    null //TODO set
+                )
+                //TODO upload attachments
+                projectService.createProject(taskId, project)
+                    .enqueue(object : Callback<CreationProject> {
+                        override fun onResponse(
+                            call: Call<CreationProject>,
+                            response: Response<CreationProject>
+                        ) {
+                            println(response)
+                            if (response.code() == 200) {
+                                if (response.body()?.isOverdue!!) {
+                                    Toast.makeText(
+                                        context,
+                                        "Не удалось создать работу. Срок сдачи прошел",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+                                } else {
+                                    getSelfProject()
+                                }
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Не удалось создать работу. Попробуйте позже",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                        }
+
+                        override fun onFailure(call: Call<CreationProject>, t: Throwable) {
+                            println("Error create project $call $t")
+
+                            Toast.makeText(
+                                context,
+                                "Не удалось создать работу. Попробуйте позже",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                    })
+            }
+
+
+        }
     }
 
     private fun editMyProject() {
         view?.findViewById<Button>(R.id.EditMyProject)?.setOnClickListener {
-            val uploadWorkButton: Button? = view?.findViewById(R.id.upload_button)
             val title: TextView? = view?.findViewById(R.id.MyProjectTitle)
             val description: TextView? = view?.findViewById(R.id.MyProjectDescription)
-            val label: TextView? = view?.findViewById(R.id.MyProjectLabel)
-            val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
 
             val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
             val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
-            val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
-            val editProject = view?.findViewById<Button>(R.id.EditMyProject)
 
-            title?.visibility = View.GONE
-            description?.visibility = View.GONE
-            label?.visibility = View.VISIBLE
-            downloadProject?.visibility = View.GONE
-            editProject?.visibility = View.GONE
-            uploadWorkButton?.visibility = View.GONE
-            editTitle?.visibility = View.VISIBLE
-            editDescription?.visibility = View.VISIBLE
+            val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
+            createProject?.visibility = View.GONE
+            val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
             saveProject?.visibility = View.VISIBLE
+
+
+
+            visibleEditProject()
 
             editTitle?.setText(title?.text)
             editDescription?.setText(description?.text)
 
             saveEditProject()
         }
+    }
+
+    private fun visibleEditProject() {
+        val uploadWorkButton: Button? = view?.findViewById(R.id.upload_button)
+        val title: TextView? = view?.findViewById(R.id.MyProjectTitle)
+        val description: TextView? = view?.findViewById(R.id.MyProjectDescription)
+        val label: TextView? = view?.findViewById(R.id.MyProjectLabel)
+
+        val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
+        val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
+        val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
+        val editProject = view?.findViewById<Button>(R.id.EditMyProject)
+
+        title?.visibility = View.GONE
+        description?.visibility = View.GONE
+        label?.visibility = View.VISIBLE
+        downloadProject?.visibility = View.GONE
+        editProject?.visibility = View.GONE
+        uploadWorkButton?.visibility = View.GONE
+        editTitle?.visibility = View.VISIBLE
+        editDescription?.visibility = View.VISIBLE
     }
 
     private fun saveEditProject() {
@@ -106,25 +189,43 @@ class TaskFragment : Fragment() {
             editDescription?.visibility = View.VISIBLE
 
 
-
-            val project = Project(projectId,
+            val project = Project(
+                projectId,
                 editTitle?.text.toString(),
                 editDescription?.text.toString(),
                 null
             )
-            projectService.updateSelfProject(taskId, project).enqueue(object : Callback<Void>{
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            projectService.updateSelfProject(taskId, project).enqueue(object : Callback<CreationProject> {
+                override fun onResponse(call: Call<CreationProject>, response: Response<CreationProject>) {
                     println(response)
-                    if(response.code() == 204){
-                        getSelfProject()
-                    } else{
-                        Toast.makeText(context, "Не удалось изменить работу. Попробуйте позже", Toast.LENGTH_LONG).show()
+                    if (response.code() == 204) {
+                        if (response.body()?.isOverdue!!) {
+                            Toast.makeText(
+                                context,
+                                "Не удалось обновить работу. Срок сдачи прошел",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                        } else {
+                            getSelfProject()
+                        }
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Не удалось изменить работу. Попробуйте позже",
+                            Toast.LENGTH_LONG
+                        ).show()
 
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(context, "Не удалось изменить работу. Попробуйте позже", Toast.LENGTH_LONG).show()
+                override fun onFailure(call: Call<CreationProject>, t: Throwable) {
+                    println("Error edit self project $call $t")
+                    Toast.makeText(
+                        context,
+                        "Не удалось изменить работу. Попробуйте позже",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
             })
@@ -156,6 +257,9 @@ class TaskFragment : Fragment() {
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
         val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
         val editProject = view?.findViewById<Button>(R.id.EditMyProject)
+        val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
+        val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
+
 
 
 
@@ -163,10 +267,10 @@ class TaskFragment : Fragment() {
 
         projectService.getSelfProject(taskId).enqueue(object : Callback<Project> {
             override fun onResponse(call: Call<Project>, response: Response<Project>) {
-                println(response)
+                println("MY PROJECT" + response)
                 if (response.code() == 200 && response.body() != null) {
                     println(response.body())
-                    projectId = response.body()!!.id
+                    projectId = response.body()!!.id!!
                     attachments = response.body()!!.attachments!!
                     title?.text = response.body()!!.title
                     description?.text = response.body()!!.description
@@ -183,6 +287,8 @@ class TaskFragment : Fragment() {
                     editTitle?.visibility = View.GONE
                     editDescription?.visibility = View.GONE
                     saveProject?.visibility = View.GONE
+                    createProject?.visibility = View.GONE
+                    uploadFile?.visibility = View.GONE
 
 
                 } else {
@@ -191,7 +297,7 @@ class TaskFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Project>, t: Throwable) {
-
+                println("Error get self project $call $t")
                 hideSelfProject()
             }
 
@@ -212,6 +318,9 @@ class TaskFragment : Fragment() {
 
         val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
+
+        val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
+        createProject?.visibility = View.GONE
 
 
         title?.visibility = View.GONE
@@ -262,7 +371,7 @@ class TaskFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Task>, t: Throwable) {
-                TODO("Not yet implemented")
+                println("Error get task $call $t")
             }
         })
     }
