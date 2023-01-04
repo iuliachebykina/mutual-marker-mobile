@@ -129,7 +129,7 @@ class EvaluatedWorks : Fragment() {
     private fun downloadFiles() {
         view?.findViewById<Button>(R.id.DownloadProject)?.setOnClickListener {
             for (attachment in attachments) {
-                attachmentDownloadService.downloadFile(attachment, attachmentService, context)
+                attachmentDownloadService.downloadFile(attachment, attachmentService, context, projectId)
             }
         }
     }

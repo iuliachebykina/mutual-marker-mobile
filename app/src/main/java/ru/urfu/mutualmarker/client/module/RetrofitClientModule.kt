@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.urfu.mutualmarker.client.*
 import ru.urfu.mutualmarker.service.AttachmentDownloadService
+import ru.urfu.mutualmarker.service.FilePrepareService
 import javax.inject.Singleton
 
 @Module
@@ -71,6 +72,10 @@ class RetrofitClientModule {
     @Singleton
     @Provides
     fun provideAttachmentDownloadService(): AttachmentDownloadService = AttachmentDownloadService()
+
+    @Singleton
+    @Provides
+    fun provideFilePrepareService(): FilePrepareService = FilePrepareService()
 
     @Singleton
     @Provides

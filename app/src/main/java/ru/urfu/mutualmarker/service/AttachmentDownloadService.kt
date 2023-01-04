@@ -15,14 +15,16 @@ import java.io.InputStream
 
 class AttachmentDownloadService {
 
-    fun downloadFile(fileName: String, attachmentService: AttachmentService, context: Context?){
-        attachmentService.downloadAttachment(fileName).enqueue(object : Callback<ResponseBody> {
+    fun downloadFile(attachment: String, attachmentService: AttachmentService, context: Context?, projectId: Long){
+        attachmentService.downloadAttachment(attachment).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 println(response)
                 if (response.code() == 200 && response.body() != null) {
+                    val fileName = "РаботаНаОценку_$projectId." + attachment.split(".").last()
+
                     val filePath = saveFile(
                         response.body(),
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + fileName
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/" + fileName
                     )
                     if(filePath == ""){
                         Toast.makeText(context, "Не удалось скачать работу. Попробуйте позже", Toast.LENGTH_LONG).show()
@@ -42,6 +44,8 @@ class AttachmentDownloadService {
 
         })
     }
+
+
 
     fun saveFile(body: ResponseBody?, pathWhereYouWantToSaveFile: String):String{
         if (body==null)

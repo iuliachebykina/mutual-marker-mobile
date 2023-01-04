@@ -1,5 +1,8 @@
 package ru.urfu.mutualmarker.fragments
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +12,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,8 +29,11 @@ import ru.urfu.mutualmarker.dto.CreationProject
 import ru.urfu.mutualmarker.dto.Project
 import ru.urfu.mutualmarker.dto.Task
 import ru.urfu.mutualmarker.service.AttachmentDownloadService
+import ru.urfu.mutualmarker.service.FilePrepareService
+import java.io.*
 import java.time.LocalDateTime
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class TaskFragment : Fragment() {
@@ -40,9 +48,13 @@ class TaskFragment : Fragment() {
     lateinit var attachmentDownloadService: AttachmentDownloadService
 
     @Inject
+    lateinit var filePrepareService: FilePrepareService
+
+    @Inject
     lateinit var attachmentService: AttachmentService
 
     var attachments: List<String> = ArrayList()
+    var selectedFiles: MutableList<Uri> = ArrayList()
 
 
     var taskId: Long = 0L
@@ -67,6 +79,36 @@ class TaskFragment : Fragment() {
         downloadFiles()
         editMyProject()
         createProject()
+        uploadFile()
+    }
+
+    private fun uploadFile() {
+        view?.findViewById<Button>(R.id.UploadFile)?.setOnClickListener {
+            chooseFile()
+        }
+    }
+
+    private fun chooseFile() {
+        val intent = Intent()
+            .setType("*/*")
+            .setAction(Intent.ACTION_GET_CONTENT)
+        resultLauncher.launch(intent)
+    }
+
+
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Uri? = result.data?.data
+                if (data != null) {
+                    selectedFiles.add(data)
+                }
+                updateSelectedFileList()
+            }
+        }
+
+    private fun updateSelectedFileList() {
+        println("TODO")
     }
 
     private fun createProject() {
@@ -87,52 +129,86 @@ class TaskFragment : Fragment() {
                     null,
                     editTitle?.text.toString(),
                     editDescription?.text.toString(),
-                    null //TODO set
+                    null
                 )
-                //TODO upload attachments
-                projectService.createProject(taskId, project)
-                    .enqueue(object : Callback<CreationProject> {
-                        override fun onResponse(
-                            call: Call<CreationProject>,
-                            response: Response<CreationProject>
-                        ) {
-                            println(response)
-                            if (response.code() == 200) {
-                                if (response.body()?.isOverdue!!) {
+
+                val files =
+                    filePrepareService.prepareFile(
+                        selectedFiles,
+                        context
+                    )
+                uploadFileWithCreateProject(files, project)
+
+
+            }
+
+
+        }
+    }
+
+    private fun uploadFileWithCreateProject(
+        files: MutableList<MultipartBody.Part>,
+        project: Project
+    ) {
+        attachmentService.uploadAttachment(files).enqueue(object : Callback<List<String>> {
+            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+                println("OK $response")
+                if (response.code() == 200 && response.body() != null) {
+                    project.attachments = response.body()
+                    projectService.createProject(taskId, project)
+                        .enqueue(object : Callback<CreationProject> {
+                            override fun onResponse(
+                                call: Call<CreationProject>,
+                                response: Response<CreationProject>
+                            ) {
+                                println(response)
+                                if (response.code() == 200) {
+                                    if (response.body()?.isOverdue!!) {
+                                        Toast.makeText(
+                                            context,
+                                            "Не удалось создать работу. Срок сдачи прошел",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                    } else {
+                                        getSelfProject()
+
+                                    }
+                                } else {
                                     Toast.makeText(
                                         context,
-                                        "Не удалось создать работу. Срок сдачи прошел",
+                                        "Не удалось создать работу. Попробуйте позже",
                                         Toast.LENGTH_LONG
                                     ).show()
 
-                                } else {
-                                    getSelfProject()
                                 }
-                            } else {
+                            }
+
+                            override fun onFailure(call: Call<CreationProject>, t: Throwable) {
+                                println("Error create project $call $t")
+
                                 Toast.makeText(
                                     context,
                                     "Не удалось создать работу. Попробуйте позже",
                                     Toast.LENGTH_LONG
                                 ).show()
-
                             }
-                        }
 
-                        override fun onFailure(call: Call<CreationProject>, t: Throwable) {
-                            println("Error create project $call $t")
-
-                            Toast.makeText(
-                                context,
-                                "Не удалось создать работу. Попробуйте позже",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                    })
+                        })
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Не удалось загрузить работу. Попробуйте позже",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
 
+            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                println("Failure$t")
+            }
 
-        }
+        })
     }
 
     private fun editMyProject() {
@@ -147,6 +223,10 @@ class TaskFragment : Fragment() {
             createProject?.visibility = View.GONE
             val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
             saveProject?.visibility = View.VISIBLE
+            val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
+            uploadFile?.visibility = View.GONE
+
+
 
 
 
@@ -169,6 +249,10 @@ class TaskFragment : Fragment() {
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
         val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
         val editProject = view?.findViewById<Button>(R.id.EditMyProject)
+        val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
+        uploadFile?.visibility = View.VISIBLE
+
+
 
         title?.visibility = View.GONE
         description?.visibility = View.GONE
@@ -178,6 +262,8 @@ class TaskFragment : Fragment() {
         uploadWorkButton?.visibility = View.GONE
         editTitle?.visibility = View.VISIBLE
         editDescription?.visibility = View.VISIBLE
+        uploadFile?.visibility = View.VISIBLE
+
     }
 
     private fun saveEditProject() {
@@ -195,40 +281,44 @@ class TaskFragment : Fragment() {
                 editDescription?.text.toString(),
                 null
             )
-            projectService.updateSelfProject(taskId, project).enqueue(object : Callback<CreationProject> {
-                override fun onResponse(call: Call<CreationProject>, response: Response<CreationProject>) {
-                    println(response)
-                    if (response.code() == 204) {
-                        if (response.body()?.isOverdue!!) {
+            projectService.updateSelfProject(taskId, project)
+                .enqueue(object : Callback<CreationProject> {
+                    override fun onResponse(
+                        call: Call<CreationProject>,
+                        response: Response<CreationProject>
+                    ) {
+                        println(response)
+                        if (response.code() == 204) {
+                            if (response.body()?.isOverdue!!) {
+                                Toast.makeText(
+                                    context,
+                                    "Не удалось обновить работу. Срок сдачи прошел",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            } else {
+                                getSelfProject()
+                            }
+                        } else {
                             Toast.makeText(
                                 context,
-                                "Не удалось обновить работу. Срок сдачи прошел",
+                                "Не удалось изменить работу. Попробуйте позже",
                                 Toast.LENGTH_LONG
                             ).show()
 
-                        } else {
-                            getSelfProject()
                         }
-                    } else {
+                    }
+
+                    override fun onFailure(call: Call<CreationProject>, t: Throwable) {
+                        println("Error edit self project $call $t")
                         Toast.makeText(
                             context,
                             "Не удалось изменить работу. Попробуйте позже",
                             Toast.LENGTH_LONG
                         ).show()
-
                     }
-                }
 
-                override fun onFailure(call: Call<CreationProject>, t: Throwable) {
-                    println("Error edit self project $call $t")
-                    Toast.makeText(
-                        context,
-                        "Не удалось изменить работу. Попробуйте позже",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-            })
+                })
 
 
         }
@@ -320,7 +410,11 @@ class TaskFragment : Fragment() {
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
 
         val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
+        val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
+
         createProject?.visibility = View.GONE
+        uploadFile?.visibility = View.GONE
+
 
 
         title?.visibility = View.GONE
@@ -341,7 +435,8 @@ class TaskFragment : Fragment() {
     private fun downloadFiles() {
         view?.findViewById<Button>(R.id.DownloadMyProject)?.setOnClickListener {
             for (attachment in attachments) {
-                attachmentDownloadService.downloadFile(attachment, attachmentService, context)
+
+                attachmentDownloadService.downloadFile(attachment, attachmentService, context, projectId)
             }
         }
     }
