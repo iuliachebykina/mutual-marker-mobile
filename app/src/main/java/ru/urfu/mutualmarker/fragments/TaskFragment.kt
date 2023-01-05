@@ -16,12 +16,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.adapter.FileEditModeAdapter
+import ru.urfu.mutualmarker.adapter.FileReadModeAdapter
 import ru.urfu.mutualmarker.client.AttachmentService
 import ru.urfu.mutualmarker.client.ProjectService
 import ru.urfu.mutualmarker.client.TaskService
@@ -56,6 +60,10 @@ class TaskFragment : Fragment() {
     var attachments: List<String> = ArrayList()
     var selectedFiles: MutableList<Uri> = ArrayList()
 
+    var filesEditMode: RecyclerView? = null
+
+    var filesReadMode: RecyclerView? = null
+
 
     var taskId: Long = 0L
     var projectId: Long = 0L
@@ -76,7 +84,6 @@ class TaskFragment : Fragment() {
         getTask()
         getSelfProject()
         markOther()
-        downloadFiles()
         editMyProject()
         createProject()
         uploadFile()
@@ -108,7 +115,16 @@ class TaskFragment : Fragment() {
         }
 
     private fun updateSelectedFileList() {
-        println("TODO")
+        filesEditMode = view?.findViewById(R.id.recycle_files_edit_mode) as RecyclerView
+        filesEditMode!!.layoutManager = LinearLayoutManager(activity)
+
+        filesEditMode!!.adapter = context?.let {
+            FileEditModeAdapter(
+                selectedFiles, attachmentService,
+                it, false
+            )
+        }
+
     }
 
     private fun createProject() {
@@ -118,6 +134,9 @@ class TaskFragment : Fragment() {
             createProject?.visibility = View.VISIBLE
             val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
             saveProject?.visibility = View.GONE
+
+            val selectedFilesView = view?.findViewById<RecyclerView>(R.id.recycle_files_edit_mode)
+            selectedFilesView?.visibility = View.VISIBLE
 
             val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
             val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
@@ -132,9 +151,12 @@ class TaskFragment : Fragment() {
                     null
                 )
 
+                val adapter: FileEditModeAdapter = filesEditMode?.adapter as FileEditModeAdapter
+
+
                 val files =
                     filePrepareService.prepareFile(
-                        selectedFiles,
+                        adapter.getItems(),
                         context
                     )
                 uploadFileWithCreateProject(files, project)
@@ -150,6 +172,9 @@ class TaskFragment : Fragment() {
         files: MutableList<MultipartBody.Part>,
         project: Project
     ) {
+        if (files.size == 0) {
+            return
+        }
         attachmentService.uploadAttachment(files).enqueue(object : Callback<List<String>> {
             override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
                 println("OK $response")
@@ -247,7 +272,6 @@ class TaskFragment : Fragment() {
 
         val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
-        val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
         val editProject = view?.findViewById<Button>(R.id.EditMyProject)
         val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
         uploadFile?.visibility = View.VISIBLE
@@ -257,7 +281,6 @@ class TaskFragment : Fragment() {
         title?.visibility = View.GONE
         description?.visibility = View.GONE
         label?.visibility = View.VISIBLE
-        downloadProject?.visibility = View.GONE
         editProject?.visibility = View.GONE
         uploadWorkButton?.visibility = View.GONE
         editTitle?.visibility = View.VISIBLE
@@ -345,7 +368,6 @@ class TaskFragment : Fragment() {
 
         val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
         val editDescription = view?.findViewById<EditText>(R.id.EditMyProjectDescription)
-        val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
         val editProject = view?.findViewById<Button>(R.id.EditMyProject)
         val createProject = view?.findViewById<Button>(R.id.CreateMyProject)
         val uploadFile = view?.findViewById<Button>(R.id.UploadFile)
@@ -362,6 +384,15 @@ class TaskFragment : Fragment() {
                     println(response.body())
                     projectId = response.body()!!.id!!
                     attachments = response.body()!!.attachments!!
+                    filesReadMode = view?.findViewById(R.id.recycle_files_read_mode) as RecyclerView
+                    filesReadMode!!.layoutManager = LinearLayoutManager(activity)
+
+                    filesReadMode!!.adapter = context?.let {
+                        FileReadModeAdapter(
+                            attachments, attachmentDownloadService, attachmentService,
+                            it
+                        )
+                    }
                     title?.text = response.body()!!.title
                     description?.text = response.body()!!.description
 
@@ -369,7 +400,6 @@ class TaskFragment : Fragment() {
                     title?.visibility = View.VISIBLE
                     description?.visibility = View.VISIBLE
                     label?.visibility = View.VISIBLE
-                    downloadProject?.visibility = View.VISIBLE
                     editProject?.visibility = View.VISIBLE
 
 
@@ -403,7 +433,6 @@ class TaskFragment : Fragment() {
         val uploadButton = view?.findViewById<Button>(R.id.upload_button)
         val editButton = view?.findViewById<Button>(R.id.EditMyProject)
         val markProject = view?.findViewById<Button>(R.id.EvaluatedWorks)
-        val downloadProject = view?.findViewById<Button>(R.id.DownloadMyProject)
         val saveProject = view?.findViewById<Button>(R.id.SaveMyProject)
 
         val editTitle = view?.findViewById<EditText>(R.id.EditMyProjectTitle)
@@ -422,7 +451,6 @@ class TaskFragment : Fragment() {
         label?.visibility = View.GONE
         editButton?.visibility = View.GONE
         markProject?.visibility = View.GONE
-        downloadProject?.visibility = View.GONE
         editTitle?.visibility = View.GONE
         editDescription?.visibility = View.GONE
         saveProject?.visibility = View.GONE
@@ -430,15 +458,6 @@ class TaskFragment : Fragment() {
 
         uploadButton?.visibility = View.VISIBLE
         uploadButton?.isEnabled = true
-    }
-
-    private fun downloadFiles() {
-        view?.findViewById<Button>(R.id.DownloadMyProject)?.setOnClickListener {
-            for (attachment in attachments) {
-
-                attachmentDownloadService.downloadFile(attachment, attachmentService, context, projectId)
-            }
-        }
     }
 
 

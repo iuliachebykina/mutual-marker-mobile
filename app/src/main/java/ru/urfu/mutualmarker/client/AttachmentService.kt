@@ -16,4 +16,9 @@ interface AttachmentService {
     @POST("/api/attachments/upload")
     fun uploadAttachment( @Part attachments: List<MultipartBody.Part>): Call<List<String>>
 
+    @Multipart
+    @POST("/api/attachments/delete/{filename}")
+    fun deleteAttachment( @Path("filename") filename: String): Call<Void>
+
+
 }

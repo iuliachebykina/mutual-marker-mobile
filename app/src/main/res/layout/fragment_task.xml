@@ -145,11 +145,11 @@
             android:hint="@string/projectTitleHint"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/MyProjectLabel"
-            app:layout_constraintWidth_percent="0.85"
-            android:visibility="gone"/>
+            app:layout_constraintWidth_percent="0.85" />
 
         <TextView
             android:id="@+id/MyProjectDescription"
@@ -160,73 +160,72 @@
             android:hint="@string/projectDescriptionHint"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/MyProjectTitle"
-            app:layout_constraintWidth_percent="0.85"
-            android:visibility="gone"/>
+            app:layout_constraintWidth_percent="0.85" />
 
         <EditText
             android:id="@+id/EditMyProjectTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:autofillHints="Название"
             android:fontFamily="@font/gilroy_black"
             android:hint="@string/projectTitleHint"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/MyProjectLabel"
-            app:layout_constraintWidth_percent="0.85"
-            android:autofillHints="Название"
-            android:inputType="text" />
+            app:layout_constraintWidth_percent="0.85" />
 
         <EditText
             android:id="@+id/EditMyProjectDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:autofillHints="Описание"
             android:fontFamily="@font/gilroy_black"
             android:hint="@string/projectDescriptionHint"
-            android:textColor="@color/black"
             android:inputType="text|textMultiLine"
-            android:textSize="15sp"
             android:maxLength="2000"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EditMyProjectTitle"
-            app:layout_constraintWidth_percent="0.85"
-            android:autofillHints="Описание" />
+            app:layout_constraintWidth_percent="0.85" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_files"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.9"
-            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            android:id="@+id/recycle_files_edit_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:scrollbars="vertical"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:listitem="@layout/edit_mode_file_item"
-            android:scrollbars="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
-            />
+            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            tools:listitem="@layout/edit_mode_file_item" />
 
-        <Button
-            android:id="@+id/DownloadMyProject"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_files_read_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/room_button_margin_between"
-            android:fontFamily="@font/gilroy_black"
-            android:text="@string/download_project"
-            android:textAllCaps="false"
-            android:textSize="@dimen/login_form_size"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:scrollbars="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/MyProjectDescription"
-            app:layout_constraintWidth_percent="0.50"
-            android:visibility="gone"/>
+            tools:listitem="@layout/read_mode_file_item" />
+
 
         <Button
             android:id="@+id/EditMyProject"
@@ -237,11 +236,11 @@
             android:text="@string/editMyProject"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/DownloadMyProject"
-            app:layout_constraintWidth_percent="0.50"
-            android:visibility="gone"/>
+            app:layout_constraintTop_toBottomOf="@id/recycle_files_read_mode"
+            app:layout_constraintWidth_percent="0.50" />
 
         <Button
             android:id="@+id/SaveMyProject"
@@ -252,11 +251,11 @@
             android:text="@string/saveMyProject"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
-            app:layout_constraintWidth_percent="0.50"
-            android:visibility="gone"/>
+            app:layout_constraintWidth_percent="0.50" />
 
         <Button
             android:id="@+id/UploadFile"
@@ -267,9 +266,10 @@
             android:text="@string/uploadFile"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycle_files"
+            app:layout_constraintTop_toBottomOf="@id/recycle_files_edit_mode"
             app:layout_constraintWidth_percent="0.50" />
 
         <Button
@@ -281,6 +281,7 @@
             android:text="@string/saveMyProject"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/UploadFile"

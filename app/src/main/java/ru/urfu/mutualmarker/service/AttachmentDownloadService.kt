@@ -1,6 +1,7 @@
 package ru.urfu.mutualmarker.service
 
 import android.content.Context
+import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
@@ -9,28 +10,31 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.client.AttachmentService
+import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
 
 class AttachmentDownloadService {
 
-    fun downloadFile(attachment: String, attachmentService: AttachmentService, context: Context?, projectId: Long){
+    fun downloadFile(attachment: String, attachmentService: AttachmentService, context: Context?){
         attachmentService.downloadAttachment(attachment).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 println(response)
                 if (response.code() == 200 && response.body() != null) {
-                    val fileName = attachment.split("___").last()
 
                     val filePath = saveFile(
                         response.body(),
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/" + fileName
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/" + attachment
                     )
                     if(filePath == ""){
                         Toast.makeText(context, "Не удалось скачать работу. Попробуйте позже", Toast.LENGTH_LONG).show()
 
                     } else {
-                        Toast.makeText(context, "Работа сохранилась в загрузках", Toast.LENGTH_SHORT).show()
+                        val uri = Uri.fromFile(File(filePath))
+                        if (context != null) {
+                            FilePrepareService().openFile(uri, context)
+                        }
 
                     }
                 } else {
@@ -39,7 +43,7 @@ class AttachmentDownloadService {
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TODO("Not yet implemented")
+               println("Error download file $t")
             }
 
         })
