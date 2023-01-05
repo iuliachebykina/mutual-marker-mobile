@@ -20,7 +20,7 @@ class AttachmentDownloadService {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 println(response)
                 if (response.code() == 200 && response.body() != null) {
-                    val fileName = "РаботаНаОценку_$projectId." + attachment.split(".").last()
+                    val fileName = attachment.split("___").last()
 
                     val filePath = saveFile(
                         response.body(),
