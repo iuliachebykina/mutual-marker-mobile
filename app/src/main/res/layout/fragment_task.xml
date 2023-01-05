@@ -199,6 +199,20 @@
             app:layout_constraintWidth_percent="0.85"
             android:autofillHints="Описание" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_files"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:listitem="@layout/edit_mode_file_item"
+            android:scrollbars="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            />
+
         <Button
             android:id="@+id/DownloadMyProject"
             android:layout_width="0dp"
@@ -241,7 +255,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
-            app:layout_constraintWidth_percent="0.50" />
+            app:layout_constraintWidth_percent="0.50"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/UploadFile"
@@ -254,7 +269,7 @@
             android:textSize="@dimen/login_form_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            app:layout_constraintTop_toBottomOf="@id/recycle_files"
             app:layout_constraintWidth_percent="0.50" />
 
         <Button
