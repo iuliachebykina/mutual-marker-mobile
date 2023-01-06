@@ -137,7 +137,7 @@
             app:layout_constraintWidth_percent="0.85" />
 
         <TextView
-            android:id="@+id/MyProjectTitle"
+            android:id="@+id/MyProjectTitleReadMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -152,7 +152,7 @@
             app:layout_constraintWidth_percent="0.85" />
 
         <TextView
-            android:id="@+id/MyProjectDescription"
+            android:id="@+id/MyProjectDescriptionReadMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -163,11 +163,11 @@
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/MyProjectTitle"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectTitleReadMode"
             app:layout_constraintWidth_percent="0.85" />
 
         <EditText
-            android:id="@+id/EditMyProjectTitle"
+            android:id="@+id/MyProjectTitleEditAndCreateMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -184,7 +184,7 @@
             app:layout_constraintWidth_percent="0.85" />
 
         <EditText
-            android:id="@+id/EditMyProjectDescription"
+            android:id="@+id/MyProjectDescriptionEditAndCreateMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -198,37 +198,37 @@
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditMyProjectTitle"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectTitleEditAndCreateMode"
             app:layout_constraintWidth_percent="0.85" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_files_edit_mode"
+            android:id="@+id/RecycleFilesEditAndCreateMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:maxHeight="200dp"
+            android:layout_marginTop="20dp"
             android:scrollbars="vertical"
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectDescriptionEditAndCreateMode"
             tools:listitem="@layout/edit_mode_file_item" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_files_read_mode"
+            android:id="@+id/RecycleFilesReadMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:maxHeight="200dp"
+            android:layout_marginTop="20dp"
             android:scrollbars="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/MyProjectDescription"
+            app:layout_constraintTop_toBottomOf="@id/MyProjectDescriptionReadMode"
             tools:listitem="@layout/read_mode_file_item" />
 
 
         <Button
-            android:id="@+id/EditMyProject"
+            android:id="@+id/EditMyProjectButtonReadMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -239,26 +239,11 @@
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycle_files_read_mode"
+            app:layout_constraintTop_toBottomOf="@id/RecycleFilesReadMode"
             app:layout_constraintWidth_percent="0.50" />
 
         <Button
-            android:id="@+id/SaveMyProject"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/gilroy_black"
-            android:text="@string/saveMyProject"
-            android:textAllCaps="false"
-            android:textSize="@dimen/login_form_size"
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditMyProjectDescription"
-            app:layout_constraintWidth_percent="0.50" />
-
-        <Button
-            android:id="@+id/UploadFile"
+            android:id="@+id/UploadFileButtonEditAndCreateMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -269,11 +254,11 @@
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycle_files_edit_mode"
+            app:layout_constraintTop_toBottomOf="@id/RecycleFilesEditAndCreateMode"
             app:layout_constraintWidth_percent="0.50" />
 
         <Button
-            android:id="@+id/CreateMyProject"
+            android:id="@+id/SaveMyProjectButtonEditMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -284,8 +269,30 @@
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/UploadFile"
+            app:layout_constraintTop_toBottomOf="@id/UploadFileButtonEditAndCreateMode"
             app:layout_constraintWidth_percent="0.50" />
+
+
+
+        <Button
+            android:id="@+id/CreateMyProjectButtonCreateMode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gilroy_black"
+            android:text="@string/saveMyProject"
+            android:textAllCaps="false"
+            android:textSize="@dimen/login_form_size"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UploadFileButtonEditAndCreateMode"
+            app:layout_constraintWidth_percent="0.50" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

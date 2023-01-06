@@ -1,7 +1,6 @@
 package ru.urfu.mutualmarker.adapter
 
 import android.content.Context
-import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -13,18 +12,18 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import ru.urfu.mutualmarker.R
 import ru.urfu.mutualmarker.client.AttachmentService
+import ru.urfu.mutualmarker.dto.Attachment
 import ru.urfu.mutualmarker.service.AttachmentDeleteService
 import ru.urfu.mutualmarker.service.AttachmentDownloadService
 import ru.urfu.mutualmarker.service.FilePrepareService
 
 
-class FileEditModeAdapter(
-    private var files: MutableList<Uri>,
+class FileEditAndCreateModeAdapter(
+    private var attachments: MutableList<Attachment>,
     var attachmentService: AttachmentService,
-    var context: Context,
-    var isSaved: Boolean
+    var context: Context
 ) :
-    RecyclerView.Adapter<FileEditModeAdapter.ViewHolder>() {
+    RecyclerView.Adapter<FileEditAndCreateModeAdapter.ViewHolder>() {
 
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -42,34 +41,36 @@ class FileEditModeAdapter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val file = files[position]
-        val fileName = file.pathSegments.last()
-        holder.filename.text = fileName
+        val attachment = attachments[position]
+        if(attachment.filename == null)
+            holder.filename.text = attachment.uri?.lastPathSegment
+        else
+            holder.filename.text = attachment.filename
 
         holder.view.findViewById<LinearLayout>(R.id.fileNameLayout).setOnClickListener {
-            if (isSaved) {
-                AttachmentDownloadService().downloadFile(fileName, attachmentService, context)
+            if (attachment.filename != null) {
+                AttachmentDownloadService().downloadFile(attachment.filename!!, attachmentService, context)
             } else {
-                FilePrepareService().openFile(file, context)
+                FilePrepareService().openFile(attachment.uri!!, context)
             }
         }
 
         holder.view.findViewById<Button>(R.id.canselButton).setOnClickListener {
-            println(files)
+            println(attachment.uri)
 
-            if (isSaved) {
-               AttachmentDeleteService().deleteAttachment(fileName, attachmentService, context)
+            if (attachment.filename != null) {
+               AttachmentDeleteService().deleteAttachment(attachment.filename!!, attachmentService, context)
             }
-            files.removeAt(holder.adapterPosition)
+            attachments.removeAt(holder.adapterPosition)
             notifyItemRemoved(position);
-            notifyItemRangeChanged(position, files.size);
+            notifyItemRangeChanged(position, attachments.size);
 
         }
     }
 
-    fun getItems(): List<Uri> = files
+    fun getItems(): List<Attachment> = attachments
 
-    override fun getItemCount(): Int = files.size
+    override fun getItemCount(): Int = attachments.size
 
 
 }

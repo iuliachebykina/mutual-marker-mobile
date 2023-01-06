@@ -28,7 +28,7 @@ class FileReadModeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.edit_mode_file_item, parent, false)
+            .inflate(R.layout.read_mode_file_item, parent, false)
 
         return ViewHolder(itemView)
     }

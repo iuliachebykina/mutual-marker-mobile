@@ -38,12 +38,12 @@ class FilePrepareService {
     }
 
     fun prepareFile(
-        uris: List<Uri>,
+        uris: List<Uri?>,
         context: Context?,
     ): MutableList<MultipartBody.Part> {
         val files: MutableList<MultipartBody.Part> = ArrayList()
         for (uri in uris) {
-            val file = fileFromContentUri(context!!, uri)
+            val file = fileFromContentUri(context!!, uri!!)
 
             val requestFile =
                 file.let { RequestBody.create(MediaType.parse("multipart/form-data"), it) }
