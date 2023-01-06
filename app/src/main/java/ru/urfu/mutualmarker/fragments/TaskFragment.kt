@@ -130,8 +130,8 @@ class TaskFragment : Fragment() {
     }
 
     private fun createProject() {
-        activeCreateMode()
         view?.findViewById<Button>(R.id.upload_button)?.setOnClickListener {
+            activeCreateMode()
 
             view?.findViewById<Button>(R.id.CreateMyProjectButtonCreateMode)?.setOnClickListener {
                 val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
