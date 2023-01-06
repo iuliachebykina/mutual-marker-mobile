@@ -8,14 +8,4 @@
     android:orientation="vertical"
     tools:context=".fragments.StartFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/AppLabel"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-       />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

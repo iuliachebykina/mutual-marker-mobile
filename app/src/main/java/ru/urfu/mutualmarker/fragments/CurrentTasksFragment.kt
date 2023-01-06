@@ -65,13 +65,14 @@ class CurrentTasksFragment : Fragment() {
                 if (response.code() == 200 && !response.body()?.isEmpty()!!) {
                     println(response.body())
                     tasks = response.body() as ArrayList<TaskInfo>
+                    tasks.sortedWith(compareBy { it.closeDate })
 
                     if (tasks.isEmpty()) {
                         noTasksText.visibility = View.VISIBLE
                         returnRoomButton.visibility = View.VISIBLE
                     } else {
-                        noTasksText.visibility = View.INVISIBLE
-                        returnRoomButton.visibility = View.INVISIBLE
+                        noTasksText.visibility = View.GONE
+                        returnRoomButton.visibility = View.GONE
                         recyclerView?.adapter = TasksAdapter(tasks)
                     }
                     return

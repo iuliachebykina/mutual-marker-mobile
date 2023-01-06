@@ -60,19 +60,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/RoomCard" />
-    <Button
-        android:id="@+id/EvaluatedWorks"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_marginTop="@dimen/room_button_margin_between"
-        android:fontFamily="@font/gilroy_black"
-        android:text="@string/evaluated_works"
-        android:textAllCaps="false"
-        android:textSize="@dimen/login_form_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/CurrentTasks" />
 
     <Button
         android:id="@+id/Members"
@@ -86,7 +73,7 @@
         android:textSize="@dimen/login_form_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/EvaluatedWorks" />
+        app:layout_constraintTop_toBottomOf="@id/CurrentTasks" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CompletedTasks"

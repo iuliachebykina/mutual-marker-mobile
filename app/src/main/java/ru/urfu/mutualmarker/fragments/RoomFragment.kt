@@ -52,9 +52,7 @@ class RoomFragment : Fragment() {
         view.findViewById<Button>(R.id.CurrentTasks).setOnClickListener {
             findNavController().navigate(R.id.action_room_to_current_tasks, bundle)
         }
-        view.findViewById<Button>(R.id.EvaluatedWorks).setOnClickListener {
-            findNavController().navigate(R.id.action_room_to_evaluated_works, bundle)
-        }
+
         view.findViewById<Button>(R.id.Members).setOnClickListener {
             findNavController().navigate(R.id.action_room_to_members, bundle)
         }

@@ -53,7 +53,7 @@ class RegistrationFragment : Fragment() {
                 if(passwordField.text?.length!! < 8){
                     shortPasswordFlag.visibility = View.VISIBLE
                 } else {
-                    shortPasswordFlag.visibility = View.INVISIBLE
+                    shortPasswordFlag.visibility = View.GONE
                 }
             }
 
@@ -72,7 +72,7 @@ class RegistrationFragment : Fragment() {
                 if(repeatPasswordField.text.toString() != passwordField.text.toString()){
                     diffPasswordFlag.visibility = View.VISIBLE
                 } else {
-                    diffPasswordFlag.visibility = View.INVISIBLE
+                    diffPasswordFlag.visibility = View.GONE
                 }
             }
 
@@ -102,7 +102,7 @@ class RegistrationFragment : Fragment() {
 //                //fillFieldsFlag.visibility = View.VISIBLE
 //
 //            } else{
-                fillFieldsFlag.visibility = View.INVISIBLE
+                fillFieldsFlag.visibility = View.GONE
                 val requestBody = Registration(
                     passwordField.text.toString(), numberField.text.toString(),
                     firstNameField.text.toString(), lastNameField.text.toString(),

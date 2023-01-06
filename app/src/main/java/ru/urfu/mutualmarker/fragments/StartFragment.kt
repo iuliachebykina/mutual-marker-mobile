@@ -39,18 +39,6 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPref = activity?.getSharedPreferences( "credentials", Context.MODE_PRIVATE)
-
-
-        //todo delete
-//        val edit = sharedPref?.edit()
-//        edit?.putString("username", null)
-//        edit?.putString("password", null)
-//        edit?.apply()
-
-
-
-
-
         val email = sharedPref?.getString("username", null)
         val password = sharedPref?.getString("password", null)
         super.onCreate(savedInstanceState)
@@ -77,6 +65,7 @@ class StartFragment : Fragment() {
                             val editor = sharedPref.edit()
                             editor?.putString("username", email)
                             editor?.putString("password", password)
+                            response.body()?.id?.let { editor?.putLong("id", it) }
                             editor?.apply()
 
                             findNavController().navigate(R.id.action_StartPage_to_navigation_my_rooms)

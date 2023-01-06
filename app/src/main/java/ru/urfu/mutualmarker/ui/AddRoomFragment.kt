@@ -44,7 +44,7 @@ class AddRoomFragment : Fragment() {
 
                     override fun onResponse(call: Call<Room>, response: Response<Room>) {
                         if (response.code() == 200) {
-                            wrongRoomCodeText.visibility = View.INVISIBLE
+                            wrongRoomCodeText.visibility = View.GONE
                             println(response.body())
 
                             val bundle = Bundle()

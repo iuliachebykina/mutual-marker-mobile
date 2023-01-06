@@ -8,6 +8,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.urfu.mutualmarker.client.*
+import ru.urfu.mutualmarker.service.AttachmentDownloadService
+import ru.urfu.mutualmarker.service.FilePrepareService
 import javax.inject.Singleton
 
 @Module
@@ -61,4 +63,22 @@ class RetrofitClientModule {
     @Provides
     fun provideProjectService(retrofit: Retrofit): ProjectService =
         retrofit.create(ProjectService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideAttachmentService(retrofit: Retrofit): AttachmentService =
+        retrofit.create(AttachmentService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideAttachmentDownloadService(): AttachmentDownloadService = AttachmentDownloadService()
+
+    @Singleton
+    @Provides
+    fun provideFilePrepareService(): FilePrepareService = FilePrepareService()
+
+    @Singleton
+    @Provides
+    fun provideMarkService(retrofit: Retrofit): MarkService =
+        retrofit.create(MarkService::class.java)
 }

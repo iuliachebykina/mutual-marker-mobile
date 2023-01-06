@@ -61,7 +61,7 @@
             android:text="@string/shortPassword"
             android:textColor="@color/red"
             android:textSize="10sp"
-            android:visibility="invisible"
+            android:visibility="gone"
 
             app:layout_constraintBottom_toTopOf="@id/PasswordField"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -92,7 +92,7 @@
             android:text="@string/diffPassword"
             android:textColor="@color/red"
             android:textSize="10sp"
-            android:visibility="invisible"
+            android:visibility="gone"
 
             app:layout_constraintBottom_toTopOf="@id/RepeatPasswordField"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -183,7 +183,7 @@
             android:text="@string/fillFields"
             android:textColor="@color/red"
             android:textSize="10sp"
-            android:visibility="invisible"
+            android:visibility="gone"
 
             app:layout_constraintBottom_toTopOf="@id/RegistrationButton"
             app:layout_constraintLeft_toLeftOf="parent"
