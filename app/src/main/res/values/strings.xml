@@ -62,6 +62,7 @@
     <string name="completed_tasks">Выполненные задания</string>
     <string name="evaluated_works">Оценить работу</string>
     <string name="no_tasks">У вас еще нет ни одного задания :(</string>
+    <string name="no_completed_tasks">У вас еще нет ни одного выполненного задания :(</string>
     <string name="room_return">Вернуться к комнате</string>
     <string name="task_title_example">Создание вайфреймов приложения</string>
     <string name="task_expiration_text">Срок истекает</string>

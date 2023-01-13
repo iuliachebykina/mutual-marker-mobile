@@ -56,6 +56,10 @@ class RoomFragment : Fragment() {
         view.findViewById<Button>(R.id.Members).setOnClickListener {
             findNavController().navigate(R.id.action_room_to_members, bundle)
         }
+
+        view.findViewById<Button>(R.id.CompletedTasks).setOnClickListener {
+            findNavController().navigate(R.id.action_room_to_completed_tasks, bundle)
+        }
     }
 
     private fun getRoom() {
@@ -82,22 +86,5 @@ class RoomFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param roomId Parameter 1.
-         * @return A new instance of fragment StudentProfileFragment.
-         */
-        @JvmStatic
-        fun newInstance(roomId: Long) =
-            StudentProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putLong(ROOM_ID, roomId)
-                }
-            }
     }
 }
