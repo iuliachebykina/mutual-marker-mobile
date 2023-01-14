@@ -115,8 +115,8 @@ class RegistrationFragment : Fragment() {
                     }
 
                     override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
-                        if(response.code() == 200){
-                            findNavController().navigate(R.id.action_RegistrationForm_to_navigation_my_rooms)
+                        if(response.code() == 201){
+                            findNavController().navigate(R.id.action_RegistrationForm_to_Login)
                         }
                         System.out.println("result " + response)
                     }

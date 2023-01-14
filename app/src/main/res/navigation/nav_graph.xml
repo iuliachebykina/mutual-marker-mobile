@@ -126,8 +126,8 @@
         tools:layout="@layout/fragment_registration" >
 
         <action
-            android:id="@+id/action_RegistrationForm_to_navigation_my_rooms"
-            app:destination="@id/navigation_my_rooms" />
+            android:id="@+id/action_RegistrationForm_to_Login"
+            app:destination="@id/LoginForm" />
     </fragment>
 
     <action
