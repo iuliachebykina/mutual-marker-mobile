@@ -1,14 +1,15 @@
 package ru.urfu.mutualmarker.service
 
 import android.content.Context
-import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.urfu.mutualmarker.BuildConfig
 import ru.urfu.mutualmarker.client.AttachmentService
 import java.io.File
 import java.io.FileOutputStream
@@ -31,8 +32,9 @@ class AttachmentDownloadService {
                         Toast.makeText(context, "Не удалось скачать работу. Попробуйте позже", Toast.LENGTH_LONG).show()
 
                     } else {
-                        val uri = Uri.fromFile(File(filePath))
+
                         if (context != null) {
+                            val uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", File(filePath));
                             FilePrepareService().openFile(uri, context)
                         }
 

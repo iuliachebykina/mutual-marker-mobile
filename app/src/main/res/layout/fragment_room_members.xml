@@ -99,6 +99,10 @@
         android:nestedScrollingEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/PurpleLine2"/>
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/studentsRecyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

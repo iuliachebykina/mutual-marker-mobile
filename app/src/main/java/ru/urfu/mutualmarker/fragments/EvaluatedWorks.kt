@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.RangeSlider
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.urfu.mutualmarker.R
+import ru.urfu.mutualmarker.adapter.FileReadModeAdapter
 import ru.urfu.mutualmarker.client.AttachmentService
 import ru.urfu.mutualmarker.client.MarkService
 import ru.urfu.mutualmarker.client.ProjectService
@@ -47,7 +50,7 @@ class EvaluatedWorks : Fragment() {
 
     @Inject
     lateinit var attachmentService: AttachmentService
-
+    var filesReadMode: RecyclerView? = null
 
     var attachments: List<String> = ArrayList()
     var projectId: Long = 0
@@ -70,8 +73,8 @@ class EvaluatedWorks : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        filesReadMode = view.findViewById(R.id.RecycleFilesReadMode) as RecyclerView
         getRandomProject()
-        downloadFiles()
         addMark()
     }
 
@@ -119,19 +122,15 @@ class EvaluatedWorks : Fragment() {
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(
+                    context,
+                    "Не получилось отправить оценку. Попробуйте позже",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
         })
 
-    }
-
-    private fun downloadFiles() {
-        view?.findViewById<Button>(R.id.DownloadProject)?.setOnClickListener {
-            for (attachment in attachments) {
-                attachmentDownloadService.downloadFile(attachment, attachmentService, context)
-            }
-        }
     }
 
     private fun getRandomProject() {
@@ -155,13 +154,18 @@ class EvaluatedWorks : Fragment() {
                                             project.title
                                         view?.findViewById<TextView>(R.id.project_description_card)?.text =
                                             project.description
-                                        attachments = project.attachments!!
                                         view?.findViewById<TextView>(R.id.not_found_project)?.visibility =
                                             View.GONE
                                         view?.findViewById<LinearLayout>(R.id.ProjectCard)?.visibility =
                                             View.VISIBLE
-                                        view?.findViewById<Button>(R.id.DownloadProject)?.visibility =
-                                            View.VISIBLE
+                                        filesReadMode?.visibility = View.VISIBLE
+                                        filesReadMode!!.layoutManager = LinearLayoutManager(activity)
+
+                                        filesReadMode!!.adapter = context?.let {
+                                            FileReadModeAdapter(
+                                                project.attachments!!, attachmentDownloadService, attachmentService, it
+                                            )
+                                        }
                                     } else {
                                         hideProject()
 
@@ -190,8 +194,7 @@ class EvaluatedWorks : Fragment() {
     private fun hideProject() {
         view?.findViewById<LinearLayout>(R.id.ProjectCard)?.visibility =
             View.GONE
-        view?.findViewById<Button>(R.id.DownloadProject)?.visibility =
-            View.GONE
+        filesReadMode?.visibility = View.GONE
         view?.findViewById<Button>(R.id.MarkProject)?.visibility =
             View.GONE
         view?.findViewById<TextView>(R.id.MarkCommentLabel)?.visibility =

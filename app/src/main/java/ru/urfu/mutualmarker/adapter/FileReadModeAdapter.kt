@@ -37,7 +37,7 @@ class FileReadModeAdapter(
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val file = files[position]
-        holder.filename.text = file
+        holder.filename.text = file.split("___").last()
 
         holder.itemView.setOnClickListener {
             attachmentDownloadService.downloadFile(file, attachmentService, context)

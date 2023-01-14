@@ -258,12 +258,12 @@
             app:layout_constraintWidth_percent="0.50" />
 
         <Button
-            android:id="@+id/SaveMyProjectButtonEditMode"
+            android:id="@+id/UpdateMyProjectButtonEditMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/gilroy_black"
-            android:text="@string/saveMyProject"
+            android:text="@string/updateMyProject"
             android:textAllCaps="false"
             android:textSize="@dimen/login_form_size"
             android:visibility="gone"

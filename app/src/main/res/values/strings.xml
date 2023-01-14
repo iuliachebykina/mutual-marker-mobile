@@ -94,4 +94,5 @@
     <string name="saveMyProject">Сохранить работу</string>
     <string name="uploadFile">Загрузить файл</string>
     <string name="filename">file.pdf</string>
+    <string name="updateMyProject">Изменить работу</string>
 </resources>

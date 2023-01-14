@@ -63,7 +63,6 @@ class TaskFragment : Fragment() {
 
 
     var filesEditAndCreateMode: RecyclerView? = null
-
     var filesReadMode: RecyclerView? = null
 
 
@@ -73,10 +72,15 @@ class TaskFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_task, container, false)
         taskId = arguments?.getLong("taskId")!!
+        filesEditAndCreateMode =
+            view?.findViewById(R.id.RecycleFilesEditAndCreateMode) as RecyclerView
+
+        filesReadMode = view.findViewById(R.id.RecycleFilesReadMode) as RecyclerView
+
         return view
     }
 
@@ -114,8 +118,7 @@ class TaskFragment : Fragment() {
         }
 
     private fun updateSelectedFileList() {
-        filesEditAndCreateMode =
-            view?.findViewById(R.id.RecycleFilesEditAndCreateMode) as RecyclerView
+
         filesEditAndCreateMode!!.layoutManager = LinearLayoutManager(activity)
         val attachments: MutableList<Attachment> =
             ArrayList(selectedFiles.size + filesFromServer.size)
@@ -123,7 +126,7 @@ class TaskFragment : Fragment() {
         attachments.addAll(filesFromServer.map { f -> Attachment(null, f) })
         filesEditAndCreateMode!!.adapter = context?.let {
             FileEditAndCreateModeAdapter(
-                attachments, attachmentService, it
+                attachments, attachmentService, it, projectId
             )
         }
 
@@ -132,30 +135,28 @@ class TaskFragment : Fragment() {
     private fun createProject() {
         view?.findViewById<Button>(R.id.upload_button)?.setOnClickListener {
             activeCreateMode()
+        }
+        view?.findViewById<Button>(R.id.CreateMyProjectButtonCreateMode)?.setOnClickListener {
+            val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
+            val editDescription =
+                view?.findViewById<EditText>(R.id.MyProjectDescriptionEditAndCreateMode)
 
-            view?.findViewById<Button>(R.id.CreateMyProjectButtonCreateMode)?.setOnClickListener {
-                val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
-                val editDescription =
-                    view?.findViewById<EditText>(R.id.MyProjectDescriptionEditAndCreateMode)
+            val project = Project(
+                null, editTitle?.text.toString(), editDescription?.text.toString(), null
+            )
 
-                val project = Project(
-                    null, editTitle?.text.toString(), editDescription?.text.toString(), null
-                )
+            val adapter: FileEditAndCreateModeAdapter =
+                filesEditAndCreateMode?.adapter as FileEditAndCreateModeAdapter
 
-                val adapter: FileEditAndCreateModeAdapter =
-                    filesEditAndCreateMode?.adapter as FileEditAndCreateModeAdapter
-
-                val filesFroUpload = adapter.getItems().map { a -> a.uri }
-                val files = filePrepareService.prepareFile(
-                    filesFroUpload, context
-                )
-                uploadFileWithCreateProject(files, project)
-
-
-            }
+            val filesFroUpload = adapter.getItems().map { a -> a.uri }
+            val files = filePrepareService.prepareFile(
+                filesFroUpload, context
+            )
+            uploadFileWithCreateProject(files, project)
 
 
         }
+
     }
 
     private fun uploadFileWithCreateProject(
@@ -225,10 +226,10 @@ class TaskFragment : Fragment() {
     private fun activeEditMode() {
         val createProject = view?.findViewById<Button>(R.id.CreateMyProjectButtonCreateMode)
         createProject?.visibility = View.GONE
-        val saveProject = view?.findViewById<Button>(R.id.SaveMyProjectButtonEditMode)
+        val saveProject = view?.findViewById<Button>(R.id.UpdateMyProjectButtonEditMode)
         saveProject?.visibility = View.VISIBLE
         val uploadFile = view?.findViewById<Button>(R.id.UploadFileButtonEditAndCreateMode)
-        uploadFile?.visibility = View.GONE
+        uploadFile?.visibility = View.VISIBLE
         filesReadMode?.visibility = View.GONE
         filesEditAndCreateMode?.visibility = View.VISIBLE
 
@@ -244,11 +245,9 @@ class TaskFragment : Fragment() {
         val editDescription =
             view?.findViewById<EditText>(R.id.MyProjectDescriptionEditAndCreateMode)
         val createProject = view?.findViewById<Button>(R.id.CreateMyProjectButtonCreateMode)
-        createProject?.visibility = View.GONE
-        val saveProject = view?.findViewById<Button>(R.id.SaveMyProjectButtonEditMode)
-        saveProject?.visibility = View.VISIBLE
+        createProject?.visibility = View.VISIBLE
         val uploadFile = view?.findViewById<Button>(R.id.UploadFileButtonEditAndCreateMode)
-        uploadFile?.visibility = View.GONE
+        uploadFile?.visibility = View.VISIBLE
         editTitle?.visibility = View.VISIBLE
         editDescription?.visibility = View.VISIBLE
         filesReadMode?.visibility = View.GONE
@@ -267,7 +266,7 @@ class TaskFragment : Fragment() {
         val title: TextView? = view?.findViewById(R.id.MyProjectTitleReadMode)
         val description: TextView? = view?.findViewById(R.id.MyProjectDescriptionReadMode)
         val label: TextView? = view?.findViewById(R.id.MyProjectLabel)
-        val saveProject = view?.findViewById<Button>(R.id.SaveMyProjectButtonEditMode)
+        val saveProject = view?.findViewById<Button>(R.id.UpdateMyProjectButtonEditMode)
 
         val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
         val editDescription =
@@ -338,91 +337,99 @@ class TaskFragment : Fragment() {
     }
 
     private fun saveEditProject() {
-        view?.findViewById<Button>(R.id.SaveMyProjectButtonEditMode)?.setOnClickListener {
-            val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
-            val editDescription =
-                view?.findViewById<EditText>(R.id.MyProjectDescriptionEditAndCreateMode)
+        view?.findViewById<Button>(R.id.UpdateMyProjectButtonEditMode)?.setOnClickListener {
+
 
             val adapter: FileEditAndCreateModeAdapter =
                 filesEditAndCreateMode?.adapter as FileEditAndCreateModeAdapter
 
             val filesForUpdate = adapter.getItems().filter { f -> f.uri != null }.map { f -> f.uri }
-            val files = filePrepareService.prepareFile(
+            val attachments = filePrepareService.prepareFile(
                 filesForUpdate, context
             )
+            if (attachments.size > 0) {
+                attachmentService.uploadAttachmentToProject(attachments, projectId)
+                    .enqueue(object : Callback<Void> {
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.code() == 200) {
+                                updateProject()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Не удалось изменить работу. Попробуйте позже",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
 
-            attachmentService.uploadAttachmentToProject(files, projectId)
-                .enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        if (response.code() == 200) {
-                            val project = Project(
-                                projectId,
-                                editTitle?.text.toString(),
-                                editDescription?.text.toString(),
-                                null
-                            )
-                            projectService.updateSelfProject(taskId, project)
-                                .enqueue(object : Callback<CreationProject> {
-                                    override fun onResponse(
-                                        call: Call<CreationProject>,
-                                        response: Response<CreationProject>
-                                    ) {
-                                        println(response)
-                                        if (response.code() == 204) {
-                                            if (response.body()?.isOverdue!!) {
-                                                Toast.makeText(
-                                                    context,
-                                                    "Не удалось обновить работу. Срок сдачи прошел",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-
-                                            } else {
-                                                getSelfProject()
-                                            }
-                                        } else {
-                                            Toast.makeText(
-                                                context,
-                                                "Не удалось изменить работу. Попробуйте позже",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-
-                                        }
-                                    }
-
-                                    override fun onFailure(
-                                        call: Call<CreationProject>,
-                                        t: Throwable
-                                    ) {
-                                        println("Error edit self project $call $t")
-                                        Toast.makeText(
-                                            context,
-                                            "Не удалось изменить работу. Попробуйте позже",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }
-
-                                })
-                        } else {
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
                             Toast.makeText(
                                 context,
                                 "Не удалось изменить работу. Попробуйте позже",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
-                    }
 
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                    })
+            } else {
+                updateProject()
+            }
+
+
+        }
+    }
+
+    private fun updateProject() {
+        val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
+        val editDescription =
+            view?.findViewById<EditText>(R.id.MyProjectDescriptionEditAndCreateMode)
+        val project = Project(
+            projectId,
+            editTitle?.text.toString(),
+            editDescription?.text.toString(),
+            null
+        )
+        projectService.updateSelfProject(taskId, project)
+            .enqueue(object : Callback<CreationProject> {
+                override fun onResponse(
+                    call: Call<CreationProject>,
+                    response: Response<CreationProject>
+                ) {
+                    println(response)
+                    if (response.code() == 200) {
+                        if (response.body()?.isOverdue!!) {
+                            Toast.makeText(
+                                context,
+                                "Не удалось обновить работу. Срок сдачи прошел",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                        } else {
+                            getSelfProject()
+                        }
+                    } else {
                         Toast.makeText(
                             context,
                             "Не удалось изменить работу. Попробуйте позже",
                             Toast.LENGTH_LONG
                         ).show()
+
                     }
+                }
 
-                })
+                override fun onFailure(
+                    call: Call<CreationProject>,
+                    t: Throwable
+                ) {
+                    println("Error edit self project $call $t")
+                    Toast.makeText(
+                        context,
+                        "Не удалось изменить работу. Попробуйте позже",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
 
-
-        }
+            })
     }
 
     private fun markOther() {
@@ -451,7 +458,7 @@ class TaskFragment : Fragment() {
                     println(response.body())
                     projectId = response.body()!!.id!!
                     filesFromServer = response.body()!!.attachments!!
-                    filesReadMode = view?.findViewById(R.id.RecycleFilesReadMode) as RecyclerView
+
                     filesReadMode!!.layoutManager = LinearLayoutManager(activity)
 
                     filesReadMode!!.adapter = context?.let {
@@ -488,7 +495,7 @@ class TaskFragment : Fragment() {
         val uploadButton = view?.findViewById<Button>(R.id.upload_button)
         val editButton = view?.findViewById<Button>(R.id.EditMyProjectButtonReadMode)
         val markProject = view?.findViewById<Button>(R.id.EvaluatedWorks)
-        val saveProject = view?.findViewById<Button>(R.id.SaveMyProjectButtonEditMode)
+        val saveProject = view?.findViewById<Button>(R.id.UpdateMyProjectButtonEditMode)
 
         val editTitle = view?.findViewById<EditText>(R.id.MyProjectTitleEditAndCreateMode)
         val editDescription =

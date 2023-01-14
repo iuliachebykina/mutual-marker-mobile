@@ -21,7 +21,8 @@ import ru.urfu.mutualmarker.service.FilePrepareService
 class FileEditAndCreateModeAdapter(
     private var attachments: MutableList<Attachment>,
     var attachmentService: AttachmentService,
-    var context: Context
+    var context: Context,
+    var projectId: Long
 ) :
     RecyclerView.Adapter<FileEditAndCreateModeAdapter.ViewHolder>() {
 
@@ -42,10 +43,10 @@ class FileEditAndCreateModeAdapter(
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val attachment = attachments[position]
-        if(attachment.filename == null)
-            holder.filename.text = attachment.uri?.lastPathSegment
+        if(attachment.filename == null && attachment.uri != null)
+            holder.filename.text = FilePrepareService().getFileName(context, attachment.uri)
         else
-            holder.filename.text = attachment.filename
+            holder.filename.text = attachment.filename!!.split("___").last()
 
         holder.view.findViewById<LinearLayout>(R.id.fileNameLayout).setOnClickListener {
             if (attachment.filename != null) {
@@ -59,7 +60,7 @@ class FileEditAndCreateModeAdapter(
             println(attachment.uri)
 
             if (attachment.filename != null) {
-               AttachmentDeleteService().deleteAttachment(attachment.filename!!, attachmentService, context)
+               AttachmentDeleteService().deleteAttachment(attachment.filename!!, projectId, attachmentService, context)
             }
             attachments.removeAt(holder.adapterPosition)
             notifyItemRemoved(position);
