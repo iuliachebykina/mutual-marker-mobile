@@ -27,6 +27,7 @@
     <string name="first_name">Имя</string>
     <string name="last_name">Фамилия</string>
     <string name="patronymic">Отчество</string>
+    <string name="subject">Направление</string>
     <string name="registration_fragment_label">Регистрация</string>
     <string name="repeatPassword">Повторите пароль</string>
     <string name="shortPassword">Короткий пароль. Минимум 8 символов</string>
@@ -49,7 +50,6 @@
     <string name="updateProfile">Изменить профиль</string>
     <string name="student">СТУДЕНТ</string>
     <string name="teacher">ПРЕПОДАВАТЕЛЬ</string>
-    <string name="subject">Предмет</string>
     <string name="room_title_example">Создание сайта по оценке обучающихся</string>
     <string name="members_count">Количество участников</string>
     <string name="teachers">Преподаватели</string>
@@ -95,4 +95,5 @@
     <string name="uploadFile">Загрузить файл</string>
     <string name="filename">file.pdf</string>
     <string name="updateMyProject">Изменить работу</string>
+    <string name="EduInstitution">Учебное заведение</string>
 </resources>

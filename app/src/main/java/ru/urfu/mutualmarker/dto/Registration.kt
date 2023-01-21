@@ -6,5 +6,10 @@ data class Registration(
     val firstName: String,
     val lastName: String,
     val patronymic: String,
-    val email: String
+    val email: String,
+    val subject: String?,
+    val university: String,
+    val institute: String,
+    val studentGroup: String?,
+    val socialNetwork: String?
 )

@@ -45,6 +45,13 @@ class RegistrationFragment : Fragment() {
         val emailField = view.findViewById<TextInputEditText>(R.id.EmailField)
         val passwordField = view.findViewById<TextInputEditText>(R.id.PasswordField)
         val repeatPasswordField = view.findViewById<TextInputEditText>(R.id.RepeatPasswordField)
+        val subjectField = view.findViewById<TextInputEditText>(R.id.Subject)
+        val universityField = view.findViewById<TextInputEditText>(R.id.University)
+        val instituteField = view.findViewById<TextInputEditText>(R.id.Institute)
+        val groupField = view.findViewById<TextInputEditText>(R.id.Group)
+        val socialNetworksField = view.findViewById<TextInputEditText>(R.id.SocialNetwork)
+//        val socialNetworkField = view.findViewById<TextInputEditText>(R.id.RepeatPasswordField)
+
         val registrationButton = view.findViewById<Button>(R.id.RegistrationButton)
 
         passwordField.addTextChangedListener(object : TextWatcher {
@@ -106,7 +113,10 @@ class RegistrationFragment : Fragment() {
                 val requestBody = Registration(
                     passwordField.text.toString(), numberField.text.toString(),
                     firstNameField.text.toString(), lastNameField.text.toString(),
-                    patronymicField.text.toString(), emailField.text.toString()
+                    patronymicField.text.toString(), emailField.text.toString(),
+                    subjectField.text.toString(), universityField.text.toString(),
+                    instituteField.text.toString(), groupField.text.toString(),
+                    socialNetworksField.text.toString()
                 )
             authorizationService.registerStudent(requestBody)
                 .enqueue(object : Callback<Profile> {
